@@ -1,4 +1,4 @@
-package com.example.kvp
+package com.kvpproject.app
 
 import io.flutter.embedding.android.FlutterActivity
 
