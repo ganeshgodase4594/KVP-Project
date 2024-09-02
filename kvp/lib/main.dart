@@ -1,9 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:kvp/provider/checkbox.dart';
+import 'package:kvp/screen/homepage.dart';
 import 'package:provider/provider.dart';
 
 import 'demopage.dart';
+import 'provider/suggestionprovider.dart';
+import 'screen/registerform.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,8 +17,9 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => CheckboxProvider()),
+        ChangeNotifierProvider(create: (_) => Suggestionprovider()),
       ],
-      child: MyApp(),
+      child: const MyApp(),
     ),
   );
 }
@@ -25,9 +29,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: DemoPage(),
+      home: Homepage(),
     );
   }
 }
