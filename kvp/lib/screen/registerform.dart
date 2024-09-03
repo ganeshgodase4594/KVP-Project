@@ -59,10 +59,39 @@ class _RegisterFormState extends State<RegisterForm> {
   TimeOfDay endTime = TimeOfDay.now();
 
   final _formKey = GlobalKey<FormState>();
+  final _nameKey = GlobalKey<FormFieldState<String>>();
+  final _conatctkey = GlobalKey<FormFieldState<String>>();
+  final _vmkey = GlobalKey<FormFieldState<String>>();
+  final _vastikey = GlobalKey<FormFieldState<String>>();
+  final _vibhagkey = GlobalKey<FormFieldState<String>>();
+  final _trainerkey = GlobalKey<FormFieldState<String>>();
+  final _freelancerkey = GlobalKey<FormFieldState<String>>();
+  final _coordinatorkey = GlobalKey<FormFieldState<String>>();
+  final _sponsorkey = GlobalKey<FormFieldState<String>>();
+  final _norekey = GlobalKey<FormFieldState<String>>();
+  final _level = GlobalKey<FormFieldState<String>>();
+  final _ssfkey = GlobalKey<FormFieldState<String>>();
+  final _dolkey = GlobalKey<FormFieldState<String>>();
+  final _dobkey = GlobalKey<FormFieldState<String>>();
+  final _aadharkey = GlobalKey<FormFieldState<String>>();
+  final _schoolnamekey = GlobalKey<FormFieldState<String>>();
+  final _schooltimekey = GlobalKey<FormFieldState<String>>();
+  final _stdkey = GlobalKey<FormFieldState<String>>();
+  final _nooffamilykey = GlobalKey<FormFieldState<String>>();
+  final _totalnogirlkey = GlobalKey<FormFieldState<String>>();
+  final _mothercontactkey = GlobalKey<FormFieldState<String>>();
+  final _fathercontacrkey = GlobalKey<FormFieldState<String>>();
+  final _allgirlregisterkey = GlobalKey<FormFieldState<String>>();
+  final _parentmeet1key = GlobalKey<FormFieldState<String>>();
+  final _parentmeet2key = GlobalKey<FormFieldState<String>>();
+  final _parentmeet3key = GlobalKey<FormFieldState<String>>();
+
+  FocusNode nameFocusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
+
     Provider.of<Suggestionprovider>(context, listen: false).loadSuggestion();
   }
 
@@ -73,7 +102,6 @@ class _RegisterFormState extends State<RegisterForm> {
         padding: const EdgeInsets.all(20.0),
         child: SingleChildScrollView(
           child: Form(
-            key: _formKey,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -120,6 +148,7 @@ class _RegisterFormState extends State<RegisterForm> {
                               border: Border.all(color: Colors.white, width: 1),
                               borderRadius: BorderRadius.circular(20)),
                           child: TextFormField(
+                            key: _nameKey,
                             cursorColor: Colors.white,
                             textAlign: TextAlign.start,
                             controller: girlname,
@@ -130,7 +159,7 @@ class _RegisterFormState extends State<RegisterForm> {
                             ),
                             decoration: InputDecoration(
                                 errorStyle: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w400,
+                                  fontWeight: FontWeight.w500,
                                   fontSize: 10,
                                   color: Colors.red,
                                 ),
@@ -150,7 +179,7 @@ class _RegisterFormState extends State<RegisterForm> {
                               return null;
                             },
                             onChanged: (value) {
-                              _formKey.currentState!.validate();
+                              _nameKey.currentState!.validate();
                             },
                           ),
                         ),
@@ -177,6 +206,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                       Border.all(color: Colors.white, width: 1),
                                   borderRadius: BorderRadius.circular(20)),
                               child: TextFormField(
+                                key: _conatctkey,
                                 cursorColor: Colors.white,
                                 textAlign: TextAlign.start,
                                 controller: girlcontactnumber,
@@ -210,7 +240,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                   return null;
                                 },
                                 onChanged: (value) {
-                                  _formKey.currentState!.validate();
+                                  _conatctkey.currentState!.validate();
                                 },
                               ),
                             ),
@@ -236,6 +266,7 @@ class _RegisterFormState extends State<RegisterForm> {
                               border: Border.all(color: Colors.white, width: 1),
                               borderRadius: BorderRadius.circular(20)),
                           child: TextFormField(
+                            key: _vmkey,
                             cursorColor: Colors.white,
                             textAlign: TextAlign.start,
                             controller: vmname,
@@ -265,6 +296,7 @@ class _RegisterFormState extends State<RegisterForm> {
                               return null;
                             },
                             onChanged: (value) {
+                              _vmkey.currentState!.validate();
                               if (value.isEmpty) {
                                 Provider.of<Suggestionprovider>(context,
                                         listen: false)
@@ -274,13 +306,12 @@ class _RegisterFormState extends State<RegisterForm> {
                                 List<String> vmlocal =
                                     Provider.of<Suggestionprovider>(context,
                                             listen: false)
-                                        .suggestedlist;
+                                        .vmlist;
 
                                 Provider.of<Suggestionprovider>(context,
                                         listen: false)
                                     .autoComplete(vmlocal, value, "checkvm");
                               }
-                              _formKey.currentState!.validate();
                             },
                           ),
                         ),
@@ -336,6 +367,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                       Border.all(color: Colors.white, width: 1),
                                   borderRadius: BorderRadius.circular(20)),
                               child: TextFormField(
+                                key: _trainerkey,
                                 cursorColor: Colors.white,
                                 textAlign: TextAlign.start,
                                 controller: trainername,
@@ -375,14 +407,14 @@ class _RegisterFormState extends State<RegisterForm> {
                                     List<String> trainerlocal =
                                         Provider.of<Suggestionprovider>(context,
                                                 listen: false)
-                                            .suggestedlist;
+                                            .trainerlist;
 
                                     Provider.of<Suggestionprovider>(context,
                                             listen: false)
                                         .autoComplete(trainerlocal, value,
                                             "checktrainer");
                                   }
-                                  _formKey.currentState!.validate();
+                                  _trainerkey.currentState!.validate();
                                 },
                               ),
                             ),
@@ -437,6 +469,7 @@ class _RegisterFormState extends State<RegisterForm> {
                               border: Border.all(color: Colors.white, width: 1),
                               borderRadius: BorderRadius.circular(20)),
                           child: TextFormField(
+                            key: _freelancerkey,
                             cursorColor: Colors.white,
                             textAlign: TextAlign.start,
                             controller: freelancername,
@@ -475,14 +508,14 @@ class _RegisterFormState extends State<RegisterForm> {
                                 List<String> freelancerlocal =
                                     Provider.of<Suggestionprovider>(context,
                                             listen: false)
-                                        .suggestedlist;
+                                        .freelancerlist;
 
                                 Provider.of<Suggestionprovider>(context,
                                         listen: false)
                                     .autoComplete(freelancerlocal, value,
                                         "checkfreelance");
                               }
-                              _formKey.currentState!.validate();
+                              _trainerkey.currentState!.validate();
                             },
                           ),
                         ),
@@ -539,6 +572,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                       Border.all(color: Colors.white, width: 1),
                                   borderRadius: BorderRadius.circular(20)),
                               child: TextFormField(
+                                key: _coordinatorkey,
                                 cursorColor: Colors.white,
                                 textAlign: TextAlign.start,
                                 controller: coordinatorname,
@@ -578,14 +612,14 @@ class _RegisterFormState extends State<RegisterForm> {
                                     List<String> coordinatorlocal =
                                         Provider.of<Suggestionprovider>(context,
                                                 listen: false)
-                                            .suggestedlist;
+                                            .coordinatorlist;
 
                                     Provider.of<Suggestionprovider>(context,
                                             listen: false)
                                         .autoComplete(coordinatorlocal, value,
                                             "checkcoo");
                                   }
-                                  _formKey.currentState!.validate();
+                                  _coordinatorkey.currentState!.validate();
                                 },
                               ),
                             ),
@@ -642,6 +676,7 @@ class _RegisterFormState extends State<RegisterForm> {
                               border: Border.all(color: Colors.white, width: 1),
                               borderRadius: BorderRadius.circular(20)),
                           child: TextFormField(
+                            key: _vastikey,
                             cursorColor: Colors.white,
                             textAlign: TextAlign.start,
                             controller: vastiname,
@@ -680,14 +715,14 @@ class _RegisterFormState extends State<RegisterForm> {
                                 List<String> vastilocal =
                                     Provider.of<Suggestionprovider>(context,
                                             listen: false)
-                                        .suggestedlist;
+                                        .vastilist;
 
                                 Provider.of<Suggestionprovider>(context,
                                         listen: false)
                                     .autoComplete(
                                         vastilocal, value, "checkvasti");
                               }
-                              _formKey.currentState!.validate();
+                              _vastikey.currentState!.validate();
                             },
                           ),
                         ),
@@ -743,6 +778,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                       Border.all(color: Colors.white, width: 1),
                                   borderRadius: BorderRadius.circular(20)),
                               child: TextFormField(
+                                key: _vibhagkey,
                                 cursorColor: Colors.white,
                                 textAlign: TextAlign.start,
                                 controller: vibhagname,
@@ -782,14 +818,14 @@ class _RegisterFormState extends State<RegisterForm> {
                                     List<String> vibhaglocal =
                                         Provider.of<Suggestionprovider>(context,
                                                 listen: false)
-                                            .suggestedlist;
+                                            .vibhaglist;
 
                                     Provider.of<Suggestionprovider>(context,
                                             listen: false)
                                         .autoComplete(
                                             vibhaglocal, value, "checkvibhag");
                                   }
-                                  _formKey.currentState!.validate();
+                                  _vibhagkey.currentState!.validate();
                                 },
                               ),
                             ),
@@ -844,6 +880,7 @@ class _RegisterFormState extends State<RegisterForm> {
                               border: Border.all(color: Colors.white, width: 1),
                               borderRadius: BorderRadius.circular(20)),
                           child: TextFormField(
+                            key: _sponsorkey,
                             cursorColor: Colors.white,
                             textAlign: TextAlign.start,
                             controller: sponsorcompany,
@@ -884,14 +921,14 @@ class _RegisterFormState extends State<RegisterForm> {
                                 List<String> sponsorlocal =
                                     Provider.of<Suggestionprovider>(context,
                                             listen: false)
-                                        .suggestedlist;
+                                        .sponsorlist;
 
                                 Provider.of<Suggestionprovider>(context,
                                         listen: false)
                                     .autoComplete(
                                         sponsorlocal, value, "sponsor");
                               }
-                              _formKey.currentState!.validate();
+                              _sponsorkey.currentState!.validate();
                             },
                           ),
                         ),
@@ -950,6 +987,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                       Border.all(color: Colors.white, width: 1),
                                   borderRadius: BorderRadius.circular(20)),
                               child: DropdownButtonFormField(
+                                key: _norekey,
                                 borderRadius: BorderRadius.circular(20),
                                 menuMaxHeight: 115,
                                 style: GoogleFonts.poppins(
@@ -996,7 +1034,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                 ],
                                 onChanged: (value) {
                                   neworrepeat.text = value!;
-                                  _formKey.currentState!.validate();
+                                  _norekey.currentState!.validate();
                                 },
                                 validator: (value) {
                                   if (value == null) {
@@ -1028,6 +1066,7 @@ class _RegisterFormState extends State<RegisterForm> {
                               border: Border.all(color: Colors.white, width: 1),
                               borderRadius: BorderRadius.circular(20)),
                           child: DropdownButtonFormField(
+                            key: _level,
                             borderRadius: BorderRadius.circular(20),
                             menuMaxHeight: 115,
                             style: GoogleFonts.poppins(
@@ -1074,7 +1113,7 @@ class _RegisterFormState extends State<RegisterForm> {
                             ],
                             onChanged: (value) {
                               levelno.text = value!;
-                              _formKey.currentState!.validate();
+                              _level.currentState!.validate();
                             },
                             validator: (value) {
                               if (value == null) {
@@ -1104,6 +1143,7 @@ class _RegisterFormState extends State<RegisterForm> {
                               border: Border.all(color: Colors.white, width: 1),
                               borderRadius: BorderRadius.circular(20)),
                           child: TextFormField(
+                            key: _ssfkey,
                             maxLines: 3,
                             cursorColor: Colors.white,
                             textAlign: TextAlign.start,
@@ -1136,7 +1176,7 @@ class _RegisterFormState extends State<RegisterForm> {
                               return null;
                             },
                             onChanged: (value) {
-                              _formKey.currentState!.validate();
+                              _ssfkey.currentState!.validate();
                             },
                           ),
                         ),
@@ -1186,15 +1226,15 @@ class _RegisterFormState extends State<RegisterForm> {
                                 color: Colors.red,
                               ),
                             ),
-                            validator: (value) {
-                              if (value!.trim().isEmpty) {
-                                return "Enter special achievement";
-                              }
-                              return null;
-                            },
-                            onChanged: (value) {
-                              _formKey.currentState!.validate();
-                            },
+                            // validator: (value) {
+                            //   if (value!.trim().isEmpty) {
+                            //     return "Enter special achievement";
+                            //   }
+                            //   return null;
+                            // },
+                            // onChanged: (value) {
+                            //   _formKey.currentState!.validate();
+                            // },
                           ),
                         ),
                         const SizedBox(
@@ -1237,15 +1277,15 @@ class _RegisterFormState extends State<RegisterForm> {
                                   color: Colors.yellow),
                               border: InputBorder.none,
                             ),
-                            validator: (value) {
-                              if (value!.trim().isEmpty) {
-                                return "Enter action taken on her";
-                              }
-                              return null;
-                            },
-                            onChanged: (value) {
-                              _formKey.currentState!.validate();
-                            },
+                            // validator: (value) {
+                            //   if (value!.trim().isEmpty) {
+                            //     return "Enter action taken on her";
+                            //   }
+                            //   return null;
+                            // },
+                            // onChanged: (value) {
+                            //   _formKey.currentState!.validate();
+                            // },
                           ),
                         ),
                         const SizedBox(
@@ -1268,6 +1308,7 @@ class _RegisterFormState extends State<RegisterForm> {
                               border: Border.all(color: Colors.white, width: 1),
                               borderRadius: BorderRadius.circular(20)),
                           child: TextFormField(
+                            key: _dolkey,
                             cursorColor: Colors.white,
                             textAlign: TextAlign.start,
                             controller: dateoflivingkvp,
@@ -1314,7 +1355,7 @@ class _RegisterFormState extends State<RegisterForm> {
 
                                 setState(() {
                                   dateoflivingkvp.text = formattedDate;
-                                  _formKey.currentState!.validate();
+                                  _dolkey.currentState!.validate();
                                 });
                               }
                             },
@@ -1399,6 +1440,7 @@ class _RegisterFormState extends State<RegisterForm> {
                             border: Border.all(color: Colors.white, width: 1),
                             borderRadius: BorderRadius.circular(20)),
                         child: TextFormField(
+                          key: _dobkey,
                           cursorColor: Colors.white,
                           textAlign: TextAlign.start,
                           controller: dob,
@@ -1445,7 +1487,7 @@ class _RegisterFormState extends State<RegisterForm> {
 
                               setState(() {
                                 dob.text = formattedDate;
-                                _formKey.currentState!.validate();
+                                _dobkey.currentState!.validate();
                               });
                             }
                           },
@@ -1474,6 +1516,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                     Border.all(color: Colors.white, width: 1),
                                 borderRadius: BorderRadius.circular(20)),
                             child: TextFormField(
+                              key: _aadharkey,
                               cursorColor: Colors.white,
                               textAlign: TextAlign.start,
                               controller: aadharnumber,
@@ -1506,7 +1549,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                 return null;
                               },
                               onChanged: (value) {
-                                _formKey.currentState!.validate();
+                                _aadharkey.currentState!.validate();
                               },
                             ),
                           ),
@@ -1532,6 +1575,7 @@ class _RegisterFormState extends State<RegisterForm> {
                             border: Border.all(color: Colors.white, width: 1),
                             borderRadius: BorderRadius.circular(20)),
                         child: TextFormField(
+                          key: _schoolnamekey,
                           cursorColor: Colors.white,
                           textAlign: TextAlign.start,
                           controller: nameofschool,
@@ -1561,7 +1605,7 @@ class _RegisterFormState extends State<RegisterForm> {
                             return null;
                           },
                           onChanged: (value) {
-                            _formKey.currentState!.validate();
+                            _schoolnamekey.currentState!.validate();
                           },
                         ),
                       ),
@@ -1588,6 +1632,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                     Border.all(color: Colors.white, width: 1),
                                 borderRadius: BorderRadius.circular(20)),
                             child: TextFormField(
+                              key: _schooltimekey,
                               readOnly: true,
                               cursorColor: Colors.white,
                               textAlign: TextAlign.start,
@@ -1626,7 +1671,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                 return null;
                               },
                               onChanged: (value) {
-                                _formKey.currentState!.validate();
+                                _schooltimekey.currentState!.validate();
                               },
                             ),
                           ),
@@ -1652,6 +1697,7 @@ class _RegisterFormState extends State<RegisterForm> {
                             border: Border.all(color: Colors.white, width: 1),
                             borderRadius: BorderRadius.circular(20)),
                         child: TextFormField(
+                          key: _stdkey,
                           cursorColor: Colors.white,
                           textAlign: TextAlign.start,
                           controller: stdinschool,
@@ -1684,7 +1730,7 @@ class _RegisterFormState extends State<RegisterForm> {
                             return null;
                           },
                           onChanged: (value) {
-                            _formKey.currentState!.validate();
+                            _stdkey.currentState!.validate();
                           },
                         ),
                       ),
@@ -1711,6 +1757,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                     Border.all(color: Colors.white, width: 1),
                                 borderRadius: BorderRadius.circular(20)),
                             child: TextFormField(
+                              key: _nooffamilykey,
                               cursorColor: Colors.white,
                               textAlign: TextAlign.start,
                               controller: nooffamilymembers,
@@ -1743,7 +1790,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                 return null;
                               },
                               onChanged: (value) {
-                                _formKey.currentState!.validate();
+                                _nooffamilykey.currentState!.validate();
                               },
                             ),
                           ),
@@ -1769,6 +1816,7 @@ class _RegisterFormState extends State<RegisterForm> {
                             border: Border.all(color: Colors.white, width: 1),
                             borderRadius: BorderRadius.circular(20)),
                         child: TextFormField(
+                          key: _totalnogirlkey,
                           cursorColor: Colors.white,
                           textAlign: TextAlign.start,
                           controller: noofgirlsfamily,
@@ -1801,7 +1849,7 @@ class _RegisterFormState extends State<RegisterForm> {
                             return null;
                           },
                           onChanged: (value) {
-                            _formKey.currentState!.validate();
+                            _totalnogirlkey.currentState!.validate();
                           },
                         ),
                       ),
@@ -1828,6 +1876,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                     Border.all(color: Colors.white, width: 1),
                                 borderRadius: BorderRadius.circular(20)),
                             child: TextFormField(
+                              key: _mothercontactkey,
                               cursorColor: Colors.white,
                               textAlign: TextAlign.start,
                               controller: mothercontact,
@@ -1860,7 +1909,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                 return null;
                               },
                               onChanged: (value) {
-                                _formKey.currentState!.validate();
+                                _mothercontactkey.currentState!.validate();
                               },
                             ),
                           ),
@@ -1886,6 +1935,7 @@ class _RegisterFormState extends State<RegisterForm> {
                             border: Border.all(color: Colors.white, width: 1),
                             borderRadius: BorderRadius.circular(20)),
                         child: TextFormField(
+                          key: _fathercontacrkey,
                           cursorColor: Colors.white,
                           textAlign: TextAlign.start,
                           controller: fathercontact,
@@ -1918,7 +1968,7 @@ class _RegisterFormState extends State<RegisterForm> {
                             return null;
                           },
                           onChanged: (value) {
-                            _formKey.currentState!.validate();
+                            _fathercontacrkey.currentState!.validate();
                           },
                         ),
                       ),
@@ -1945,6 +1995,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                     Border.all(color: Colors.white, width: 1),
                                 borderRadius: BorderRadius.circular(20)),
                             child: DropdownButtonFormField(
+                              key: _allgirlregisterkey,
                               borderRadius: BorderRadius.circular(20),
                               menuMaxHeight: 115,
                               style: GoogleFonts.poppins(
@@ -1991,7 +2042,7 @@ class _RegisterFormState extends State<RegisterForm> {
                               ],
                               onChanged: (value) {
                                 allgirlsregistred.text = value!;
-                                _formKey.currentState!.validate();
+                                _allgirlregisterkey.currentState!.validate();
                               },
                               validator: (value) {
                                 if (value == null) {
@@ -2049,6 +2100,7 @@ class _RegisterFormState extends State<RegisterForm> {
                             border: Border.all(color: Colors.white, width: 1),
                             borderRadius: BorderRadius.circular(20)),
                         child: DropdownButtonFormField(
+                          key: _parentmeet1key,
                           borderRadius: BorderRadius.circular(20),
                           menuMaxHeight: 115,
                           style: GoogleFonts.poppins(
@@ -2095,7 +2147,7 @@ class _RegisterFormState extends State<RegisterForm> {
                           ],
                           onChanged: (value) {
                             parentmeet1.text = value!;
-                            _formKey.currentState!.validate();
+                            _parentmeet1key.currentState!.validate();
                           },
                           validator: (value) {
                             if (value == null) {
@@ -2128,6 +2180,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                     Border.all(color: Colors.white, width: 1),
                                 borderRadius: BorderRadius.circular(20)),
                             child: DropdownButtonFormField(
+                              key: _parentmeet2key,
                               borderRadius: BorderRadius.circular(20),
                               menuMaxHeight: 115,
                               style: GoogleFonts.poppins(
@@ -2174,7 +2227,7 @@ class _RegisterFormState extends State<RegisterForm> {
                               ],
                               onChanged: (value) {
                                 parentmeet2.text = value!;
-                                _formKey.currentState!.validate();
+                                _parentmeet2key.currentState!.validate();
                               },
                               validator: (value) {
                                 if (value == null) {
@@ -2206,6 +2259,7 @@ class _RegisterFormState extends State<RegisterForm> {
                             border: Border.all(color: Colors.white, width: 1),
                             borderRadius: BorderRadius.circular(20)),
                         child: DropdownButtonFormField(
+                          key: _parentmeet3key,
                           borderRadius: BorderRadius.circular(20),
                           menuMaxHeight: 115,
                           style: GoogleFonts.poppins(
@@ -2252,7 +2306,7 @@ class _RegisterFormState extends State<RegisterForm> {
                           ],
                           onChanged: (value) {
                             parentmeet3.text = value!;
-                            _formKey.currentState!.validate();
+                            _parentmeet3key.currentState!.validate();
                           },
                           validator: (value) {
                             if (value == null) {
@@ -2270,15 +2324,51 @@ class _RegisterFormState extends State<RegisterForm> {
                 ),
                 GestureDetector(
                   onTap: () async {
-                    if (_formKey.currentState?.validate() == true) {
+                    // bool isValid = true;
+
+                    final keys = [
+                      _nameKey,
+                      _conatctkey,
+                      _vmkey,
+                      _vastikey,
+                      _vibhagkey,
+                      _trainerkey,
+                      _freelancerkey,
+                      _coordinatorkey,
+                      _sponsorkey,
+                      _norekey,
+                      _level,
+                      _ssfkey,
+                      _dobkey,
+                      _dolkey,
+                      _aadharkey,
+                      _schoolnamekey,
+                      _schooltimekey,
+                      _stdkey,
+                      _nooffamilykey,
+                      _totalnogirlkey,
+                      _mothercontactkey,
+                      _fathercontacrkey,
+                      _allgirlregisterkey,
+                      _parentmeet1key,
+                      _parentmeet2key,
+                      _parentmeet3key
+                    ];
+                    bool isValid = true;
+                    for (final key in keys) {
+                      if (key.currentState!.validate() == false) {
+                        isValid = false;
+                      }
+                    }
+
+                    if (isValid) {
                       storeDataToFirebase();
-                      controllerClear();
                       submitMessage(context);
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
-                            content:
-                                Text("Please Complete The All Text Field")),
+                          content: Text("Please Complete All Text Fields"),
+                        ),
                       );
                     }
                   },
@@ -2397,24 +2487,24 @@ class _RegisterFormState extends State<RegisterForm> {
         .add(data)
         .then((value) {
       Provider.of<Suggestionprovider>(context, listen: false)
-          .saveSuggestion(vastiname.text);
+          .saveSuggestion(vastiname.text, "vasti");
       Provider.of<Suggestionprovider>(context, listen: false)
-          .saveSuggestion(vibhagname.text);
+          .saveSuggestion(vibhagname.text, "vibhag");
 
       Provider.of<Suggestionprovider>(context, listen: false)
-          .saveSuggestion(trainername.text);
+          .saveSuggestion(trainername.text, "trainer");
 
       Provider.of<Suggestionprovider>(context, listen: false)
-          .saveSuggestion(freelancername.text);
+          .saveSuggestion(freelancername.text, "freelancer");
 
       Provider.of<Suggestionprovider>(context, listen: false)
-          .saveSuggestion(coordinatorname.text);
+          .saveSuggestion(coordinatorname.text, "coordinator");
 
       Provider.of<Suggestionprovider>(context, listen: false)
-          .saveSuggestion(vmname.text);
+          .saveSuggestion(vmname.text, "vm");
 
       Provider.of<Suggestionprovider>(context, listen: false)
-          .saveSuggestion(sponsorcompany.text);
+          .saveSuggestion(sponsorcompany.text, "sponsor");
 
       print("Data submitted successfully");
     }).catchError((error) {
