@@ -4,9 +4,8 @@ import 'package:kvp/provider/checkbox.dart';
 import 'package:kvp/screen/homepage.dart';
 import 'package:provider/provider.dart';
 
-import 'demopage.dart';
 import 'provider/suggestionprovider.dart';
-import 'screen/registerform.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -1297,8 +1297,8 @@ class CheckboxWithControllers extends StatelessWidget {
     final checkboxProvider = Provider.of<CheckboxProvider>(context);
 
     return SingleChildScrollView(
-      physics: const NeverScrollableScrollPhysics(),
       child: ListView.builder(
+      physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemCount: checkboxProvider.checkboxState.keys.length,
         itemBuilder: (context, index) {

@@ -213,28 +213,38 @@ class Suggestionprovider extends ChangeNotifier {
   List<String> coordinatorlist = [];
   List<String> sponsorlist = [];
 
+  bool vmbuild = false;
+  bool trainerbuyild= false;
+
   void autoComplete(List<String> suggestion, String input, String choice) {
     switch (choice) {
       case "checkvasti":
         vastilist.clear();
+        notifyListeners();
         break;
       case "checkvibhag":
         vibhaglist.clear();
+        notifyListeners();
         break;
       case "checkvm":
         vmlist.clear();
+        notifyListeners();
         break;
       case "checkfreelance":
         freelancerlist.clear();
+        notifyListeners();
         break;
       case "checktrainer":
         trainerlist.clear();
+        notifyListeners();
         break;
       case "checkcoo":
         coordinatorlist.clear();
+        notifyListeners();
         break;
       case "sponsor":
         sponsorlist.clear();
+        notifyListeners();
         break;
     }
 
@@ -244,32 +254,39 @@ class Suggestionprovider extends ChangeNotifier {
         switch (choice) {
           case "checkvasti":
             vastilist.add(element);
+            notifyListeners();
             break;
           case "checkvibhag":
             vibhaglist.add(element);
+            notifyListeners();
             break;
           case "checkvm":
             vmlist.add(element);
+            notifyListeners();
             break;
           case "checkfreelance":
             freelancerlist.add(element);
+            notifyListeners();
             break;
           case "checktrainer":
             trainerlist.add(element);
+            notifyListeners();
             break;
           case "checkcoo":
             coordinatorlist.add(element);
+            notifyListeners();
             break;
           case "sponsor":
             sponsorlist.add(element);
+            notifyListeners();
             break;
           default:
             break;
         }
+      
       }
     }
 
-    notifyListeners();
   }
 
   Future<void> saveSuggestion(String newSuggestion, String input) async {
@@ -277,8 +294,9 @@ class Suggestionprovider extends ChangeNotifier {
       SharedPreferences prefs = await SharedPreferences.getInstance();
 
       if ("vasti" == input) {
-        vastilist.add(newSuggestion);
-        await prefs.setStringList('vastisuggestion', vastilist);
+        List<String> data =  await prefs.getStringList("vastisuggestion") ?? [];
+        data.add(newSuggestion);
+        await prefs.setStringList('vastisuggestion', data);
       } else if ("vibhag" == input) {
         vibhaglist.add(newSuggestion);
         await prefs.setStringList('vibhagsuggestion', vibhaglist);
@@ -358,6 +376,14 @@ class Suggestionprovider extends ChangeNotifier {
         "Saved suggestion sponsor list in load suggestion: $savedSponsorSuggestions");
     sponsorlist = savedSponsorSuggestions;
 
-    notifyListeners();
+   // notifyListeners();
+  }
+
+  void clearData(String val){
+    if(val == 'vm'){
+      vmbuild = true;
+      vmlist.clear();
+      notifyListeners();
+    }
   }
 }

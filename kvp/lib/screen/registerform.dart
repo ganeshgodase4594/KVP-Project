@@ -91,8 +91,6 @@ class _RegisterFormState extends State<RegisterForm> {
   @override
   void initState() {
     super.initState();
-
-    Provider.of<Suggestionprovider>(context, listen: false).loadSuggestion();
   }
 
   @override
@@ -296,17 +294,22 @@ class _RegisterFormState extends State<RegisterForm> {
                               return null;
                             },
                             onChanged: (value) {
+                               Provider.of<Suggestionprovider>(context, listen: false).loadSuggestion();
                               _vmkey.currentState!.validate();
                               if (value.isEmpty) {
                                 Provider.of<Suggestionprovider>(context,
                                         listen: false)
-                                    .vmlist
-                                    .clear();
+                                    .clearData("vm");   
+                                   
+                                 
                               } else {
                                 List<String> vmlocal =
                                     Provider.of<Suggestionprovider>(context,
                                             listen: false)
                                         .vmlist;
+                                    Provider.of<Suggestionprovider>(context,
+                                            listen: false)
+                                        .vmbuild = true;
 
                                 Provider.of<Suggestionprovider>(context,
                                         listen: false)
@@ -318,7 +321,9 @@ class _RegisterFormState extends State<RegisterForm> {
                         Consumer<Suggestionprovider>(
                           builder: (BuildContext context, suggestionProvider,
                               Widget? child) {
-                            return ListView.separated(
+                            
+                            if(suggestionProvider.vmbuild == true){
+                              return ListView.separated(
                               shrinkWrap: true,
                               itemCount: suggestionProvider.vmlist.length,
                               separatorBuilder: (context, index) =>
@@ -345,8 +350,13 @@ class _RegisterFormState extends State<RegisterForm> {
                                 );
                               },
                             );
+                            }
+                            else{
+                              return SizedBox();
+                            }
                           },
                         ),
+                        const SizedBox(height: 10,),
                         Row(
                           children: [
                             Text(
@@ -423,7 +433,8 @@ class _RegisterFormState extends State<RegisterForm> {
                         Consumer<Suggestionprovider>(
                           builder: (BuildContext context, suggestionProvider,
                               Widget? child) {
-                            return ListView.separated(
+                            if(suggestionProvider.trainerbuyild == true){
+                              return ListView.separated(
                               shrinkWrap: true,
                               itemCount: suggestionProvider.trainerlist.length,
                               separatorBuilder: (context, index) =>
@@ -450,6 +461,10 @@ class _RegisterFormState extends State<RegisterForm> {
                                 );
                               },
                             );
+                            }
+                            else{
+                              return SizedBox();
+                            }
                           },
                         ),
                         Text(
@@ -709,8 +724,7 @@ class _RegisterFormState extends State<RegisterForm> {
                               if (value.isEmpty) {
                                 Provider.of<Suggestionprovider>(context,
                                         listen: false)
-                                    .vastilist
-                                    .clear();
+                                    .clearData("vm");
                               } else {
                                 List<String> vastilocal =
                                     Provider.of<Suggestionprovider>(context,
@@ -1390,7 +1404,7 @@ class _RegisterFormState extends State<RegisterForm> {
                           ),
                         ),
                         SizedBox(
-                            height: 500,
+                        
                             width: MediaQuery.of(context).size.width,
                             child: CheckboxWithControllers()),
                       ],
