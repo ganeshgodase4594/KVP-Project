@@ -58,7 +58,6 @@ class _RegisterFormState extends State<RegisterForm> {
   TimeOfDay startTime = TimeOfDay.now();
   TimeOfDay endTime = TimeOfDay.now();
 
-  final _formKey = GlobalKey<FormState>();
   final _nameKey = GlobalKey<FormFieldState<String>>();
   final _conatctkey = GlobalKey<FormFieldState<String>>();
   final _vmkey = GlobalKey<FormFieldState<String>>();
@@ -86,11 +85,102 @@ class _RegisterFormState extends State<RegisterForm> {
   final _parentmeet2key = GlobalKey<FormFieldState<String>>();
   final _parentmeet3key = GlobalKey<FormFieldState<String>>();
 
-  FocusNode nameFocusNode = FocusNode();
+  final FocusNode _vmFocusNode = FocusNode();
+  final FocusNode _trainerFocusNode = FocusNode();
+  final FocusNode _freelancerFocusNode = FocusNode();
+  final FocusNode _cooFocusNode = FocusNode();
+  final FocusNode _vastiFocusNode = FocusNode();
+  final FocusNode _vibhgFocusNode = FocusNode();
+  final FocusNode _sponsorFocusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
+
+    _vmFocusNode.addListener(() {
+      if (!_vmFocusNode.hasFocus) {
+        Provider.of<Suggestionprovider>(context, listen: false)
+            .matchedItems
+            .clear();
+        Provider.of<Suggestionprovider>(context, listen: false).vmbuild = false;
+        Provider.of<Suggestionprovider>(context, listen: false)
+            .notifyListeners();
+      }
+    });
+
+    _trainerFocusNode.addListener(() {
+      if (!_trainerFocusNode.hasFocus) {
+        Provider.of<Suggestionprovider>(context, listen: false)
+            .matchedItems
+            .clear();
+        Provider.of<Suggestionprovider>(context, listen: false).trainerbuyild =
+            false;
+        Provider.of<Suggestionprovider>(context, listen: false)
+            .notifyListeners();
+      }
+    });
+
+    _freelancerFocusNode.addListener(() {
+      if (!_freelancerFocusNode.hasFocus) {
+        Provider.of<Suggestionprovider>(context, listen: false)
+            .matchedItems
+            .clear();
+        Provider.of<Suggestionprovider>(context, listen: false)
+            .freelancerbuild = false;
+        Provider.of<Suggestionprovider>(context, listen: false)
+            .notifyListeners();
+      }
+    });
+
+    _cooFocusNode.addListener(() {
+      if (!_cooFocusNode.hasFocus) {
+        Provider.of<Suggestionprovider>(context, listen: false)
+            .matchedItems
+            .clear();
+        Provider.of<Suggestionprovider>(context, listen: false).coobuild =
+            false;
+        Provider.of<Suggestionprovider>(context, listen: false)
+            .notifyListeners();
+      }
+    });
+
+    _vastiFocusNode.addListener(() {
+      if (!_vastiFocusNode.hasFocus) {
+        Provider.of<Suggestionprovider>(context, listen: false)
+            .matchedItems
+            .clear();
+        Provider.of<Suggestionprovider>(context, listen: false).vastibuild =
+            false;
+        Provider.of<Suggestionprovider>(context, listen: false)
+            .notifyListeners();
+      }
+    });
+
+    _vibhgFocusNode.addListener(() {
+      if (!_vibhgFocusNode.hasFocus) {
+        Provider.of<Suggestionprovider>(context, listen: false)
+            .matchedItems
+            .clear();
+        Provider.of<Suggestionprovider>(context, listen: false).vibhagbuild =
+            false;
+        Provider.of<Suggestionprovider>(context, listen: false)
+            .notifyListeners();
+      }
+    });
+
+    _sponsorFocusNode.addListener(() {
+      if (!_sponsorFocusNode.hasFocus) {
+        Provider.of<Suggestionprovider>(context, listen: false)
+            .matchedItems
+            .clear();
+        Provider.of<Suggestionprovider>(context, listen: false).sponsorbuild =
+            false;
+        Provider.of<Suggestionprovider>(context, listen: false)
+            .notifyListeners();
+      }
+    });
+
+    Provider.of<Suggestionprovider>(context, listen: false).loadSuggestion();
   }
 
   @override
@@ -265,6 +355,7 @@ class _RegisterFormState extends State<RegisterForm> {
                               borderRadius: BorderRadius.circular(20)),
                           child: TextFormField(
                             key: _vmkey,
+                            focusNode: _vmFocusNode,
                             cursorColor: Colors.white,
                             textAlign: TextAlign.start,
                             controller: vmname,
@@ -294,22 +385,25 @@ class _RegisterFormState extends State<RegisterForm> {
                               return null;
                             },
                             onChanged: (value) {
-                               Provider.of<Suggestionprovider>(context, listen: false).loadSuggestion();
                               _vmkey.currentState!.validate();
                               if (value.isEmpty) {
                                 Provider.of<Suggestionprovider>(context,
                                         listen: false)
-                                    .clearData("vm");   
-                                   
-                                 
+                                    .matchedItems;
+                                Provider.of<Suggestionprovider>(context,
+                                        listen: false)
+                                    .vmbuild = false;
+                                Provider.of<Suggestionprovider>(context,
+                                        listen: false)
+                                    .notifyListeners();
                               } else {
                                 List<String> vmlocal =
                                     Provider.of<Suggestionprovider>(context,
                                             listen: false)
                                         .vmlist;
-                                    Provider.of<Suggestionprovider>(context,
-                                            listen: false)
-                                        .vmbuild = true;
+                                Provider.of<Suggestionprovider>(context,
+                                        listen: false)
+                                    .vmbuild = false;
 
                                 Provider.of<Suggestionprovider>(context,
                                         listen: false)
@@ -321,42 +415,53 @@ class _RegisterFormState extends State<RegisterForm> {
                         Consumer<Suggestionprovider>(
                           builder: (BuildContext context, suggestionProvider,
                               Widget? child) {
-                            
-                            if(suggestionProvider.vmbuild == true){
+                            if (suggestionProvider.vmbuild == true) {
                               return ListView.separated(
-                              shrinkWrap: true,
-                              itemCount: suggestionProvider.vmlist.length,
-                              separatorBuilder: (context, index) =>
-                                  const SizedBox(height: 0),
-                              itemBuilder: (context, index) {
-                                return Container(
-                                  width: MediaQuery.of(context).size.width / 2,
-                                  decoration: const BoxDecoration(
-                                    color: Colors.white,
-                                  ),
-                                  child: ListTile(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
+                                shrinkWrap: true,
+                                itemCount:
+                                    suggestionProvider.matchedItems.length,
+                                separatorBuilder: (context, index) =>
+                                    const SizedBox(height: 0),
+                                itemBuilder: (context, index) {
+                                  return Container(
+                                    width:
+                                        MediaQuery.of(context).size.width / 2,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(10),
+                                        boxShadow: const [
+                                          BoxShadow(
+                                            color: Colors.blueAccent,
+                                            spreadRadius: 2,
+                                            blurRadius: 5,
+                                            offset: Offset(0, 3),
+                                          ),
+                                        ]),
+                                    child: ListTile(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      title: Text(suggestionProvider
+                                          .matchedItems[index]),
+                                      onTap: () {
+                                        vmname.text = suggestionProvider
+                                            .matchedItems[index];
+                                        suggestionProvider.matchedItems.clear();
+
+                                        suggestionProvider.notifyListeners();
+                                      },
                                     ),
-                                    title:
-                                        Text(suggestionProvider.vmlist[index]),
-                                    onTap: () {
-                                      vmname.text =
-                                          suggestionProvider.vmlist[index];
-                                      suggestionProvider.vmlist.clear();
-                                      suggestionProvider.notifyListeners();
-                                    },
-                                  ),
-                                );
-                              },
-                            );
-                            }
-                            else{
-                              return SizedBox();
+                                  );
+                                },
+                              );
+                            } else {
+                              return const SizedBox();
                             }
                           },
                         ),
-                        const SizedBox(height: 10,),
+                        const SizedBox(
+                          height: 10,
+                        ),
                         Row(
                           children: [
                             Text(
@@ -378,6 +483,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                   borderRadius: BorderRadius.circular(20)),
                               child: TextFormField(
                                 key: _trainerkey,
+                                focusNode: _trainerFocusNode,
                                 cursorColor: Colors.white,
                                 textAlign: TextAlign.start,
                                 controller: trainername,
@@ -408,11 +514,20 @@ class _RegisterFormState extends State<RegisterForm> {
                                   return null;
                                 },
                                 onChanged: (value) {
+                                  _trainerkey.currentState!.validate();
+                                  // Provider.of<Suggestionprovider>(context,
+                                  //         listen: false)
+                                  //     .loadSuggestion();
                                   if (value.isEmpty) {
                                     Provider.of<Suggestionprovider>(context,
                                             listen: false)
-                                        .trainerlist
-                                        .clear();
+                                        .matchedItems;
+                                    Provider.of<Suggestionprovider>(context,
+                                            listen: false)
+                                        .trainerbuyild = false;
+                                    Provider.of<Suggestionprovider>(context,
+                                            listen: false)
+                                        .notifyListeners();
                                   } else {
                                     List<String> trainerlocal =
                                         Provider.of<Suggestionprovider>(context,
@@ -421,10 +536,13 @@ class _RegisterFormState extends State<RegisterForm> {
 
                                     Provider.of<Suggestionprovider>(context,
                                             listen: false)
+                                        .trainerbuyild = true;
+
+                                    Provider.of<Suggestionprovider>(context,
+                                            listen: false)
                                         .autoComplete(trainerlocal, value,
                                             "checktrainer");
                                   }
-                                  _trainerkey.currentState!.validate();
                                 },
                               ),
                             ),
@@ -433,39 +551,51 @@ class _RegisterFormState extends State<RegisterForm> {
                         Consumer<Suggestionprovider>(
                           builder: (BuildContext context, suggestionProvider,
                               Widget? child) {
-                            if(suggestionProvider.trainerbuyild == true){
+                            if (suggestionProvider.trainerbuyild == true) {
                               return ListView.separated(
-                              shrinkWrap: true,
-                              itemCount: suggestionProvider.trainerlist.length,
-                              separatorBuilder: (context, index) =>
-                                  const SizedBox(height: 0),
-                              itemBuilder: (context, index) {
-                                return Container(
-                                  width: MediaQuery.of(context).size.width / 2,
-                                  decoration: const BoxDecoration(
-                                    color: Colors.white,
-                                  ),
-                                  child: ListTile(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
+                                shrinkWrap: true,
+                                itemCount:
+                                    suggestionProvider.matchedItems.length,
+                                separatorBuilder: (context, index) =>
+                                    const SizedBox(height: 0),
+                                itemBuilder: (context, index) {
+                                  return Container(
+                                    width:
+                                        MediaQuery.of(context).size.width / 2,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(10),
+                                        boxShadow: const [
+                                          BoxShadow(
+                                            color: Colors.blueAccent,
+                                            spreadRadius: 2,
+                                            blurRadius: 5,
+                                            offset: Offset(0, 3),
+                                          ),
+                                        ]),
+                                    child: ListTile(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      title: Text(suggestionProvider
+                                          .matchedItems[index]),
+                                      onTap: () {
+                                        trainername.text = suggestionProvider
+                                            .matchedItems[index];
+                                        suggestionProvider.matchedItems.clear();
+                                        suggestionProvider.notifyListeners();
+                                      },
                                     ),
-                                    title: Text(
-                                        suggestionProvider.trainerlist[index]),
-                                    onTap: () {
-                                      trainername.text =
-                                          suggestionProvider.trainerlist[index];
-                                      suggestionProvider.trainerlist.clear();
-                                      suggestionProvider.notifyListeners();
-                                    },
-                                  ),
-                                );
-                              },
-                            );
-                            }
-                            else{
-                              return SizedBox();
+                                  );
+                                },
+                              );
+                            } else {
+                              return const SizedBox();
                             }
                           },
+                        ),
+                        const SizedBox(
+                          height: 10,
                         ),
                         Text(
                           "Freelancer Name",
@@ -485,6 +615,7 @@ class _RegisterFormState extends State<RegisterForm> {
                               borderRadius: BorderRadius.circular(20)),
                           child: TextFormField(
                             key: _freelancerkey,
+                            focusNode: _freelancerFocusNode,
                             cursorColor: Colors.white,
                             textAlign: TextAlign.start,
                             controller: freelancername,
@@ -514,11 +645,20 @@ class _RegisterFormState extends State<RegisterForm> {
                               return null;
                             },
                             onChanged: (value) {
+                              _freelancerkey.currentState!.validate();
+                              // Provider.of<Suggestionprovider>(context,
+                              //         listen: false)
+                              //     .loadSuggestion();
                               if (value.isEmpty) {
                                 Provider.of<Suggestionprovider>(context,
                                         listen: false)
-                                    .freelancerlist
-                                    .clear();
+                                    .matchedItems;
+                                Provider.of<Suggestionprovider>(context,
+                                        listen: false)
+                                    .freelancerbuild = false;
+                                Provider.of<Suggestionprovider>(context,
+                                        listen: false)
+                                    .notifyListeners();
                               } else {
                                 List<String> freelancerlocal =
                                     Provider.of<Suggestionprovider>(context,
@@ -527,45 +667,64 @@ class _RegisterFormState extends State<RegisterForm> {
 
                                 Provider.of<Suggestionprovider>(context,
                                         listen: false)
+                                    .freelancerbuild = true;
+
+                                Provider.of<Suggestionprovider>(context,
+                                        listen: false)
                                     .autoComplete(freelancerlocal, value,
                                         "checkfreelance");
                               }
-                              _trainerkey.currentState!.validate();
                             },
                           ),
                         ),
                         Consumer<Suggestionprovider>(
                           builder: (BuildContext context, suggestionProvider,
                               Widget? child) {
-                            return ListView.separated(
-                              shrinkWrap: true,
-                              itemCount:
-                                  suggestionProvider.freelancerlist.length,
-                              separatorBuilder: (context, index) =>
-                                  const SizedBox(height: 0),
-                              itemBuilder: (context, index) {
-                                return Container(
-                                  width: MediaQuery.of(context).size.width / 2,
-                                  decoration: const BoxDecoration(
-                                    color: Colors.white,
-                                  ),
-                                  child: ListTile(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
+                            if (suggestionProvider.freelancerbuild == true) {
+                              return ListView.separated(
+                                shrinkWrap: true,
+                                itemCount:
+                                    suggestionProvider.matchedItems.length,
+                                separatorBuilder: (context, index) =>
+                                    const SizedBox(height: 0),
+                                itemBuilder: (context, index) {
+                                  return Container(
+                                    width:
+                                        MediaQuery.of(context).size.width / 2,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(10),
+                                        boxShadow: const [
+                                          BoxShadow(
+                                            color: Colors.blueAccent,
+                                            spreadRadius: 2,
+                                            blurRadius: 5,
+                                            offset: Offset(0, 3),
+                                          ),
+                                        ]),
+                                    child: ListTile(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      title: Text(suggestionProvider
+                                          .matchedItems[index]),
+                                      onTap: () {
+                                        freelancername.text = suggestionProvider
+                                            .matchedItems[index];
+                                        suggestionProvider.matchedItems.clear();
+                                        suggestionProvider.notifyListeners();
+                                      },
                                     ),
-                                    title: Text(suggestionProvider
-                                        .freelancerlist[index]),
-                                    onTap: () {
-                                      freelancername.text = suggestionProvider
-                                          .freelancerlist[index];
-                                      suggestionProvider.freelancerlist.clear();
-                                      suggestionProvider.notifyListeners();
-                                    },
-                                  ),
-                                );
-                              },
-                            );
+                                  );
+                                },
+                              );
+                            } else {
+                              return const SizedBox();
+                            }
                           },
+                        ),
+                        const SizedBox(
+                          height: 10,
                         ),
                         Row(
                           children: [
@@ -588,6 +747,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                   borderRadius: BorderRadius.circular(20)),
                               child: TextFormField(
                                 key: _coordinatorkey,
+                                focusNode: _cooFocusNode,
                                 cursorColor: Colors.white,
                                 textAlign: TextAlign.start,
                                 controller: coordinatorname,
@@ -618,16 +778,28 @@ class _RegisterFormState extends State<RegisterForm> {
                                   return null;
                                 },
                                 onChanged: (value) {
+                                  // Provider.of<Suggestionprovider>(context,
+                                  //         listen: false)
+                                  //     .loadSuggestion();
                                   if (value.isEmpty) {
                                     Provider.of<Suggestionprovider>(context,
                                             listen: false)
-                                        .coordinatorlist
-                                        .clear();
+                                        .matchedItems;
+                                    Provider.of<Suggestionprovider>(context,
+                                            listen: false)
+                                        .coobuild = false;
+                                    Provider.of<Suggestionprovider>(context,
+                                            listen: false)
+                                        .notifyListeners();
                                   } else {
                                     List<String> coordinatorlocal =
                                         Provider.of<Suggestionprovider>(context,
                                                 listen: false)
                                             .coordinatorlist;
+
+                                    Provider.of<Suggestionprovider>(context,
+                                            listen: false)
+                                        .coobuild = true;
 
                                     Provider.of<Suggestionprovider>(context,
                                             listen: false)
@@ -643,35 +815,48 @@ class _RegisterFormState extends State<RegisterForm> {
                         Consumer<Suggestionprovider>(
                           builder: (BuildContext context, suggestionProvider,
                               Widget? child) {
-                            return ListView.separated(
-                              shrinkWrap: true,
-                              itemCount:
-                                  suggestionProvider.coordinatorlist.length,
-                              separatorBuilder: (context, index) =>
-                                  const SizedBox(height: 0),
-                              itemBuilder: (context, index) {
-                                return Container(
-                                  width: MediaQuery.of(context).size.width / 2,
-                                  decoration: const BoxDecoration(
-                                    color: Colors.white,
-                                  ),
-                                  child: ListTile(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
+                            if (suggestionProvider.coobuild) {
+                              return ListView.separated(
+                                shrinkWrap: true,
+                                itemCount:
+                                    suggestionProvider.matchedItems.length,
+                                separatorBuilder: (context, index) =>
+                                    const SizedBox(height: 0),
+                                itemBuilder: (context, index) {
+                                  return Container(
+                                    width:
+                                        MediaQuery.of(context).size.width / 2,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(10),
+                                        boxShadow: const [
+                                          BoxShadow(
+                                            color: Colors.blueAccent,
+                                            spreadRadius: 2,
+                                            blurRadius: 5,
+                                            offset: Offset(0, 3),
+                                          ),
+                                        ]),
+                                    child: ListTile(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      title: Text(suggestionProvider
+                                          .matchedItems[index]),
+                                      onTap: () {
+                                        coordinatorname.text =
+                                            suggestionProvider
+                                                .matchedItems[index];
+                                        suggestionProvider.matchedItems.clear();
+                                        suggestionProvider.notifyListeners();
+                                      },
                                     ),
-                                    title: Text(suggestionProvider
-                                        .coordinatorlist[index]),
-                                    onTap: () {
-                                      coordinatorname.text = suggestionProvider
-                                          .coordinatorlist[index];
-                                      suggestionProvider.coordinatorlist
-                                          .clear();
-                                      suggestionProvider.notifyListeners();
-                                    },
-                                  ),
-                                );
-                              },
-                            );
+                                  );
+                                },
+                              );
+                            } else {
+                              return const SizedBox();
+                            }
                           },
                         ),
                         Text(
@@ -692,6 +877,7 @@ class _RegisterFormState extends State<RegisterForm> {
                               borderRadius: BorderRadius.circular(20)),
                           child: TextFormField(
                             key: _vastikey,
+                            focusNode: _vastiFocusNode,
                             cursorColor: Colors.white,
                             textAlign: TextAlign.start,
                             controller: vastiname,
@@ -721,15 +907,32 @@ class _RegisterFormState extends State<RegisterForm> {
                               return null;
                             },
                             onChanged: (value) {
+                              // Provider.of<Suggestionprovider>(context,
+                              //         listen: false)
+                              //     .loadSuggestion();
                               if (value.isEmpty) {
+                                // Provider.of<Suggestionprovider>(context,
+                                //         listen: false)
+                                //     .clearData("vm");
+
                                 Provider.of<Suggestionprovider>(context,
                                         listen: false)
-                                    .clearData("vm");
+                                    .matchedItems;
+                                Provider.of<Suggestionprovider>(context,
+                                        listen: false)
+                                    .vastibuild = false;
+                                Provider.of<Suggestionprovider>(context,
+                                        listen: false)
+                                    .notifyListeners();
                               } else {
                                 List<String> vastilocal =
                                     Provider.of<Suggestionprovider>(context,
                                             listen: false)
                                         .vastilist;
+
+                                Provider.of<Suggestionprovider>(context,
+                                        listen: false)
+                                    .vastibuild = true;
 
                                 Provider.of<Suggestionprovider>(context,
                                         listen: false)
@@ -743,34 +946,49 @@ class _RegisterFormState extends State<RegisterForm> {
                         Consumer<Suggestionprovider>(
                           builder: (BuildContext context, suggestionProvider,
                               Widget? child) {
-                            return ListView.separated(
-                              shrinkWrap: true,
-                              itemCount: suggestionProvider.vastilist.length,
-                              separatorBuilder: (context, index) =>
-                                  const SizedBox(height: 0),
-                              itemBuilder: (context, index) {
-                                return Container(
-                                  width: MediaQuery.of(context).size.width / 2,
-                                  decoration: const BoxDecoration(
-                                    color: Colors.white,
-                                  ),
-                                  child: ListTile(
-                                    shape: RoundedRectangleBorder(
+                            if (suggestionProvider.vastibuild == true) {
+                              return ListView.separated(
+                                shrinkWrap: true,
+                                itemCount:
+                                    suggestionProvider.matchedItems.length,
+                                separatorBuilder: (context, index) =>
+                                    const SizedBox(height: 0),
+                                itemBuilder: (context, index) {
+                                  return Container(
+                                    width:
+                                        (MediaQuery.of(context).size.width) / 2,
+                                    decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
+                                      color: Colors.white,
+                                      boxShadow: const [
+                                        BoxShadow(
+                                          color: Colors.blueAccent,
+                                          spreadRadius: 2,
+                                          blurRadius: 5,
+                                          offset: Offset(0, 3),
+                                        ),
+                                      ],
                                     ),
-                                    title: Text(
-                                        suggestionProvider.vastilist[index]),
-                                    onTap: () {
-                                      vastiname.text =
-                                          suggestionProvider.vastilist[index];
-                                      suggestionProvider.vastilist.clear();
-                                      suggestionProvider.notifyListeners();
-                                    },
-                                  ),
-                                );
-                              },
-                            );
+                                    child: ListTile(
+                                      title: Text(suggestionProvider
+                                          .matchedItems[index]),
+                                      onTap: () {
+                                        vastiname.text = suggestionProvider
+                                            .matchedItems[index];
+                                        suggestionProvider.matchedItems.clear();
+                                        suggestionProvider.notifyListeners();
+                                      },
+                                    ),
+                                  );
+                                },
+                              );
+                            } else {
+                              return const SizedBox();
+                            }
                           },
+                        ),
+                        const SizedBox(
+                          height: 10,
                         ),
                         Row(
                           children: [
@@ -793,6 +1011,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                   borderRadius: BorderRadius.circular(20)),
                               child: TextFormField(
                                 key: _vibhagkey,
+                                focusNode: _vibhgFocusNode,
                                 cursorColor: Colors.white,
                                 textAlign: TextAlign.start,
                                 controller: vibhagname,
@@ -823,16 +1042,28 @@ class _RegisterFormState extends State<RegisterForm> {
                                   return null;
                                 },
                                 onChanged: (value) {
+                                  // Provider.of<Suggestionprovider>(context,
+                                  //         listen: false)
+                                  //     .loadSuggestion();
                                   if (value.isEmpty) {
                                     Provider.of<Suggestionprovider>(context,
                                             listen: false)
-                                        .vibhaglist
-                                        .clear();
+                                        .matchedItems;
+                                    Provider.of<Suggestionprovider>(context,
+                                            listen: false)
+                                        .vibhagbuild = false;
+                                    Provider.of<Suggestionprovider>(context,
+                                            listen: false)
+                                        .notifyListeners();
                                   } else {
                                     List<String> vibhaglocal =
                                         Provider.of<Suggestionprovider>(context,
                                                 listen: false)
                                             .vibhaglist;
+
+                                    Provider.of<Suggestionprovider>(context,
+                                            listen: false)
+                                        .vibhagbuild = true;
 
                                     Provider.of<Suggestionprovider>(context,
                                             listen: false)
@@ -848,33 +1079,47 @@ class _RegisterFormState extends State<RegisterForm> {
                         Consumer<Suggestionprovider>(
                           builder: (BuildContext context, suggestionProvider,
                               Widget? child) {
-                            return ListView.separated(
-                              shrinkWrap: true,
-                              itemCount: suggestionProvider.vibhaglist.length,
-                              separatorBuilder: (context, index) =>
-                                  const SizedBox(height: 0),
-                              itemBuilder: (context, index) {
-                                return Container(
-                                  width: MediaQuery.of(context).size.width / 2,
-                                  decoration: const BoxDecoration(
-                                    color: Colors.white,
-                                  ),
-                                  child: ListTile(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
+                            if (suggestionProvider.vibhagbuild == true) {
+                              return ListView.separated(
+                                shrinkWrap: true,
+                                itemCount:
+                                    suggestionProvider.matchedItems.length,
+                                separatorBuilder: (context, index) =>
+                                    const SizedBox(height: 0),
+                                itemBuilder: (context, index) {
+                                  return Container(
+                                    width:
+                                        MediaQuery.of(context).size.width / 2,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(10),
+                                        boxShadow: const [
+                                          BoxShadow(
+                                            color: Colors.blueAccent,
+                                            spreadRadius: 2,
+                                            blurRadius: 5,
+                                            offset: Offset(0, 3),
+                                          ),
+                                        ]),
+                                    child: ListTile(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      title: Text(suggestionProvider
+                                          .matchedItems[index]),
+                                      onTap: () {
+                                        vibhagname.text = suggestionProvider
+                                            .matchedItems[index];
+                                        suggestionProvider.matchedItems.clear();
+                                        suggestionProvider.notifyListeners();
+                                      },
                                     ),
-                                    title: Text(
-                                        suggestionProvider.vibhaglist[index]),
-                                    onTap: () {
-                                      vibhagname.text =
-                                          suggestionProvider.vibhaglist[index];
-                                      suggestionProvider.vibhaglist.clear();
-                                      suggestionProvider.notifyListeners();
-                                    },
-                                  ),
-                                );
-                              },
-                            );
+                                  );
+                                },
+                              );
+                            } else {
+                              return const SizedBox();
+                            }
                           },
                         ),
                         Text(
@@ -895,6 +1140,7 @@ class _RegisterFormState extends State<RegisterForm> {
                               borderRadius: BorderRadius.circular(20)),
                           child: TextFormField(
                             key: _sponsorkey,
+                            focusNode: _sponsorFocusNode,
                             cursorColor: Colors.white,
                             textAlign: TextAlign.start,
                             controller: sponsorcompany,
@@ -926,16 +1172,33 @@ class _RegisterFormState extends State<RegisterForm> {
                               return null;
                             },
                             onChanged: (value) {
+                              // Provider.of<Suggestionprovider>(context,
+                              //         listen: false)
+                              //     .loadSuggestion();
                               if (value.isEmpty) {
+                                // Provider.of<Suggestionprovider>(context,
+                                //         listen: false)
+                                //     .sponsorlist
+                                //     .clear();
+
                                 Provider.of<Suggestionprovider>(context,
                                         listen: false)
-                                    .sponsorlist
-                                    .clear();
+                                    .matchedItems;
+                                Provider.of<Suggestionprovider>(context,
+                                        listen: false)
+                                    .sponsorbuild = false;
+                                Provider.of<Suggestionprovider>(context,
+                                        listen: false)
+                                    .notifyListeners();
                               } else {
                                 List<String> sponsorlocal =
                                     Provider.of<Suggestionprovider>(context,
                                             listen: false)
                                         .sponsorlist;
+
+                                Provider.of<Suggestionprovider>(context,
+                                        listen: false)
+                                    .sponsorbuild = true;
 
                                 Provider.of<Suggestionprovider>(context,
                                         listen: false)
@@ -949,33 +1212,47 @@ class _RegisterFormState extends State<RegisterForm> {
                         Consumer<Suggestionprovider>(
                           builder: (BuildContext context, suggestionProvider,
                               Widget? child) {
-                            return ListView.separated(
-                              shrinkWrap: true,
-                              itemCount: suggestionProvider.sponsorlist.length,
-                              separatorBuilder: (context, index) =>
-                                  const SizedBox(height: 0),
-                              itemBuilder: (context, index) {
-                                return Container(
-                                  width: MediaQuery.of(context).size.width / 2,
-                                  decoration: const BoxDecoration(
-                                    color: Colors.white,
-                                  ),
-                                  child: ListTile(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
+                            if (suggestionProvider.sponsorbuild) {
+                              return ListView.separated(
+                                shrinkWrap: true,
+                                itemCount:
+                                    suggestionProvider.matchedItems.length,
+                                separatorBuilder: (context, index) =>
+                                    const SizedBox(height: 0),
+                                itemBuilder: (context, index) {
+                                  return Container(
+                                    width:
+                                        MediaQuery.of(context).size.width / 2,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(10),
+                                        boxShadow: const [
+                                          BoxShadow(
+                                            color: Colors.blueAccent,
+                                            spreadRadius: 2,
+                                            blurRadius: 5,
+                                            offset: Offset(0, 3),
+                                          ),
+                                        ]),
+                                    child: ListTile(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      title: Text(suggestionProvider
+                                          .matchedItems[index]),
+                                      onTap: () {
+                                        sponsorcompany.text = suggestionProvider
+                                            .matchedItems[index];
+                                        suggestionProvider.matchedItems.clear();
+                                        suggestionProvider.notifyListeners();
+                                      },
                                     ),
-                                    title: Text(
-                                        suggestionProvider.sponsorlist[index]),
-                                    onTap: () {
-                                      sponsorcompany.text =
-                                          suggestionProvider.sponsorlist[index];
-                                      suggestionProvider.sponsorlist.clear();
-                                      suggestionProvider.notifyListeners();
-                                    },
-                                  ),
-                                );
-                              },
-                            );
+                                  );
+                                },
+                              );
+                            } else {
+                              return const SizedBox();
+                            }
                           },
                         ),
                         const SizedBox(
@@ -1031,8 +1308,8 @@ class _RegisterFormState extends State<RegisterForm> {
                                       "NE",
                                       style: GoogleFonts.poppins(
                                           fontWeight: FontWeight.w500,
-                                          fontSize: 13,
-                                          color: Colors.yellow),
+                                          fontSize: 15,
+                                          color: Colors.black),
                                     ),
                                   ),
                                   DropdownMenuItem<String>(
@@ -1041,8 +1318,8 @@ class _RegisterFormState extends State<RegisterForm> {
                                       "R",
                                       style: GoogleFonts.poppins(
                                           fontWeight: FontWeight.w500,
-                                          fontSize: 13,
-                                          color: Colors.yellow),
+                                          fontSize: 15,
+                                          color: Colors.black),
                                     ),
                                   ),
                                 ],
@@ -1055,6 +1332,18 @@ class _RegisterFormState extends State<RegisterForm> {
                                     return "Select NE or R";
                                   }
                                   return null;
+                                },
+                                selectedItemBuilder: (BuildContext context) {
+                                  return ['NE', 'R'].map((String value) {
+                                    return Text(
+                                      value,
+                                      style: GoogleFonts.poppins(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 13,
+                                        color: Colors.yellow,
+                                      ),
+                                    );
+                                  }).toList();
                                 },
                               ),
                             ),
@@ -1110,8 +1399,8 @@ class _RegisterFormState extends State<RegisterForm> {
                                   "I",
                                   style: GoogleFonts.poppins(
                                       fontWeight: FontWeight.w500,
-                                      fontSize: 13,
-                                      color: Colors.yellow),
+                                      fontSize: 15,
+                                      color: Colors.black),
                                 ),
                               ),
                               DropdownMenuItem<String>(
@@ -1120,8 +1409,8 @@ class _RegisterFormState extends State<RegisterForm> {
                                   "II",
                                   style: GoogleFonts.poppins(
                                       fontWeight: FontWeight.w500,
-                                      fontSize: 13,
-                                      color: Colors.yellow),
+                                      fontSize: 15,
+                                      color: Colors.black),
                                 ),
                               ),
                             ],
@@ -1134,6 +1423,18 @@ class _RegisterFormState extends State<RegisterForm> {
                                 return "Select I or II";
                               }
                               return null;
+                            },
+                            selectedItemBuilder: (BuildContext context) {
+                              return ['I', 'II'].map((String value) {
+                                return Text(
+                                  value,
+                                  style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 13,
+                                    color: Colors.yellow,
+                                  ),
+                                );
+                              }).toList();
                             },
                           ),
                         ),
@@ -1404,7 +1705,6 @@ class _RegisterFormState extends State<RegisterForm> {
                           ),
                         ),
                         SizedBox(
-                        
                             width: MediaQuery.of(context).size.width,
                             child: CheckboxWithControllers()),
                       ],
@@ -2040,7 +2340,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                     style: GoogleFonts.poppins(
                                         fontWeight: FontWeight.w500,
                                         fontSize: 13,
-                                        color: Colors.yellow),
+                                        color: Colors.black),
                                   ),
                                 ),
                                 DropdownMenuItem<String>(
@@ -2050,7 +2350,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                     style: GoogleFonts.poppins(
                                         fontWeight: FontWeight.w500,
                                         fontSize: 13,
-                                        color: Colors.yellow),
+                                        color: Colors.black),
                                   ),
                                 ),
                               ],
@@ -2063,6 +2363,18 @@ class _RegisterFormState extends State<RegisterForm> {
                                   return "Seletct Yes or No";
                                 }
                                 return null;
+                              },
+                              selectedItemBuilder: (BuildContext context) {
+                                return ['Yes', 'No'].map((String value) {
+                                  return Text(
+                                    value,
+                                    style: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 13,
+                                      color: Colors.yellow,
+                                    ),
+                                  );
+                                }).toList();
                               },
                             ),
                           ),
@@ -2144,8 +2456,8 @@ class _RegisterFormState extends State<RegisterForm> {
                                 "Yes",
                                 style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.w500,
-                                    fontSize: 13,
-                                    color: Colors.yellow),
+                                    fontSize: 15,
+                                    color: Colors.black),
                               ),
                             ),
                             DropdownMenuItem<String>(
@@ -2154,8 +2466,8 @@ class _RegisterFormState extends State<RegisterForm> {
                                 "No",
                                 style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.w500,
-                                    fontSize: 13,
-                                    color: Colors.yellow),
+                                    fontSize: 15,
+                                    color: Colors.black),
                               ),
                             ),
                           ],
@@ -2168,6 +2480,18 @@ class _RegisterFormState extends State<RegisterForm> {
                               return "Seletct Yes or No";
                             }
                             return null;
+                          },
+                          selectedItemBuilder: (BuildContext context) {
+                            return ['Yes', 'No'].map((String value) {
+                              return Text(
+                                value,
+                                style: GoogleFonts.poppins(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 13,
+                                  color: Colors.yellow,
+                                ),
+                              );
+                            }).toList();
                           },
                         ),
                       ),
@@ -2224,8 +2548,8 @@ class _RegisterFormState extends State<RegisterForm> {
                                     "Yes",
                                     style: GoogleFonts.poppins(
                                         fontWeight: FontWeight.w500,
-                                        fontSize: 13,
-                                        color: Colors.yellow),
+                                        fontSize: 15,
+                                        color: Colors.black),
                                   ),
                                 ),
                                 DropdownMenuItem<String>(
@@ -2234,8 +2558,8 @@ class _RegisterFormState extends State<RegisterForm> {
                                     "No",
                                     style: GoogleFonts.poppins(
                                         fontWeight: FontWeight.w500,
-                                        fontSize: 13,
-                                        color: Colors.yellow),
+                                        fontSize: 15,
+                                        color: Colors.black),
                                   ),
                                 ),
                               ],
@@ -2248,6 +2572,18 @@ class _RegisterFormState extends State<RegisterForm> {
                                   return "Seletct Yes or No";
                                 }
                                 return null;
+                              },
+                              selectedItemBuilder: (BuildContext context) {
+                                return ['Yes', 'No'].map((String value) {
+                                  return Text(
+                                    value,
+                                    style: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 13,
+                                      color: Colors.yellow,
+                                    ),
+                                  );
+                                }).toList();
                               },
                             ),
                           ),
@@ -2303,8 +2639,8 @@ class _RegisterFormState extends State<RegisterForm> {
                                 "Yes",
                                 style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.w500,
-                                    fontSize: 13,
-                                    color: Colors.yellow),
+                                    fontSize: 15,
+                                    color: Colors.black),
                               ),
                             ),
                             DropdownMenuItem<String>(
@@ -2313,8 +2649,8 @@ class _RegisterFormState extends State<RegisterForm> {
                                 "No",
                                 style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.w500,
-                                    fontSize: 13,
-                                    color: Colors.yellow),
+                                    fontSize: 15,
+                                    color: Colors.black),
                               ),
                             ),
                           ],
@@ -2327,6 +2663,18 @@ class _RegisterFormState extends State<RegisterForm> {
                               return "Seletct Yes or No";
                             }
                             return null;
+                          },
+                          selectedItemBuilder: (BuildContext context) {
+                            return ['Yes', 'No'].map((String value) {
+                              return Text(
+                                value,
+                                style: GoogleFonts.poppins(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 13,
+                                  color: Colors.yellow,
+                                ),
+                              );
+                            }).toList();
                           },
                         ),
                       ),
@@ -2547,6 +2895,7 @@ class _RegisterFormState extends State<RegisterForm> {
           actions: [
             TextButton(
               onPressed: () {
+                controllerClear();
                 Navigator.of(context).pop();
               },
               child: Text(

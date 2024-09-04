@@ -214,79 +214,188 @@ class Suggestionprovider extends ChangeNotifier {
   List<String> sponsorlist = [];
 
   bool vmbuild = false;
-  bool trainerbuyild= false;
+  bool trainerbuyild = false;
+  bool freelancerbuild = false;
+  bool coobuild = false;
+  bool vastibuild = false;
+  bool vibhagbuild = false;
+  bool sponsorbuild = false;
+
+  // switch (choice) {
+  //   case "checkvasti":
+  //     vastilist.clear();
+  //     notifyListeners();
+  //     break;
+  //   case "checkvibhag":
+  //     vibhaglist.clear();
+  //     notifyListeners();
+  //     break;
+  //   case "checkvm":
+  //     vmlist.clear();
+  //     notifyListeners();
+  //     break;
+  //   case "checkfreelance":
+  //     freelancerlist.clear();
+  //     notifyListeners();
+  //     break;
+  //   case "checktrainer":
+  //     trainerlist.clear();
+  //     notifyListeners();
+  //     break;
+  //   case "checkcoo":
+  //     coordinatorlist.clear();
+  //     notifyListeners();
+  //     break;
+  //   case "sponsor":
+  //     sponsorlist.clear();
+  //     notifyListeners();
+  //     break;
+  // }
+
+  //   for (String element in suggestion) {
+  //     if (element.toLowerCase().startsWith(input.toLowerCase())) {
+  //       print("Matched item: $element");
+  //       switch (choice) {
+  //         case "checkvasti":
+  //           vastilist.add(element);
+  //           notifyListeners();
+  //           break;
+  //         case "checkvibhag":
+  //           vibhaglist.add(element);
+  //           notifyListeners();
+  //           break;
+  //         case "checkvm":
+  //           vmlist.add(element);
+  //           vmbuild = true;
+  //           notifyListeners();
+  //           break;
+  //         case "checkfreelance":
+  //           freelancerlist.add(element);
+  //           notifyListeners();
+  //           break;
+  //         case "checktrainer":
+  //           trainerlist.add(element);
+  //           notifyListeners();
+  //           break;
+  //         case "checkcoo":
+  //           coordinatorlist.add(element);
+  //           notifyListeners();
+  //           break;
+  //         case "sponsor":
+  //           sponsorlist.add(element);
+  //           notifyListeners();
+  //           break;
+  //         default:
+  //           break;
+  //       }
+  //     }
+  //   }
+  // }
+  List<String> matchedItems = [];
 
   void autoComplete(List<String> suggestion, String input, String choice) {
-    switch (choice) {
-      case "checkvasti":
-        vastilist.clear();
-        notifyListeners();
-        break;
-      case "checkvibhag":
-        vibhaglist.clear();
-        notifyListeners();
-        break;
-      case "checkvm":
-        vmlist.clear();
-        notifyListeners();
-        break;
-      case "checkfreelance":
-        freelancerlist.clear();
-        notifyListeners();
-        break;
-      case "checktrainer":
-        trainerlist.clear();
-        notifyListeners();
-        break;
-      case "checkcoo":
-        coordinatorlist.clear();
-        notifyListeners();
-        break;
-      case "sponsor":
-        sponsorlist.clear();
-        notifyListeners();
-        break;
-    }
-
+    // List<String> templist = [];
+    matchedItems.clear();
     for (String element in suggestion) {
       if (element.toLowerCase().startsWith(input.toLowerCase())) {
-        print("Matched item: $element");
-        switch (choice) {
-          case "checkvasti":
-            vastilist.add(element);
-            notifyListeners();
-            break;
-          case "checkvibhag":
-            vibhaglist.add(element);
-            notifyListeners();
-            break;
-          case "checkvm":
-            vmlist.add(element);
-            notifyListeners();
-            break;
-          case "checkfreelance":
-            freelancerlist.add(element);
-            notifyListeners();
-            break;
-          case "checktrainer":
-            trainerlist.add(element);
-            notifyListeners();
-            break;
-          case "checkcoo":
-            coordinatorlist.add(element);
-            notifyListeners();
-            break;
-          case "sponsor":
-            sponsorlist.add(element);
-            notifyListeners();
-            break;
-          default:
-            break;
-        }
-      
+        matchedItems.add(element);
       }
     }
 
+    switch (choice) {
+      case "checkvasti":
+        //vastilist.addAll(matchedItems);
+        matchedItems;
+        vastibuild = true;
+        vibhagbuild = false;
+        trainerbuyild = false;
+        freelancerbuild = false;
+        coobuild = false;
+        vmbuild = false;
+        sponsorbuild = false;
+        notifyListeners();
+        break;
+      case "checkvibhag":
+        matchedItems;
+        vastibuild = false;
+        vibhagbuild = true;
+        trainerbuyild = false;
+        freelancerbuild = false;
+        coobuild = false;
+        vmbuild = false;
+        sponsorbuild = false;
+        // vibhaglist.addAll(matchedItems);
+        notifyListeners();
+        break;
+      case "checkvm":
+
+        // templist.addAll(vmlist);
+        // vmlist.clear();
+        // vmlist.addAll(matchedItems);
+
+        matchedItems;
+
+        vastibuild = false;
+        vibhagbuild = false;
+        trainerbuyild = false;
+        freelancerbuild = false;
+        coobuild = false;
+        vmbuild = true;
+        sponsorbuild = false;
+        notifyListeners();
+        break;
+      case "checkfreelance":
+        matchedItems;
+        vastibuild = false;
+        vibhagbuild = false;
+        trainerbuyild = false;
+        freelancerbuild = true;
+        coobuild = false;
+        vmbuild = false;
+        sponsorbuild = false;
+        //freelancerlist.addAll(matchedItems);
+        notifyListeners();
+        break;
+      case "checktrainer":
+        // trainerlist.addAll(matchedItems)
+        // ;
+        matchedItems;
+        vastibuild = false;
+        vibhagbuild = false;
+        trainerbuyild = true;
+        freelancerbuild = false;
+        coobuild = false;
+        vmbuild = false;
+        sponsorbuild = false;
+        notifyListeners();
+        break;
+      case "checkcoo":
+        matchedItems;
+        vastibuild = false;
+        vibhagbuild = false;
+        trainerbuyild = false;
+        freelancerbuild = false;
+        coobuild = true;
+        vmbuild = false;
+        sponsorbuild = false;
+        // coordinatorlist.addAll(matchedItems);
+        notifyListeners();
+        break;
+      case "sponsor":
+        matchedItems;
+        vastibuild = false;
+        vibhagbuild = false;
+        trainerbuyild = false;
+        freelancerbuild = false;
+        coobuild = false;
+        vmbuild = false;
+        sponsorbuild = true;
+        //sponsorlist.addAll(matchedItems);
+        notifyListeners();
+        break;
+      default:
+        break;
+    }
   }
 
   Future<void> saveSuggestion(String newSuggestion, String input) async {
@@ -294,27 +403,33 @@ class Suggestionprovider extends ChangeNotifier {
       SharedPreferences prefs = await SharedPreferences.getInstance();
 
       if ("vasti" == input) {
-        List<String> data =  await prefs.getStringList("vastisuggestion") ?? [];
+        List<String> data = prefs.getStringList("vastisuggestion") ?? [];
         data.add(newSuggestion);
         await prefs.setStringList('vastisuggestion', data);
       } else if ("vibhag" == input) {
-        vibhaglist.add(newSuggestion);
-        await prefs.setStringList('vibhagsuggestion', vibhaglist);
+        List<String> data1 = prefs.getStringList("vibhagsuggestion") ?? [];
+        data1.add(newSuggestion);
+        await prefs.setStringList('vibhagsuggestion', data1);
       } else if ("vm" == input) {
-        vmlist.add(newSuggestion);
-        await prefs.setStringList('vmsuggestion', vmlist);
+        List<String> data2 = prefs.getStringList("vmsuggestion") ?? [];
+        data2.add(newSuggestion);
+        await prefs.setStringList('vmsuggestion', data2);
       } else if ("trainer" == input) {
-        trainerlist.add(newSuggestion);
-        await prefs.setStringList("trainersuggestion", trainerlist);
+        List<String> data3 = prefs.getStringList("trainersuggestion") ?? [];
+        data3.add(newSuggestion);
+        await prefs.setStringList("trainersuggestion", data3);
       } else if ("freelancer" == input) {
-        freelancerlist.add(newSuggestion);
-        await prefs.setStringList("freelancersuggestion", freelancerlist);
+        List<String> data4 = prefs.getStringList("freelancersuggestion") ?? [];
+        data4.add(newSuggestion);
+        await prefs.setStringList("freelancersuggestion", data4);
       } else if ("coordinator" == input) {
-        coordinatorlist.add(newSuggestion);
-        await prefs.setStringList("coordinatorsuggestion", coordinatorlist);
+        List<String> data5 = prefs.getStringList("coordinatorsuggestion") ?? [];
+        data5.add(newSuggestion);
+        await prefs.setStringList("coordinatorsuggestion", data5);
       } else if ("sponsor" == input) {
-        sponsorlist.add(newSuggestion);
-        await prefs.setStringList("sponsorsuggestion", sponsorlist);
+        List<String> data6 = prefs.getStringList("sponsorsuggestion") ?? [];
+        data6.add(newSuggestion);
+        await prefs.setStringList("sponsorsuggestion", data6);
       }
 
       notifyListeners();
@@ -323,6 +438,7 @@ class Suggestionprovider extends ChangeNotifier {
 
   Future<void> loadSuggestion() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    print("my name is ganesh");
     List<String> savedVastiSuggestions =
         prefs.getStringList('vastisuggestion') ?? [];
     savedVastiSuggestions =
@@ -376,14 +492,14 @@ class Suggestionprovider extends ChangeNotifier {
         "Saved suggestion sponsor list in load suggestion: $savedSponsorSuggestions");
     sponsorlist = savedSponsorSuggestions;
 
-   // notifyListeners();
+    notifyListeners();
   }
 
-  void clearData(String val){
-    if(val == 'vm'){
-      vmbuild = true;
-      vmlist.clear();
-      notifyListeners();
-    }
-  }
+  // // void clearData(String val) {
+  // //   if (val == 'vm') {
+  // //     vmbuild = true;
+  // //     vmlist.clear();
+  // //     notifyListeners();
+  // //   }
+  // }
 }
