@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:kvp/provider/checkbox.dart';
+import 'package:kvp/provider/timeprovider.dart';
 import 'package:kvp/screen/homepage.dart';
 import 'package:kvp/screen/splashscreen.dart';
 import 'package:provider/provider.dart';
@@ -17,6 +18,7 @@ void main() async {
       providers: [
         ChangeNotifierProvider(create: (_) => CheckboxProvider()),
         ChangeNotifierProvider(create: (_) => Suggestionprovider()),
+        ChangeNotifierProvider(create: (_) => TimeProvider())
       ],
       child: const MyApp(),
     ),

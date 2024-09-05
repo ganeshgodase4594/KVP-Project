@@ -378,7 +378,7 @@ class Suggestionprovider extends ChangeNotifier {
         coobuild = true;
         vmbuild = false;
         sponsorbuild = false;
-        // coordinatorlist.addAll(matchedItems);
+
         notifyListeners();
         break;
       case "sponsor":
@@ -398,38 +398,74 @@ class Suggestionprovider extends ChangeNotifier {
     }
   }
 
+  // Future<void> saveSuggestion(String newSuggestion, String input) async {
+  //   if (newSuggestion.isNotEmpty) {
+  //     SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  //     if ("vasti" == input) {
+  //       List<String> data = prefs.getStringList("vastisuggestion") ?? [];
+  //       data.add(newSuggestion);
+  //       await prefs.setStringList('vastisuggestion', data);
+  //     } else if ("vibhag" == input) {
+  //       List<String> data1 = prefs.getStringList("vibhagsuggestion") ?? [];
+  //       data1.add(newSuggestion);
+  //       await prefs.setStringList('vibhagsuggestion', data1);
+  //     } else if ("vm" == input) {
+  //       List<String> data2 = prefs.getStringList("vmsuggestion") ?? [];
+  //       data2.add(newSuggestion);
+  //       await prefs.setStringList('vmsuggestion', data2);
+  //     } else if ("trainer" == input) {
+  //       List<String> data3 = prefs.getStringList("trainersuggestion") ?? [];
+  //       data3.add(newSuggestion);
+  //       await prefs.setStringList("trainersuggestion", data3);
+  //     } else if ("freelancer" == input) {
+  //       List<String> data4 = prefs.getStringList("freelancersuggestion") ?? [];
+  //       data4.add(newSuggestion);
+  //       await prefs.setStringList("freelancersuggestion", data4);
+  //     } else if ("coordinator" == input) {
+  //       List<String> data5 = prefs.getStringList("coordinatorsuggestion") ?? [];
+  //       data5.add(newSuggestion);
+  //       await prefs.setStringList("coordinatorsuggestion", data5);
+  //     } else if ("sponsor" == input) {
+  //       List<String> data6 = prefs.getStringList("sponsorsuggestion") ?? [];
+  //       data6.add(newSuggestion);
+  //       await prefs.setStringList("sponsorsuggestion", data6);
+  //     }
+
+  //     notifyListeners();
+  //   }
+  // }
+
   Future<void> saveSuggestion(String newSuggestion, String input) async {
     if (newSuggestion.isNotEmpty) {
       SharedPreferences prefs = await SharedPreferences.getInstance();
 
+      List<String> data;
+      String key;
+
       if ("vasti" == input) {
-        List<String> data = prefs.getStringList("vastisuggestion") ?? [];
-        data.add(newSuggestion);
-        await prefs.setStringList('vastisuggestion', data);
+        key = "vastisuggestion";
       } else if ("vibhag" == input) {
-        List<String> data1 = prefs.getStringList("vibhagsuggestion") ?? [];
-        data1.add(newSuggestion);
-        await prefs.setStringList('vibhagsuggestion', data1);
+        key = "vibhagsuggestion";
       } else if ("vm" == input) {
-        List<String> data2 = prefs.getStringList("vmsuggestion") ?? [];
-        data2.add(newSuggestion);
-        await prefs.setStringList('vmsuggestion', data2);
+        key = "vmsuggestion";
       } else if ("trainer" == input) {
-        List<String> data3 = prefs.getStringList("trainersuggestion") ?? [];
-        data3.add(newSuggestion);
-        await prefs.setStringList("trainersuggestion", data3);
+        key = "trainersuggestion";
       } else if ("freelancer" == input) {
-        List<String> data4 = prefs.getStringList("freelancersuggestion") ?? [];
-        data4.add(newSuggestion);
-        await prefs.setStringList("freelancersuggestion", data4);
+        key = "freelancersuggestion";
       } else if ("coordinator" == input) {
-        List<String> data5 = prefs.getStringList("coordinatorsuggestion") ?? [];
-        data5.add(newSuggestion);
-        await prefs.setStringList("coordinatorsuggestion", data5);
+        key = "coordinatorsuggestion";
       } else if ("sponsor" == input) {
-        List<String> data6 = prefs.getStringList("sponsorsuggestion") ?? [];
-        data6.add(newSuggestion);
-        await prefs.setStringList("sponsorsuggestion", data6);
+        key = "sponsorsuggestion";
+      } else {
+        return;
+      }
+
+      data = prefs.getStringList(key) ?? [];
+
+      if (!data.contains(newSuggestion)) {
+        data.add(newSuggestion);
+        await prefs.setStringList(key, data);
       }
 
       notifyListeners();
