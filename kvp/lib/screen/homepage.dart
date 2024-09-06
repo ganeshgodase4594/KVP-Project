@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kvp/demopage.dart';
 import 'package:kvp/screen/registerform.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -12,9 +13,25 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   @override
+  void initState() {
+    super.initState();
+    _requestStrogePermission();
+  }
+
+  Future<void> _requestStrogePermission() async {
+    var status = await Permission.storage.status;
+
+    if (status.isGranted) {
+      await Permission.storage.status;
+    } else {
+      print("permission not granted");
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(25, 72, 106, 1.0),
+      backgroundColor: const Color.fromRGBO(25, 72, 106, 1.0),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(

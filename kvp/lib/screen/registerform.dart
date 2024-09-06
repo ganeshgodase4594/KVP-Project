@@ -297,7 +297,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                       color: Colors.white),
                                 ),
                                 Text(
-                                  "*",
+                                  "* ",
                                   style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.w500,
                                     fontSize: 20,
@@ -306,54 +306,53 @@ class _RegisterFormState extends State<RegisterForm> {
                                 ),
                               ],
                             ),
-                            const SizedBox(
-                              width: 8,
-                            ),
-                            Container(
-                              height: 50,
-                              width: 180,
-                              decoration: BoxDecoration(
-                                  border:
-                                      Border.all(color: Colors.white, width: 1),
-                                  borderRadius: BorderRadius.circular(20)),
-                              child: TextFormField(
-                                keyboardType: TextInputType.phone,
-                                key: _conatctkey,
-                                cursorColor: Colors.white,
-                                textAlign: TextAlign.start,
-                                controller: girlcontactnumber,
-                                style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 13,
-                                  color: Colors.yellow,
+                            Expanded(
+                              child: Container(
+                                height: 50,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Colors.white, width: 1),
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: TextFormField(
+                                  keyboardType: TextInputType.phone,
+                                  key: _conatctkey,
+                                  cursorColor: Colors.white,
+                                  textAlign: TextAlign.start,
+                                  controller: girlcontactnumber,
+                                  style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 13,
+                                    color: Colors.yellow,
+                                  ),
+                                  decoration: InputDecoration(
+                                      errorStyle: GoogleFonts.poppins(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 10,
+                                        color: Colors.red,
+                                      ),
+                                      contentPadding:
+                                          const EdgeInsets.only(left: 10),
+                                      hintText: "contact no",
+                                      hintStyle: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 13,
+                                          color: Colors.yellow),
+                                      border: InputBorder.none),
+                                  validator: (value) {
+                                    if (value!.trim().isEmpty) {
+                                      return "Enter The Contact Number";
+                                    } else if (int.tryParse(value.trim()) ==
+                                            null ||
+                                        value.trim().length != 10) {
+                                      return "Enter Your 10 Digit Mobile Num";
+                                    }
+                                    return null;
+                                  },
+                                  onChanged: (value) {
+                                    _conatctkey.currentState!.validate();
+                                  },
                                 ),
-                                decoration: InputDecoration(
-                                    errorStyle: GoogleFonts.poppins(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 10,
-                                      color: Colors.red,
-                                    ),
-                                    contentPadding:
-                                        const EdgeInsets.only(left: 10),
-                                    hintText: "contact no",
-                                    hintStyle: GoogleFonts.poppins(
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 13,
-                                        color: Colors.yellow),
-                                    border: InputBorder.none),
-                                validator: (value) {
-                                  if (value!.trim().isEmpty) {
-                                    return "Enter The Contact Number";
-                                  } else if (int.tryParse(value.trim()) ==
-                                          null ||
-                                      value.trim().length != 10) {
-                                    return "Enter Your 10 Digit Mobile Num";
-                                  }
-                                  return null;
-                                },
-                                onChanged: (value) {
-                                  _conatctkey.currentState!.validate();
-                                },
                               ),
                             ),
                           ],
@@ -517,7 +516,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                       color: Colors.white),
                                 ),
                                 Text(
-                                  "*",
+                                  "* ",
                                   style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.w500,
                                     fontSize: 20,
@@ -526,80 +525,84 @@ class _RegisterFormState extends State<RegisterForm> {
                                 ),
                               ],
                             ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Container(
-                              height: 50,
-                              width: 180,
-                              decoration: BoxDecoration(
-                                  border:
-                                      Border.all(color: Colors.white, width: 1),
-                                  borderRadius: BorderRadius.circular(20)),
-                              child: TextFormField(
-                                keyboardType: TextInputType.text,
-                                key: _vibhagkey,
-                                focusNode: _vibhgFocusNode,
-                                cursorColor: Colors.white,
-                                textAlign: TextAlign.start,
-                                controller: vibhagname,
-                                style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 13,
-                                  color: Colors.yellow,
-                                ),
-                                decoration: InputDecoration(
-                                  contentPadding:
-                                      const EdgeInsets.only(left: 10),
-                                  hintText: "vibhagName",
-                                  hintStyle: GoogleFonts.poppins(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 13,
-                                      color: Colors.yellow),
-                                  border: InputBorder.none,
-                                  errorStyle: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 10,
-                                    color: Colors.red,
+                            // const SizedBox(
+                            //   width: 10,
+                            // ),
+                            // const Spacer(),
+                            Expanded(
+                              child: Container(
+                                height: 50,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Colors.white, width: 1),
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: TextFormField(
+                                  keyboardType: TextInputType.text,
+                                  key: _vibhagkey,
+                                  focusNode: _vibhgFocusNode,
+                                  cursorColor: Colors.white,
+                                  textAlign: TextAlign.start,
+                                  controller: vibhagname,
+                                  style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 13,
+                                    color: Colors.yellow,
                                   ),
+                                  decoration: InputDecoration(
+                                    contentPadding:
+                                        const EdgeInsets.only(left: 10),
+                                    hintText: "vibhagName",
+                                    hintStyle: GoogleFonts.poppins(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 13,
+                                        color: Colors.yellow),
+                                    border: InputBorder.none,
+                                    errorStyle: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 10,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                  validator: (value) {
+                                    if (value!.trim().isEmpty) {
+                                      return "Enter The Vibhag Name";
+                                    }
+                                    return null;
+                                  },
+                                  onChanged: (value) {
+                                    // Provider.of<Suggestionprovider>(context,
+                                    //         listen: false)
+                                    //     .loadSuggestion();
+                                    if (value.isEmpty) {
+                                      Provider.of<Suggestionprovider>(context,
+                                              listen: false)
+                                          .matchedItems;
+                                      Provider.of<Suggestionprovider>(context,
+                                              listen: false)
+                                          .vibhagbuild = false;
+                                      Provider.of<Suggestionprovider>(context,
+                                              listen: false)
+                                          .notifyListeners();
+                                    } else {
+                                      List<String> vibhaglocal =
+                                          Provider.of<Suggestionprovider>(
+                                                  context,
+                                                  listen: false)
+                                              .vibhaglist;
+
+                                      Provider.of<Suggestionprovider>(context,
+                                              listen: false)
+                                          .vibhagbuild = true;
+
+                                      Provider.of<Suggestionprovider>(context,
+                                              listen: false)
+                                          .autoComplete(vibhaglocal, value,
+                                              "checkvibhag");
+                                    }
+                                    _vibhagkey.currentState!.validate();
+                                  },
                                 ),
-                                validator: (value) {
-                                  if (value!.trim().isEmpty) {
-                                    return "Enter The Vibhag Name";
-                                  }
-                                  return null;
-                                },
-                                onChanged: (value) {
-                                  // Provider.of<Suggestionprovider>(context,
-                                  //         listen: false)
-                                  //     .loadSuggestion();
-                                  if (value.isEmpty) {
-                                    Provider.of<Suggestionprovider>(context,
-                                            listen: false)
-                                        .matchedItems;
-                                    Provider.of<Suggestionprovider>(context,
-                                            listen: false)
-                                        .vibhagbuild = false;
-                                    Provider.of<Suggestionprovider>(context,
-                                            listen: false)
-                                        .notifyListeners();
-                                  } else {
-                                    List<String> vibhaglocal =
-                                        Provider.of<Suggestionprovider>(context,
-                                                listen: false)
-                                            .vibhaglist;
-
-                                    Provider.of<Suggestionprovider>(context,
-                                            listen: false)
-                                        .vibhagbuild = true;
-
-                                    Provider.of<Suggestionprovider>(context,
-                                            listen: false)
-                                        .autoComplete(
-                                            vibhaglocal, value, "checkvibhag");
-                                  }
-                                  _vibhagkey.currentState!.validate();
-                                },
                               ),
                             ),
                           ],
@@ -801,7 +804,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                       color: Colors.white),
                                 ),
                                 Text(
-                                  "*",
+                                  "* ",
                                   style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.w500,
                                     fontSize: 20,
@@ -810,80 +813,84 @@ class _RegisterFormState extends State<RegisterForm> {
                                 ),
                               ],
                             ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Container(
-                              height: 50,
-                              width: 180,
-                              decoration: BoxDecoration(
-                                  border:
-                                      Border.all(color: Colors.white, width: 1),
-                                  borderRadius: BorderRadius.circular(20)),
-                              child: TextFormField(
-                                keyboardType: TextInputType.text,
-                                key: _trainerkey,
-                                focusNode: _trainerFocusNode,
-                                cursorColor: Colors.white,
-                                textAlign: TextAlign.start,
-                                controller: trainername,
-                                style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 13,
-                                  color: Colors.yellow,
-                                ),
-                                decoration: InputDecoration(
-                                  contentPadding:
-                                      const EdgeInsets.only(left: 10),
-                                  hintText: "trainerName",
-                                  hintStyle: GoogleFonts.poppins(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 13,
-                                      color: Colors.yellow),
-                                  border: InputBorder.none,
-                                  errorStyle: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 10,
-                                    color: Colors.red,
+                            // const SizedBox(
+                            //   width: 10,
+                            // ),
+                            // const Spacer(),
+                            Expanded(
+                              child: Container(
+                                height: 50,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Colors.white, width: 1),
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: TextFormField(
+                                  keyboardType: TextInputType.text,
+                                  key: _trainerkey,
+                                  focusNode: _trainerFocusNode,
+                                  cursorColor: Colors.white,
+                                  textAlign: TextAlign.start,
+                                  controller: trainername,
+                                  style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 13,
+                                    color: Colors.yellow,
                                   ),
+                                  decoration: InputDecoration(
+                                    contentPadding:
+                                        const EdgeInsets.only(left: 10),
+                                    hintText: "trainerName",
+                                    hintStyle: GoogleFonts.poppins(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 13,
+                                        color: Colors.yellow),
+                                    border: InputBorder.none,
+                                    errorStyle: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 10,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                  validator: (value) {
+                                    if (value!.trim().isEmpty) {
+                                      return "Enter The Trainer Name";
+                                    }
+                                    return null;
+                                  },
+                                  onChanged: (value) {
+                                    _trainerkey.currentState!.validate();
+                                    // Provider.of<Suggestionprovider>(context,
+                                    //         listen: false)
+                                    //     .loadSuggestion();
+                                    if (value.isEmpty) {
+                                      Provider.of<Suggestionprovider>(context,
+                                              listen: false)
+                                          .matchedItems;
+                                      Provider.of<Suggestionprovider>(context,
+                                              listen: false)
+                                          .trainerbuyild = false;
+                                      Provider.of<Suggestionprovider>(context,
+                                              listen: false)
+                                          .notifyListeners();
+                                    } else {
+                                      List<String> trainerlocal =
+                                          Provider.of<Suggestionprovider>(
+                                                  context,
+                                                  listen: false)
+                                              .trainerlist;
+
+                                      Provider.of<Suggestionprovider>(context,
+                                              listen: false)
+                                          .trainerbuyild = true;
+
+                                      Provider.of<Suggestionprovider>(context,
+                                              listen: false)
+                                          .autoComplete(trainerlocal, value,
+                                              "checktrainer");
+                                    }
+                                  },
                                 ),
-                                validator: (value) {
-                                  if (value!.trim().isEmpty) {
-                                    return "Enter The Trainer Name";
-                                  }
-                                  return null;
-                                },
-                                onChanged: (value) {
-                                  _trainerkey.currentState!.validate();
-                                  // Provider.of<Suggestionprovider>(context,
-                                  //         listen: false)
-                                  //     .loadSuggestion();
-                                  if (value.isEmpty) {
-                                    Provider.of<Suggestionprovider>(context,
-                                            listen: false)
-                                        .matchedItems;
-                                    Provider.of<Suggestionprovider>(context,
-                                            listen: false)
-                                        .trainerbuyild = false;
-                                    Provider.of<Suggestionprovider>(context,
-                                            listen: false)
-                                        .notifyListeners();
-                                  } else {
-                                    List<String> trainerlocal =
-                                        Provider.of<Suggestionprovider>(context,
-                                                listen: false)
-                                            .trainerlist;
-
-                                    Provider.of<Suggestionprovider>(context,
-                                            listen: false)
-                                        .trainerbuyild = true;
-
-                                    Provider.of<Suggestionprovider>(context,
-                                            listen: false)
-                                        .autoComplete(trainerlocal, value,
-                                            "checktrainer");
-                                  }
-                                },
                               ),
                             ),
                           ],
@@ -1088,7 +1095,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                       color: Colors.white),
                                 ),
                                 Text(
-                                  "*",
+                                  "* ",
                                   style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.w500,
                                     fontSize: 20,
@@ -1097,78 +1104,81 @@ class _RegisterFormState extends State<RegisterForm> {
                                 ),
                               ],
                             ),
-                            const Spacer(),
-                            Container(
-                              height: 50,
-                              width: 180,
-                              decoration: BoxDecoration(
-                                  border:
-                                      Border.all(color: Colors.white, width: 1),
-                                  borderRadius: BorderRadius.circular(20)),
-                              child: TextFormField(
-                                keyboardType: TextInputType.text,
-                                key: _coordinatorkey,
-                                focusNode: _cooFocusNode,
-                                cursorColor: Colors.white,
-                                textAlign: TextAlign.start,
-                                controller: coordinatorname,
-                                style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 13,
-                                  color: Colors.yellow,
-                                ),
-                                decoration: InputDecoration(
-                                  contentPadding:
-                                      const EdgeInsets.only(left: 10),
-                                  hintText: "coordinatorName",
-                                  hintStyle: GoogleFonts.poppins(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 13,
-                                      color: Colors.yellow),
-                                  border: InputBorder.none,
-                                  errorStyle: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 10,
-                                    color: Colors.red,
+                            // const Spacer(),
+                            Expanded(
+                              child: Container(
+                                height: 50,
+                                width: 180,
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Colors.white, width: 1),
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: TextFormField(
+                                  keyboardType: TextInputType.text,
+                                  key: _coordinatorkey,
+                                  focusNode: _cooFocusNode,
+                                  cursorColor: Colors.white,
+                                  textAlign: TextAlign.start,
+                                  controller: coordinatorname,
+                                  style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 13,
+                                    color: Colors.yellow,
                                   ),
+                                  decoration: InputDecoration(
+                                    contentPadding:
+                                        const EdgeInsets.only(left: 10),
+                                    hintText: "coordinatorName",
+                                    hintStyle: GoogleFonts.poppins(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 13,
+                                        color: Colors.yellow),
+                                    border: InputBorder.none,
+                                    errorStyle: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 10,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                  validator: (value) {
+                                    if (value!.trim().isEmpty) {
+                                      return "Enter The Cooridinator Name";
+                                    }
+                                    return null;
+                                  },
+                                  onChanged: (value) {
+                                    // Provider.of<Suggestionprovider>(context,
+                                    //         listen: false)
+                                    //     .loadSuggestion();
+                                    if (value.isEmpty) {
+                                      Provider.of<Suggestionprovider>(context,
+                                              listen: false)
+                                          .matchedItems;
+                                      Provider.of<Suggestionprovider>(context,
+                                              listen: false)
+                                          .coobuild = false;
+                                      Provider.of<Suggestionprovider>(context,
+                                              listen: false)
+                                          .notifyListeners();
+                                    } else {
+                                      List<String> coordinatorlocal =
+                                          Provider.of<Suggestionprovider>(
+                                                  context,
+                                                  listen: false)
+                                              .coordinatorlist;
+
+                                      Provider.of<Suggestionprovider>(context,
+                                              listen: false)
+                                          .coobuild = true;
+
+                                      Provider.of<Suggestionprovider>(context,
+                                              listen: false)
+                                          .autoComplete(coordinatorlocal, value,
+                                              "checkcoo");
+                                    }
+                                    _coordinatorkey.currentState!.validate();
+                                  },
                                 ),
-                                validator: (value) {
-                                  if (value!.trim().isEmpty) {
-                                    return "Enter The Cooridinator Name";
-                                  }
-                                  return null;
-                                },
-                                onChanged: (value) {
-                                  // Provider.of<Suggestionprovider>(context,
-                                  //         listen: false)
-                                  //     .loadSuggestion();
-                                  if (value.isEmpty) {
-                                    Provider.of<Suggestionprovider>(context,
-                                            listen: false)
-                                        .matchedItems;
-                                    Provider.of<Suggestionprovider>(context,
-                                            listen: false)
-                                        .coobuild = false;
-                                    Provider.of<Suggestionprovider>(context,
-                                            listen: false)
-                                        .notifyListeners();
-                                  } else {
-                                    List<String> coordinatorlocal =
-                                        Provider.of<Suggestionprovider>(context,
-                                                listen: false)
-                                            .coordinatorlist;
-
-                                    Provider.of<Suggestionprovider>(context,
-                                            listen: false)
-                                        .coobuild = true;
-
-                                    Provider.of<Suggestionprovider>(context,
-                                            listen: false)
-                                        .autoComplete(coordinatorlocal, value,
-                                            "checkcoo");
-                                  }
-                                  _coordinatorkey.currentState!.validate();
-                                },
                               ),
                             ),
                           ],
@@ -1384,7 +1394,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                       color: Colors.white),
                                 ),
                                 Text(
-                                  "*",
+                                  "* ",
                                   style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.w500,
                                     fontSize: 20,
@@ -1393,84 +1403,87 @@ class _RegisterFormState extends State<RegisterForm> {
                                 ),
                               ],
                             ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Container(
-                              height: 50,
-                              width: 180,
-                              decoration: BoxDecoration(
-                                  border:
-                                      Border.all(color: Colors.white, width: 1),
-                                  borderRadius: BorderRadius.circular(20)),
-                              child: DropdownButtonFormField(
-                                key: _norekey,
-                                borderRadius: BorderRadius.circular(20),
-                                menuMaxHeight: 115,
-                                style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 13,
-                                  color: Colors.yellow,
-                                ),
-                                decoration: InputDecoration(
-                                  contentPadding: const EdgeInsets.only(
-                                      left: 10, bottom: 10),
-                                  hintText: "entry NE or R",
-                                  hintStyle: GoogleFonts.poppins(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 13,
-                                      color: Colors.yellow),
-                                  border: InputBorder.none,
-                                  errorStyle: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 10,
-                                    color: Colors.red,
+                            // const SizedBox(
+                            //   width: 10,
+                            // ),
+                            // const Spacer(),
+                            Expanded(
+                              child: Container(
+                                height: 50,
+                                width: 180,
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Colors.white, width: 1),
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: DropdownButtonFormField(
+                                  key: _norekey,
+                                  borderRadius: BorderRadius.circular(20),
+                                  menuMaxHeight: 115,
+                                  style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 13,
+                                    color: Colors.yellow,
                                   ),
-                                ),
-                                items: [
-                                  DropdownMenuItem<String>(
-                                    value: "NE",
-                                    child: Text(
-                                      "NE",
-                                      style: GoogleFonts.poppins(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 15,
-                                          color: Colors.black),
-                                    ),
-                                  ),
-                                  DropdownMenuItem<String>(
-                                    value: "R",
-                                    child: Text(
-                                      "R",
-                                      style: GoogleFonts.poppins(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 15,
-                                          color: Colors.black),
-                                    ),
-                                  ),
-                                ],
-                                onChanged: (value) {
-                                  neworrepeat.text = value!;
-                                  _norekey.currentState!.validate();
-                                },
-                                validator: (value) {
-                                  if (value == null) {
-                                    return "Select NE or R";
-                                  }
-                                  return null;
-                                },
-                                selectedItemBuilder: (BuildContext context) {
-                                  return ['NE', 'R'].map((String value) {
-                                    return Text(
-                                      value,
-                                      style: GoogleFonts.poppins(
+                                  decoration: InputDecoration(
+                                    contentPadding: const EdgeInsets.only(
+                                        left: 10, bottom: 10),
+                                    hintText: "entry NE or R",
+                                    hintStyle: GoogleFonts.poppins(
                                         fontWeight: FontWeight.w500,
                                         fontSize: 13,
-                                        color: Colors.yellow,
+                                        color: Colors.yellow),
+                                    border: InputBorder.none,
+                                    errorStyle: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 10,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                  items: [
+                                    DropdownMenuItem<String>(
+                                      value: "NE",
+                                      child: Text(
+                                        "NE",
+                                        style: GoogleFonts.poppins(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 15,
+                                            color: Colors.black),
                                       ),
-                                    );
-                                  }).toList();
-                                },
+                                    ),
+                                    DropdownMenuItem<String>(
+                                      value: "R",
+                                      child: Text(
+                                        "R",
+                                        style: GoogleFonts.poppins(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 15,
+                                            color: Colors.black),
+                                      ),
+                                    ),
+                                  ],
+                                  onChanged: (value) {
+                                    neworrepeat.text = value!;
+                                    _norekey.currentState!.validate();
+                                  },
+                                  validator: (value) {
+                                    if (value == null) {
+                                      return "Select NE or R";
+                                    }
+                                    return null;
+                                  },
+                                  selectedItemBuilder: (BuildContext context) {
+                                    return ['NE', 'R'].map((String value) {
+                                      return Text(
+                                        value,
+                                        style: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 13,
+                                          color: Colors.yellow,
+                                        ),
+                                      );
+                                    }).toList();
+                                  },
+                                ),
                               ),
                             ),
                           ],
@@ -1603,7 +1616,7 @@ class _RegisterFormState extends State<RegisterForm> {
                         ),
                         Container(
                           height: 70,
-                          width: 350,
+                          width: MediaQuery.of(context).size.width,
                           decoration: BoxDecoration(
                               border: Border.all(color: Colors.white, width: 1),
                               borderRadius: BorderRadius.circular(20)),
@@ -1661,7 +1674,7 @@ class _RegisterFormState extends State<RegisterForm> {
                         ),
                         Container(
                           height: 70,
-                          width: 350,
+                          width: MediaQuery.of(context).size.width,
                           decoration: BoxDecoration(
                               border: Border.all(color: Colors.white, width: 1),
                               borderRadius: BorderRadius.circular(20)),
@@ -1718,7 +1731,7 @@ class _RegisterFormState extends State<RegisterForm> {
                         ),
                         Container(
                           height: 70,
-                          width: 350,
+                          width: MediaQuery.of(context).size.width,
                           decoration: BoxDecoration(
                               border: Border.all(color: Colors.white, width: 1),
                               borderRadius: BorderRadius.circular(20)),
@@ -1885,6 +1898,17 @@ class _RegisterFormState extends State<RegisterForm> {
                             ],
                           ),
                         ),
+                        Center(
+                          child: Text(
+                            textAlign: TextAlign.center,
+                            "note : If a girl has not participated in any program, please leave the checkbox empty.",
+                            style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 13,
+                              color: Colors.red,
+                            ),
+                          ),
+                        ),
                         SizedBox(
                             width: MediaQuery.of(context).size.width,
                             child: CheckboxWithControllers()),
@@ -2004,7 +2028,7 @@ class _RegisterFormState extends State<RegisterForm> {
                           height: 10,
                         ),
                         Row(
-                          children: [
+                          children: <Widget>[
                             Row(
                               children: [
                                 Text(
@@ -2015,7 +2039,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                       color: Colors.white),
                                 ),
                                 Text(
-                                  "*",
+                                  "* ",
                                   style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.w500,
                                     fontSize: 20,
@@ -2024,55 +2048,58 @@ class _RegisterFormState extends State<RegisterForm> {
                                 ),
                               ],
                             ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Container(
-                              height: 50,
-                              width: 180,
-                              decoration: BoxDecoration(
-                                  border:
-                                      Border.all(color: Colors.white, width: 1),
-                                  borderRadius: BorderRadius.circular(20)),
-                              child: TextFormField(
-                                keyboardType: TextInputType.number,
-                                key: _aadharkey,
-                                cursorColor: Colors.white,
-                                textAlign: TextAlign.start,
-                                controller: aadharnumber,
-                                style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 13,
-                                  color: Colors.yellow,
-                                ),
-                                decoration: InputDecoration(
-                                  contentPadding:
-                                      const EdgeInsets.only(left: 10),
-                                  hintText: "aadhar no",
-                                  hintStyle: GoogleFonts.poppins(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 13,
-                                      color: Colors.yellow),
-                                  border: InputBorder.none,
-                                  errorStyle: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 10,
-                                    color: Colors.red,
+                            // const SizedBox(
+                            //   width: 10,
+                            // ),
+                            // const Spacer(),
+                            Expanded(
+                              child: Container(
+                                height: 50,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Colors.white, width: 1),
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: TextFormField(
+                                  keyboardType: TextInputType.number,
+                                  key: _aadharkey,
+                                  cursorColor: Colors.white,
+                                  textAlign: TextAlign.start,
+                                  controller: aadharnumber,
+                                  style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 13,
+                                    color: Colors.yellow,
                                   ),
+                                  decoration: InputDecoration(
+                                    contentPadding:
+                                        const EdgeInsets.only(left: 10),
+                                    hintText: "aadhar no",
+                                    hintStyle: GoogleFonts.poppins(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 13,
+                                        color: Colors.yellow),
+                                    border: InputBorder.none,
+                                    errorStyle: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 10,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                  validator: (value) {
+                                    if (value!.trim().isEmpty) {
+                                      return "Enter Valid Adhar Number";
+                                    } else if (int.tryParse(value.trim()) ==
+                                            null ||
+                                        value.trim().length != 12) {
+                                      return "Enter 12 Digit Aadhar Num";
+                                    }
+                                    return null;
+                                  },
+                                  onChanged: (value) {
+                                    _aadharkey.currentState!.validate();
+                                  },
                                 ),
-                                validator: (value) {
-                                  if (value!.trim().isEmpty) {
-                                    return "Enter Valid Adhar Number";
-                                  } else if (int.tryParse(value.trim()) ==
-                                          null ||
-                                      value.trim().length != 12) {
-                                    return "Enter 12 Digit Aadhar Num";
-                                  }
-                                  return null;
-                                },
-                                onChanged: (value) {
-                                  _aadharkey.currentState!.validate();
-                                },
                               ),
                             ),
                           ],
@@ -2159,7 +2186,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                       color: Colors.white),
                                 ),
                                 Text(
-                                  "*",
+                                  "* ",
                                   style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.w500,
                                     fontSize: 20,
@@ -2168,63 +2195,63 @@ class _RegisterFormState extends State<RegisterForm> {
                                 ),
                               ],
                             ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Container(
-                              height: 50,
-                              width: 180,
-                              decoration: BoxDecoration(
-                                  border:
-                                      Border.all(color: Colors.white, width: 1),
-                                  borderRadius: BorderRadius.circular(20)),
-                              child: TextFormField(
-                                keyboardType: TextInputType.text,
-                                key: _schooltimekey,
-                                //readOnly: true,
-                                cursorColor: Colors.white,
-                                textAlign: TextAlign.start,
-                                controller: schooltiming,
-                                style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 13,
-                                  color: Colors.yellow,
-                                ),
-                                autovalidateMode:
-                                    AutovalidateMode.onUserInteraction,
-                                decoration: InputDecoration(
-                                  suffixIcon: const Icon(
-                                    Icons.access_time,
+                            // const SizedBox(
+                            //   width: 10,
+                            // ),
+                            // const Spacer(),
+                            Expanded(
+                              child: Container(
+                                height: 50,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Colors.white, width: 1),
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: TextFormField(
+                                  keyboardType: TextInputType.text,
+                                  key: _schooltimekey,
+                                  //readOnly: true,
+                                  cursorColor: Colors.white,
+                                  textAlign: TextAlign.start,
+                                  controller: schooltiming,
+                                  style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 13,
                                     color: Colors.yellow,
                                   ),
-                                  contentPadding:
-                                      const EdgeInsets.only(left: 10, top: 13),
-                                  hintText: "school time",
-                                  hintStyle: GoogleFonts.poppins(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 13,
-                                      color: Colors.yellow),
-                                  border: InputBorder.none,
-                                  errorStyle: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 10,
-                                    color: Colors.red,
+
+                                  decoration: InputDecoration(
+                                    suffixIcon: const Icon(
+                                      Icons.access_time,
+                                      color: Colors.yellow,
+                                    ),
+                                    contentPadding: const EdgeInsets.only(
+                                        left: 10, top: 13),
+                                    hintText: "school time",
+                                    hintStyle: GoogleFonts.poppins(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 13,
+                                        color: Colors.yellow),
+                                    border: InputBorder.none,
+                                    errorStyle: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 10,
+                                      color: Colors.red,
+                                    ),
                                   ),
-                                ),
-                                onTap: () {
-                                  _showTimeRangePicker(context);
-                                },
-                                validator: (value) {
-                                  if (value!.trim().isEmpty) {
-                                    return "Enter Valid School Time";
-                                  }
-                                  return null;
-                                },
-                                onChanged: (value) {
-                                  setState(() {
+                                  onTap: () {
+                                    _showTimeRangePicker(context);
+                                  },
+                                  validator: (value) {
+                                    if (value!.trim().isEmpty) {
+                                      return "Enter Valid School Time";
+                                    }
+                                    return null;
+                                  },
+                                  onChanged: (value) {
                                     _schooltimekey.currentState!.validate();
-                                  });
-                                },
+                                  },
+                                ),
                               ),
                             ),
                           ],
@@ -2314,7 +2341,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                       color: Colors.white),
                                 ),
                                 Text(
-                                  "*",
+                                  "* ",
                                   style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.w500,
                                     fontSize: 20,
@@ -2323,55 +2350,58 @@ class _RegisterFormState extends State<RegisterForm> {
                                 ),
                               ],
                             ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Container(
-                              height: 50,
-                              width: 180,
-                              decoration: BoxDecoration(
-                                  border:
-                                      Border.all(color: Colors.white, width: 1),
-                                  borderRadius: BorderRadius.circular(20)),
-                              child: TextFormField(
-                                keyboardType: TextInputType.number,
-                                key: _nooffamilykey,
-                                cursorColor: Colors.white,
-                                textAlign: TextAlign.start,
-                                controller: nooffamilymembers,
-                                style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 13,
-                                  color: Colors.yellow,
-                                ),
-                                decoration: InputDecoration(
-                                  contentPadding:
-                                      const EdgeInsets.only(left: 10),
-                                  hintText: "no of family member",
-                                  hintStyle: GoogleFonts.poppins(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 13,
-                                      color: Colors.yellow),
-                                  border: InputBorder.none,
-                                  errorStyle: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 10,
-                                    color: Colors.red,
+                            // const SizedBox(
+                            //   width: 10,
+                            // ),
+                            //const Spacer(),
+                            Expanded(
+                              child: Container(
+                                height: 50,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Colors.white, width: 1),
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: TextFormField(
+                                  keyboardType: TextInputType.number,
+                                  key: _nooffamilykey,
+                                  cursorColor: Colors.white,
+                                  textAlign: TextAlign.start,
+                                  controller: nooffamilymembers,
+                                  style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 13,
+                                    color: Colors.yellow,
                                   ),
+                                  decoration: InputDecoration(
+                                    contentPadding:
+                                        const EdgeInsets.only(left: 10),
+                                    hintText: "no of family member",
+                                    hintStyle: GoogleFonts.poppins(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 13,
+                                        color: Colors.yellow),
+                                    border: InputBorder.none,
+                                    errorStyle: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 10,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                  validator: (value) {
+                                    if (value!.trim().isEmpty) {
+                                      return "Enter The Family Member No";
+                                    } else if (int.tryParse(value.trim()) ==
+                                            null ||
+                                        value.trim().length > 12) {
+                                      return "Enter Correct Family No(Digit)";
+                                    }
+                                    return null;
+                                  },
+                                  onChanged: (value) {
+                                    _nooffamilykey.currentState!.validate();
+                                  },
                                 ),
-                                validator: (value) {
-                                  if (value!.trim().isEmpty) {
-                                    return "Enter The Family Member No";
-                                  } else if (int.tryParse(value.trim()) ==
-                                          null ||
-                                      value.trim().length > 12) {
-                                    return "Enter Correct Family No(Digit)";
-                                  }
-                                  return null;
-                                },
-                                onChanged: (value) {
-                                  _nooffamilykey.currentState!.validate();
-                                },
                               ),
                             ),
                           ],
@@ -2461,7 +2491,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                       color: Colors.white),
                                 ),
                                 Text(
-                                  "*",
+                                  "* ",
                                   style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.w500,
                                     fontSize: 20,
@@ -2470,55 +2500,58 @@ class _RegisterFormState extends State<RegisterForm> {
                                 ),
                               ],
                             ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Container(
-                              height: 50,
-                              width: 180,
-                              decoration: BoxDecoration(
-                                  border:
-                                      Border.all(color: Colors.white, width: 1),
-                                  borderRadius: BorderRadius.circular(20)),
-                              child: TextFormField(
-                                keyboardType: TextInputType.phone,
-                                key: _mothercontactkey,
-                                cursorColor: Colors.white,
-                                textAlign: TextAlign.start,
-                                controller: mothercontact,
-                                style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 13,
-                                  color: Colors.yellow,
-                                ),
-                                decoration: InputDecoration(
-                                  contentPadding:
-                                      const EdgeInsets.only(left: 10),
-                                  hintText: "mother contact number",
-                                  hintStyle: GoogleFonts.poppins(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 13,
-                                      color: Colors.yellow),
-                                  border: InputBorder.none,
-                                  errorStyle: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 10,
-                                    color: Colors.red,
+                            // const SizedBox(
+                            //   width: 10,
+                            // ),
+                            //const Spacer(),
+                            Expanded(
+                              child: Container(
+                                height: 50,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Colors.white, width: 1),
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: TextFormField(
+                                  keyboardType: TextInputType.phone,
+                                  key: _mothercontactkey,
+                                  cursorColor: Colors.white,
+                                  textAlign: TextAlign.start,
+                                  controller: mothercontact,
+                                  style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 13,
+                                    color: Colors.yellow,
                                   ),
+                                  decoration: InputDecoration(
+                                    contentPadding:
+                                        const EdgeInsets.only(left: 10),
+                                    hintText: "mother contact number",
+                                    hintStyle: GoogleFonts.poppins(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 13,
+                                        color: Colors.yellow),
+                                    border: InputBorder.none,
+                                    errorStyle: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 10,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                  validator: (value) {
+                                    if (value!.trim().isEmpty) {
+                                      return "Enter Mother Contact Number";
+                                    } else if (int.tryParse(value.trim()) ==
+                                            null ||
+                                        value.trim().length != 10) {
+                                      return "Enter Mother 10 Digit Mobile Num";
+                                    }
+                                    return null;
+                                  },
+                                  onChanged: (value) {
+                                    _mothercontactkey.currentState!.validate();
+                                  },
                                 ),
-                                validator: (value) {
-                                  if (value!.trim().isEmpty) {
-                                    return "Enter Mother Contact Number";
-                                  } else if (int.tryParse(value.trim()) ==
-                                          null ||
-                                      value.trim().length != 10) {
-                                    return "Enter Mother 10 Digit Mobile Num";
-                                  }
-                                  return null;
-                                },
-                                onChanged: (value) {
-                                  _mothercontactkey.currentState!.validate();
-                                },
                               ),
                             ),
                           ],
@@ -2608,7 +2641,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                       color: Colors.white),
                                 ),
                                 Text(
-                                  "*",
+                                  "* ",
                                   style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.w500,
                                     fontSize: 20,
@@ -2617,84 +2650,88 @@ class _RegisterFormState extends State<RegisterForm> {
                                 ),
                               ],
                             ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Container(
-                              height: 50,
-                              width: 180,
-                              decoration: BoxDecoration(
-                                  border:
-                                      Border.all(color: Colors.white, width: 1),
-                                  borderRadius: BorderRadius.circular(20)),
-                              child: DropdownButtonFormField(
-                                key: _allgirlregisterkey,
-                                borderRadius: BorderRadius.circular(20),
-                                menuMaxHeight: 115,
-                                style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 13,
-                                  color: Colors.yellow,
-                                ),
-                                decoration: InputDecoration(
-                                  contentPadding: const EdgeInsets.only(
-                                      left: 10, bottom: 10),
-                                  hintText: "all girl registered kvp ",
-                                  hintStyle: GoogleFonts.poppins(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 13,
-                                      color: Colors.yellow),
-                                  border: InputBorder.none,
-                                  errorStyle: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 10,
-                                    color: Colors.red,
+                            // const SizedBox(
+                            //   width: 10,
+                            // ),
+                            // const Spacer(),
+                            Expanded(
+                              child: Container(
+                                height: 50,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Colors.white, width: 1),
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: DropdownButtonFormField(
+                                  key: _allgirlregisterkey,
+                                  borderRadius: BorderRadius.circular(20),
+                                  menuMaxHeight: 115,
+                                  style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 13,
+                                    color: Colors.yellow,
                                   ),
-                                ),
-                                items: [
-                                  DropdownMenuItem<String>(
-                                    value: "Yes",
-                                    child: Text(
-                                      "Yes",
-                                      style: GoogleFonts.poppins(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 13,
-                                          color: Colors.black),
-                                    ),
-                                  ),
-                                  DropdownMenuItem<String>(
-                                    value: "No",
-                                    child: Text(
-                                      "No",
-                                      style: GoogleFonts.poppins(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 13,
-                                          color: Colors.black),
-                                    ),
-                                  ),
-                                ],
-                                onChanged: (value) {
-                                  allgirlsregistred.text = value!;
-                                  _allgirlregisterkey.currentState!.validate();
-                                },
-                                validator: (value) {
-                                  if (value == null) {
-                                    return "Seletct Yes or No";
-                                  }
-                                  return null;
-                                },
-                                selectedItemBuilder: (BuildContext context) {
-                                  return ['Yes', 'No'].map((String value) {
-                                    return Text(
-                                      value,
-                                      style: GoogleFonts.poppins(
+                                  decoration: InputDecoration(
+                                    contentPadding: const EdgeInsets.only(
+                                        left: 10, bottom: 10),
+                                    hintText: "all girl registered kvp ",
+                                    hintStyle: GoogleFonts.poppins(
                                         fontWeight: FontWeight.w500,
                                         fontSize: 13,
-                                        color: Colors.yellow,
+                                        color: Colors.yellow),
+                                    border: InputBorder.none,
+                                    errorStyle: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 10,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                  items: [
+                                    DropdownMenuItem<String>(
+                                      value: "Yes",
+                                      child: Text(
+                                        "Yes",
+                                        style: GoogleFonts.poppins(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 13,
+                                            color: Colors.black),
                                       ),
-                                    );
-                                  }).toList();
-                                },
+                                    ),
+                                    DropdownMenuItem<String>(
+                                      value: "No",
+                                      child: Text(
+                                        "No",
+                                        style: GoogleFonts.poppins(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 13,
+                                            color: Colors.black),
+                                      ),
+                                    ),
+                                  ],
+                                  onChanged: (value) {
+                                    allgirlsregistred.text = value!;
+                                    _allgirlregisterkey.currentState!
+                                        .validate();
+                                  },
+                                  validator: (value) {
+                                    if (value == null) {
+                                      return "Seletct Yes or No";
+                                    }
+                                    return null;
+                                  },
+                                  selectedItemBuilder: (BuildContext context) {
+                                    return ['Yes', 'No'].map((String value) {
+                                      return Text(
+                                        value,
+                                        style: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 13,
+                                          color: Colors.yellow,
+                                        ),
+                                      );
+                                    }).toList();
+                                  },
+                                ),
                               ),
                             ),
                           ],
@@ -2842,7 +2879,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                       color: Colors.white),
                                 ),
                                 Text(
-                                  "*",
+                                  "* ",
                                   style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.w500,
                                     fontSize: 20,
@@ -2851,84 +2888,87 @@ class _RegisterFormState extends State<RegisterForm> {
                                 ),
                               ],
                             ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Container(
-                              height: 50,
-                              width: 180,
-                              decoration: BoxDecoration(
-                                  border:
-                                      Border.all(color: Colors.white, width: 1),
-                                  borderRadius: BorderRadius.circular(20)),
-                              child: DropdownButtonFormField(
-                                key: _parentmeet2key,
-                                borderRadius: BorderRadius.circular(20),
-                                menuMaxHeight: 115,
-                                style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 13,
-                                  color: Colors.yellow,
-                                ),
-                                decoration: InputDecoration(
-                                  contentPadding: const EdgeInsets.only(
-                                      left: 10, bottom: 10),
-                                  hintText: "paremt meet2 ",
-                                  hintStyle: GoogleFonts.poppins(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 13,
-                                      color: Colors.yellow),
-                                  border: InputBorder.none,
-                                  errorStyle: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 10,
-                                    color: Colors.red,
+                            // const SizedBox(
+                            //   width: 10,
+                            // ),
+                            // const Spacer(),
+                            Expanded(
+                              child: Container(
+                                height: 50,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Colors.white, width: 1),
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: DropdownButtonFormField(
+                                  key: _parentmeet2key,
+                                  borderRadius: BorderRadius.circular(20),
+                                  menuMaxHeight: 115,
+                                  style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 13,
+                                    color: Colors.yellow,
                                   ),
-                                ),
-                                items: [
-                                  DropdownMenuItem<String>(
-                                    value: "Yes",
-                                    child: Text(
-                                      "Yes",
-                                      style: GoogleFonts.poppins(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 15,
-                                          color: Colors.black),
-                                    ),
-                                  ),
-                                  DropdownMenuItem<String>(
-                                    value: "No",
-                                    child: Text(
-                                      "No",
-                                      style: GoogleFonts.poppins(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 15,
-                                          color: Colors.black),
-                                    ),
-                                  ),
-                                ],
-                                onChanged: (value) {
-                                  parentmeet2.text = value!;
-                                  _parentmeet2key.currentState!.validate();
-                                },
-                                validator: (value) {
-                                  if (value == null) {
-                                    return "Seletct Yes or No";
-                                  }
-                                  return null;
-                                },
-                                selectedItemBuilder: (BuildContext context) {
-                                  return ['Yes', 'No'].map((String value) {
-                                    return Text(
-                                      value,
-                                      style: GoogleFonts.poppins(
+                                  decoration: InputDecoration(
+                                    contentPadding: const EdgeInsets.only(
+                                        left: 10, bottom: 10),
+                                    hintText: "paremt meet2 ",
+                                    hintStyle: GoogleFonts.poppins(
                                         fontWeight: FontWeight.w500,
                                         fontSize: 13,
-                                        color: Colors.yellow,
+                                        color: Colors.yellow),
+                                    border: InputBorder.none,
+                                    errorStyle: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 10,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                  items: [
+                                    DropdownMenuItem<String>(
+                                      value: "Yes",
+                                      child: Text(
+                                        "Yes",
+                                        style: GoogleFonts.poppins(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 15,
+                                            color: Colors.black),
                                       ),
-                                    );
-                                  }).toList();
-                                },
+                                    ),
+                                    DropdownMenuItem<String>(
+                                      value: "No",
+                                      child: Text(
+                                        "No",
+                                        style: GoogleFonts.poppins(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 15,
+                                            color: Colors.black),
+                                      ),
+                                    ),
+                                  ],
+                                  onChanged: (value) {
+                                    parentmeet2.text = value!;
+                                    _parentmeet2key.currentState!.validate();
+                                  },
+                                  validator: (value) {
+                                    if (value == null) {
+                                      return "Seletct Yes or No";
+                                    }
+                                    return null;
+                                  },
+                                  selectedItemBuilder: (BuildContext context) {
+                                    return ['Yes', 'No'].map((String value) {
+                                      return Text(
+                                        value,
+                                        style: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 13,
+                                          color: Colors.yellow,
+                                        ),
+                                      );
+                                    }).toList();
+                                  },
+                                ),
                               ),
                             ),
                           ],
@@ -3461,5 +3501,7 @@ class _RegisterFormState extends State<RegisterForm> {
     String start = timeProvider.getStartTime().format(context);
     String end = timeProvider.getEndTime().format(context);
     schooltiming.text = "$start to $end";
+    _schooltimekey.currentState!.validate();
+    setState(() {});
   }
 }
