@@ -263,7 +263,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                   color: Colors.red,
                                 ),
                                 contentPadding: const EdgeInsets.only(left: 10),
-                                hintText: "name",
+                                hintText: "Enter Full Name",
                                 hintStyle: GoogleFonts.poppins(
                                     fontWeight: FontWeight.w500,
                                     fontSize: 13,
@@ -333,7 +333,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                       ),
                                       contentPadding:
                                           const EdgeInsets.only(left: 10),
-                                      hintText: "contact no",
+                                      hintText: "Enter Phone Number",
                                       hintStyle: GoogleFonts.poppins(
                                           fontWeight: FontWeight.w500,
                                           fontSize: 13,
@@ -402,7 +402,7 @@ class _RegisterFormState extends State<RegisterForm> {
                             ),
                             decoration: InputDecoration(
                               contentPadding: const EdgeInsets.only(left: 10),
-                              hintText: "vastiName",
+                              hintText: "Enter Name",
                               hintStyle: GoogleFonts.poppins(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 13,
@@ -552,7 +552,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                   decoration: InputDecoration(
                                     contentPadding:
                                         const EdgeInsets.only(left: 10),
-                                    hintText: "vibhagName",
+                                    hintText: "Enter Name",
                                     hintStyle: GoogleFonts.poppins(
                                         fontWeight: FontWeight.w500,
                                         fontSize: 13,
@@ -698,7 +698,7 @@ class _RegisterFormState extends State<RegisterForm> {
                             ),
                             decoration: InputDecoration(
                               contentPadding: const EdgeInsets.only(left: 10),
-                              hintText: "vmName",
+                              hintText: "Enter Name",
                               hintStyle: GoogleFonts.poppins(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 13,
@@ -840,7 +840,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                   decoration: InputDecoration(
                                     contentPadding:
                                         const EdgeInsets.only(left: 10),
-                                    hintText: "trainerName",
+                                    hintText: "Enter Name",
                                     hintStyle: GoogleFonts.poppins(
                                         fontWeight: FontWeight.w500,
                                         fontSize: 13,
@@ -983,7 +983,7 @@ class _RegisterFormState extends State<RegisterForm> {
                             ),
                             decoration: InputDecoration(
                               contentPadding: const EdgeInsets.only(left: 10),
-                              hintText: "freelancerName",
+                              hintText: "Enter Name",
                               hintStyle: GoogleFonts.poppins(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 13,
@@ -1128,7 +1128,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                   decoration: InputDecoration(
                                     contentPadding:
                                         const EdgeInsets.only(left: 10),
-                                    hintText: "coordinatorName",
+                                    hintText: "Enter Name",
                                     hintStyle: GoogleFonts.poppins(
                                         fontWeight: FontWeight.w500,
                                         fontSize: 13,
@@ -1277,7 +1277,7 @@ class _RegisterFormState extends State<RegisterForm> {
                               contentPadding: const EdgeInsets.only(
                                 left: 10,
                               ),
-                              hintText: "sponsorName",
+                              hintText: "Enter Name",
                               hintStyle: GoogleFonts.poppins(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 13,
@@ -1427,7 +1427,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                   decoration: InputDecoration(
                                     contentPadding: const EdgeInsets.only(
                                         left: 10, bottom: 10),
-                                    hintText: "entry NE or R",
+                                    hintText: "N / RE",
                                     hintStyle: GoogleFonts.poppins(
                                         fontWeight: FontWeight.w500,
                                         fontSize: 13,
@@ -1531,7 +1531,7 @@ class _RegisterFormState extends State<RegisterForm> {
                             decoration: InputDecoration(
                               contentPadding:
                                   const EdgeInsets.only(left: 10, bottom: 10),
-                              hintText: " education level I or II",
+                              hintText: " Level I / II",
                               hintStyle: GoogleFonts.poppins(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 13,
@@ -1636,7 +1636,7 @@ class _RegisterFormState extends State<RegisterForm> {
                               hintMaxLines: 2,
                               contentPadding:
                                   const EdgeInsets.only(left: 10, top: 10),
-                              hintText: "enter the ssf program name....",
+                              hintText: " Enter Program Name",
                               hintStyle: GoogleFonts.poppins(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 13,
@@ -1692,8 +1692,7 @@ class _RegisterFormState extends State<RegisterForm> {
                               hintMaxLines: 4,
                               contentPadding:
                                   const EdgeInsets.only(left: 10, top: 10),
-                              hintText:
-                                  "enter the special achievement of the girl....",
+                              hintText: "Enter Special Achievement",
                               hintStyle: GoogleFonts.poppins(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 13,
@@ -1749,7 +1748,7 @@ class _RegisterFormState extends State<RegisterForm> {
                               hintMaxLines: 4,
                               contentPadding:
                                   const EdgeInsets.only(left: 10, top: 10),
-                              hintText: "enter the action taken on her....",
+                              hintText: " Enter Details",
                               hintStyle: GoogleFonts.poppins(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 13,
@@ -1821,7 +1820,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                 Icons.date_range_outlined,
                                 color: Colors.yellow,
                               ),
-                              hintText: "date Of leaving KVP",
+                              hintText: "Leaving Date",
                               hintStyle: GoogleFonts.poppins(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 13,
@@ -1879,20 +1878,32 @@ class _RegisterFormState extends State<RegisterForm> {
                       children: [
                         Center(
                           child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                "Program Of KVP Where Girl Has Participated ",
-                                style: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.w900,
-                                    fontSize: 13,
-                                    color: Colors.white),
-                              ),
-                              Text(
-                                "*",
-                                style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 20,
-                                  color: Colors.red,
+                              Flexible(
+                                child: RichText(
+                                  textAlign: TextAlign.center,
+                                  text: TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text:
+                                            "Program Of KVP Where Girl Has Participated ",
+                                        style: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.w800,
+                                          fontSize: 13,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: "*",
+                                        style: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 20,
+                                          color: Colors.red,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ],
@@ -1987,7 +1998,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                 Icons.date_range_outlined,
                                 color: Colors.yellow,
                               ),
-                              hintText: "dob of girl",
+                              hintText: "DOB",
                               hintStyle: GoogleFonts.poppins(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 13,
@@ -2074,7 +2085,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                   decoration: InputDecoration(
                                     contentPadding:
                                         const EdgeInsets.only(left: 10),
-                                    hintText: "aadhar no",
+                                    hintText: "Enter Number",
                                     hintStyle: GoogleFonts.poppins(
                                         fontWeight: FontWeight.w500,
                                         fontSize: 13,
@@ -2148,7 +2159,7 @@ class _RegisterFormState extends State<RegisterForm> {
                             ),
                             decoration: InputDecoration(
                               contentPadding: const EdgeInsets.only(left: 10),
-                              hintText: "school name",
+                              hintText: "School Name",
                               hintStyle: GoogleFonts.poppins(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 13,
@@ -2227,7 +2238,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                     ),
                                     contentPadding: const EdgeInsets.only(
                                         left: 10, top: 13),
-                                    hintText: "school time",
+                                    hintText: "Enter time",
                                     hintStyle: GoogleFonts.poppins(
                                         fontWeight: FontWeight.w500,
                                         fontSize: 13,
@@ -2300,7 +2311,7 @@ class _RegisterFormState extends State<RegisterForm> {
                             ),
                             decoration: InputDecoration(
                               contentPadding: const EdgeInsets.only(left: 10),
-                              hintText: "std",
+                              hintText: "Std",
                               hintStyle: GoogleFonts.poppins(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 13,
@@ -2376,7 +2387,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                   decoration: InputDecoration(
                                     contentPadding:
                                         const EdgeInsets.only(left: 10),
-                                    hintText: "no of family member",
+                                    hintText: "Enter Number",
                                     hintStyle: GoogleFonts.poppins(
                                         fontWeight: FontWeight.w500,
                                         fontSize: 13,
@@ -2450,7 +2461,7 @@ class _RegisterFormState extends State<RegisterForm> {
                             ),
                             decoration: InputDecoration(
                               contentPadding: const EdgeInsets.only(left: 10),
-                              hintText: "total no of girl in family",
+                              hintText: "Enter Number",
                               hintStyle: GoogleFonts.poppins(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 13,
@@ -2526,7 +2537,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                   decoration: InputDecoration(
                                     contentPadding:
                                         const EdgeInsets.only(left: 10),
-                                    hintText: "mother contact number",
+                                    hintText: "Enter Contact Number",
                                     hintStyle: GoogleFonts.poppins(
                                         fontWeight: FontWeight.w500,
                                         fontSize: 13,
@@ -2600,7 +2611,7 @@ class _RegisterFormState extends State<RegisterForm> {
                             ),
                             decoration: InputDecoration(
                               contentPadding: const EdgeInsets.only(left: 10),
-                              hintText: "father contact number",
+                              hintText: "Enter Contact Number",
                               hintStyle: GoogleFonts.poppins(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 13,
@@ -2674,7 +2685,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                   decoration: InputDecoration(
                                     contentPadding: const EdgeInsets.only(
                                         left: 10, bottom: 10),
-                                    hintText: "all girl registered kvp ",
+                                    hintText: "Y/N",
                                     hintStyle: GoogleFonts.poppins(
                                         fontWeight: FontWeight.w500,
                                         fontSize: 13,
@@ -2806,7 +2817,7 @@ class _RegisterFormState extends State<RegisterForm> {
                             decoration: InputDecoration(
                               contentPadding:
                                   const EdgeInsets.only(left: 10, bottom: 10),
-                              hintText: "parent meet1 ",
+                              hintText: "Y/N",
                               hintStyle: GoogleFonts.poppins(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 13,
@@ -2912,7 +2923,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                   decoration: InputDecoration(
                                     contentPadding: const EdgeInsets.only(
                                         left: 10, bottom: 10),
-                                    hintText: "paremt meet2 ",
+                                    hintText: "Y/N",
                                     hintStyle: GoogleFonts.poppins(
                                         fontWeight: FontWeight.w500,
                                         fontSize: 13,
@@ -3016,7 +3027,7 @@ class _RegisterFormState extends State<RegisterForm> {
                             decoration: InputDecoration(
                               contentPadding:
                                   const EdgeInsets.only(left: 10, bottom: 10),
-                              hintText: "parent meet3 ",
+                              hintText: "Y/N",
                               hintStyle: GoogleFonts.poppins(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 13,
