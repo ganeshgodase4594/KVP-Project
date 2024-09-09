@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class CheckboxProvider with ChangeNotifier {
   // Map to manage checkbox states
   final Map<String, bool> _checkboxState = {
-    'Bhonda': false,
+    'Bhondla': false,
     'Summer Camp': false,
     'Mangalagaur': false,
     'Winter Camp': false,

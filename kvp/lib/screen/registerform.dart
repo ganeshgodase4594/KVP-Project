@@ -290,7 +290,7 @@ class _RegisterFormState extends State<RegisterForm> {
                             Row(
                               children: [
                                 Text(
-                                  "Contact No Of Girl : ",
+                                  "Contact No. Of Girl : ",
                                   style: GoogleFonts.poppins(
                                       fontWeight: FontWeight.w500,
                                       fontSize: 13,
@@ -2190,7 +2190,7 @@ class _RegisterFormState extends State<RegisterForm> {
                             Row(
                               children: [
                                 Text(
-                                  "school timing : ",
+                                  "School Timing : ",
                                   style: GoogleFonts.poppins(
                                       fontWeight: FontWeight.w500,
                                       fontSize: 13,
@@ -2423,7 +2423,7 @@ class _RegisterFormState extends State<RegisterForm> {
                         Row(
                           children: [
                             Text(
-                              "Girl No : ",
+                              "Number of Girls in Family : ",
                               style: GoogleFonts.poppins(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 13,
@@ -2645,7 +2645,7 @@ class _RegisterFormState extends State<RegisterForm> {
                             Row(
                               children: [
                                 Text(
-                                  "All Girl Registerd : ",
+                                  "All Girls Registerd : ",
                                   style: GoogleFonts.poppins(
                                       fontWeight: FontWeight.w500,
                                       fontSize: 13,

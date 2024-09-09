@@ -68,7 +68,7 @@ class _HomepageState extends State<Homepage> {
               height: 5,
             ),
             Text(
-              "Celebrating Humidity",
+              "Celebrating Humanity",
               style: GoogleFonts.poppins(
                 fontStyle: FontStyle.italic,
                 color: Colors.white,
