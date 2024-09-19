@@ -1,11 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:kvp/provider/dateprovider.dart';
-import 'package:kvp/provider/vastifilterprovider.dart';
 import 'package:kvp/provider/vastifilterprovider.dart';
 import 'package:provider/provider.dart';
 
@@ -52,23 +49,18 @@ class _SearchNameState extends State<SearchName> {
               child: Column(
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(),
-                      Text(
-                        "Girl Attendance",
-                        style: GoogleFonts.poppins(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.search,
-                          color: Colors.white,
-                          size: 25,
+                      Center(
+                        child: Text(
+                          "Girl Attendance",
+                          style: GoogleFonts.poppins(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
                     ],
@@ -123,26 +115,31 @@ class _SearchNameState extends State<SearchName> {
                           onTap: () {
                             showVastiDialog(context);
                           },
-                          child: Expanded(
-                            child: Container(
-                              padding: const EdgeInsets.all(5),
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.white)),
-                              child: Consumer<VastiProvider>(
-                                builder: (context, value, child) {
-                                  return Text(
-                                    vastiProvider.selectedVasti.isNotEmpty
-                                        ? vastiProvider.selectedVasti
-                                        : "Select Vasti",
-                                    style: GoogleFonts.poppins(
-                                        color: Colors.white,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w400),
-                                  );
-                                },
-                              ),
+                          child: Container(
+                            padding: const EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.white)),
+                            child: Consumer<VastiProvider>(
+                              builder: (context, value, child) {
+                                return Text(
+                                  vastiProvider.selectedVasti.isNotEmpty
+                                      ? vastiProvider.selectedVasti
+                                      : "Select Vasti",
+                                  style: GoogleFonts.poppins(
+                                      color: Colors.white,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w400),
+                                );
+                              },
                             ),
                           ),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.clear_outlined,
+                              color: Colors.white),
+                          onPressed: () {
+                            vastiProvider.clearSelectedVasti();
+                          },
                         ),
                         const SizedBox(
                           width: 10,
@@ -151,26 +148,31 @@ class _SearchNameState extends State<SearchName> {
                           onTap: () {
                             showVibhagDialog(context);
                           },
-                          child: Expanded(
-                            child: Container(
-                              padding: const EdgeInsets.all(5),
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.white)),
-                              child: Consumer<VastiProvider>(
-                                builder: (context, value, child) {
-                                  return Text(
-                                    value.selectedVibhag.isNotEmpty
-                                        ? value.selectedVibhag
-                                        : "Select Vibhag",
-                                    style: GoogleFonts.poppins(
-                                        color: Colors.white,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w400),
-                                  );
-                                },
-                              ),
+                          child: Container(
+                            padding: const EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.white)),
+                            child: Consumer<VastiProvider>(
+                              builder: (context, value, child) {
+                                return Text(
+                                  value.selectedVibhag.isNotEmpty
+                                      ? value.selectedVibhag
+                                      : "Select Vibhag",
+                                  style: GoogleFonts.poppins(
+                                      color: Colors.white,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w400),
+                                );
+                              },
                             ),
                           ),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.clear_outlined,
+                              color: Colors.white),
+                          onPressed: () {
+                            vastiProvider.clearSelectedVibhag();
+                          },
                         ),
                       ],
                     ),
@@ -218,84 +220,91 @@ class _SearchNameState extends State<SearchName> {
               : Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
-                    child: ListView.builder(
-                      itemCount: vastiProvider.filteredData.length,
-                      itemBuilder: (context, index) {
-                        String nameOfGirl =
-                            vastiProvider.filteredData[index]['name of girl'];
-                        String girlid = vastiProvider.filteredData[index]['id'];
+                    child: Consumer<VastiProvider>(
+                      builder: (context, value, child) {
+                        return ListView.builder(
+                          itemCount: vastiProvider.filteredData.length,
+                          itemBuilder: (context, index) {
+                            String nameOfGirl = vastiProvider
+                                .filteredData[index]['name of girl'];
+                            String girlid =
+                                vastiProvider.filteredData[index]['id'];
 
-                        // Fetch the attendance status based on the selected date
-                        attendenceProvider.fetchAttendenceData(girlid);
+                            // Fetch the attendance status based on the selected date
+                            attendenceProvider.fetchAttendenceData(girlid);
 
-                        return Container(
-                          margin: const EdgeInsets.only(bottom: 20),
-                          padding: const EdgeInsets.all(15),
-                          decoration: BoxDecoration(
-                            color: Colors.white54,
-                            borderRadius: BorderRadius.circular(15),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.2),
-                                spreadRadius: 1,
-                                blurRadius: 2,
-                                offset: const Offset(0, 2),
+                            return Container(
+                              margin: const EdgeInsets.only(bottom: 20),
+                              padding: const EdgeInsets.all(15),
+                              decoration: BoxDecoration(
+                                color: Colors.white54,
+                                borderRadius: BorderRadius.circular(15),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.2),
+                                    spreadRadius: 1,
+                                    blurRadius: 2,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                nameOfGirl,
-                                style: GoogleFonts.poppins(
-                                  color: Colors.black,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  DateTime date = dateProvider.selectedDate!;
-                                  String currentStatus = attendenceProvider
-                                      .getStatus(date, context, girlid);
-                                  String newStatus =
-                                      currentStatus == 'A' ? 'P' : 'A';
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    nameOfGirl,
+                                    style: GoogleFonts.poppins(
+                                      color: Colors.black,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      DateTime date =
+                                          dateProvider.selectedDate!;
+                                      String currentStatus = attendenceProvider
+                                          .getStatus(date, context, girlid);
+                                      String newStatus =
+                                          currentStatus == 'A' ? 'P' : 'A';
 
-                                  attendenceProvider.updateAttendence(
-                                      date, newStatus, context, girlid);
-                                },
-                                child: Consumer<AttendenceProvider>(
-                                  builder: (context, value, child) {
-                                    String status = value.getStatus(
-                                        dateProvider.selectedDate!,
-                                        context,
-                                        girlid);
+                                      attendenceProvider.updateAttendence(
+                                          date, newStatus, context, girlid);
+                                    },
+                                    child: Consumer<AttendenceProvider>(
+                                      builder: (context, value, child) {
+                                        String status = value.getStatus(
+                                            dateProvider.selectedDate!,
+                                            context,
+                                            girlid);
 
-                                    return Container(
-                                      height: 30,
-                                      width: 30,
-                                      decoration: BoxDecoration(
-                                        color: status == 'A'
-                                            ? Colors.red
-                                            : Colors.green,
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          status,
-                                          style: GoogleFonts.poppins(
-                                            color: Colors.white,
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w500,
+                                        return Container(
+                                          height: 30,
+                                          width: 30,
+                                          decoration: BoxDecoration(
+                                            color: status == 'A'
+                                                ? Colors.red
+                                                : Colors.green,
                                           ),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                ),
+                                          child: Center(
+                                            child: Text(
+                                              status,
+                                              style: GoogleFonts.poppins(
+                                                color: Colors.white,
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
+                            );
+                          },
                         );
                       },
                     ),
@@ -327,132 +336,170 @@ class _SearchNameState extends State<SearchName> {
     Set<String> vastiNameSet = {};
 
     for (var vastidata in firebaseVasti.docs) {
-      print("vastidata is : ${vastidata['vasti name']}");
       String vastiname = vastidata['vasti name'];
       vastiNameSet.add(vastiname);
     }
     List<String> vastiName = vastiNameSet.toList();
 
+    String selectedVasti =
+        Provider.of<VastiProvider>(context, listen: false).selectedVasti;
+
     showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            titlePadding: EdgeInsets.all(20),
-            title: Center(
-              child: Text(
-                "Select Vasti Name",
-                style: GoogleFonts.poppins(
-                  color: Colors.black,
-                  fontSize: 17,
-                  fontWeight: FontWeight.w900,
-                ),
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          titlePadding: const EdgeInsets.all(20),
+          title: Center(
+            child: Text(
+              "Select Vasti Name",
+              style: GoogleFonts.poppins(
+                color: Colors.black,
+                fontSize: 17,
+                fontWeight: FontWeight.w900,
               ),
             ),
-            content: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Flexible(
-                    child: SizedBox(
-                      //height: double.maxFinite,
-                      width: double.maxFinite,
-                      child: ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: vastiName.length,
-                          itemBuilder: (BuildContext context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: GestureDetector(
-                                onTap: () {
-                                  Provider.of<VastiProvider>(context,
-                                          listen: false)
-                                      .setSelectedVasti(vastiName[index]);
-                                },
-                                child: Text(
-                                  vastiName[index],
-                                  style: GoogleFonts.poppins(
-                                    color: Colors.black,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w500,
-                                  ),
+          ),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Flexible(
+                  child: SizedBox(
+                    width: double.maxFinite,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: vastiName.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        String vasti = vastiName[index];
+                        bool isSelected = vasti == selectedVasti;
+
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: GestureDetector(
+                            onTap: () {
+                              Provider.of<VastiProvider>(context, listen: false)
+                                  .setSelectedVasti(vastiName[index]);
+                              Navigator.pop(context);
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: isSelected
+                                    ? Colors.blue.withOpacity(0.2)
+                                    : Colors.transparent,
+                                border: isSelected
+                                    ? Border.all(color: Colors.blue, width: 2)
+                                    : Border.all(color: Colors.grey, width: 1),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              padding: const EdgeInsets.all(10),
+                              child: Text(
+                                vastiName[index],
+                                style: GoogleFonts.poppins(
+                                  color: Colors.black,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
                                 ),
                               ),
-                            );
-                          }),
+                            ),
+                          ),
+                        );
+                      },
                     ),
-                  )
-                ],
-              ),
+                  ),
+                )
+              ],
             ),
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 
   void showVibhagDialog(BuildContext context) async {
-    QuerySnapshot firebaseVasti =
+    QuerySnapshot firebaseVibhag =
         await FirebaseFirestore.instance.collection("girldetails").get();
 
     Set<String> vibhagNameSet = {};
 
-    for (var vibhagdata in firebaseVasti.docs) {
-      print("vastidata is : ${vibhagdata['vibhag name']}");
+    String selectedVibhag =
+        Provider.of<VastiProvider>(context, listen: false).selectedVibhag;
+
+    for (var vibhagdata in firebaseVibhag.docs) {
+      print("vibhagdata is : ${vibhagdata['vibhag name']}");
       String vibhagname = vibhagdata['vibhag name'];
       vibhagNameSet.add(vibhagname);
     }
+
     List<String> vibhagName = vibhagNameSet.toList();
 
     showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            titlePadding: EdgeInsets.all(20),
-            title: Center(
-              child: Text(
-                "Select Vibhag Name",
-                style: GoogleFonts.poppins(
-                  color: Colors.black,
-                  fontSize: 17,
-                  fontWeight: FontWeight.w900,
-                ),
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          titlePadding: const EdgeInsets.all(20),
+          title: Center(
+            child: Text(
+              "Select Vibhag Name",
+              style: GoogleFonts.poppins(
+                color: Colors.black,
+                fontSize: 17,
+                fontWeight: FontWeight.w900,
               ),
             ),
-            content: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Flexible(
-                    child: SizedBox(
-                      //height: double.maxFinite,
-                      width: double.maxFinite,
-                      child: ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: vibhagName.length,
-                          itemBuilder: (BuildContext context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: GestureDetector(
-                                onTap: () {
-                                  Provider.of<VastiProvider>(context,
-                                          listen: false)
-                                      .setSelectedVibhag(vibhagName[index]);
-                                },
-                                child: Text(
-                                  vibhagName[index],
-                                  style: GoogleFonts.poppins(
-                                    color: Colors.black,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w500,
-                                  ),
+          ),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Flexible(
+                  child: SizedBox(
+                    width: double.maxFinite,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: vibhagName.length,
+                      itemBuilder: (BuildContext context, index) {
+                        String vibhag = vibhagName[index];
+                        bool isSelected = vibhag == selectedVibhag;
+
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: GestureDetector(
+                            onTap: () {
+                              Provider.of<VastiProvider>(context, listen: false)
+                                  .setSelectedVibhag(vibhagName[index]);
+                              Navigator.pop(context);
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: isSelected
+                                    ? Colors.blue.withOpacity(0.2)
+                                    : Colors.transparent,
+                                border: isSelected
+                                    ? Border.all(color: Colors.blue, width: 2)
+                                    : Border.all(color: Colors.grey, width: 1),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              padding: const EdgeInsets.all(10),
+                              child: Text(
+                                vibhagName[index],
+                                style: GoogleFonts.poppins(
+                                  color: Colors.black,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
                                 ),
                               ),
-                            );
-                          }),
+                            ),
+                          ),
+                        );
+                      },
                     ),
-                  )
-                ],
-              ),
+                  ),
+                )
+              ],
             ),
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 }

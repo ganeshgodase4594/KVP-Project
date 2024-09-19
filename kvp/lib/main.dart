@@ -5,13 +5,10 @@ import 'package:kvp/provider/checkbox.dart';
 import 'package:kvp/provider/girlidprovider.dart';
 import 'package:kvp/provider/timeprovider.dart';
 import 'package:kvp/provider/vastifilterprovider.dart';
-import 'package:kvp/screen/searchname.dart';
-import 'package:kvp/screen/splashscreen.dart';
-
 import 'package:provider/provider.dart';
-
 import 'provider/dateprovider.dart';
 import 'provider/suggestionprovider.dart';
+import 'screen/homescreen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,7 +38,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+      home: HomeScreen(),
     );
   }
 }

@@ -23,6 +23,18 @@ class VastiProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void clearSelectedVibhag() {
+    _selectedVibhag = '';
+    _filterData();
+    notifyListeners();
+  }
+
+  void clearSelectedVasti() {
+    _selectedVasti = '';
+    _filterData();
+    notifyListeners();
+  }
+
   Future<void> fetchAllData() async {
     QuerySnapshot snapshot =
         await FirebaseFirestore.instance.collection("girldetails").get();
@@ -38,15 +50,28 @@ class VastiProvider with ChangeNotifier {
   }
 
   void _filterData() {
-    List<Map<String, dynamic>> filteredResults = [];
+    _filteredData.clear();
 
-    for (var data in collectiondata) {
-      if (data['vasti name'] == _selectedVasti) {
-        filteredResults.add(data);
-      } else if (data['vibhag name'] == _selectedVibhag) {
-        filteredResults.add(data);
+    if (_selectedVasti.isEmpty && _selectedVibhag.isEmpty) {
+      _filteredData = List.from(collectiondata);
+    } else {
+      for (var data in collectiondata) {
+        if (_selectedVasti.isNotEmpty && _selectedVibhag.isNotEmpty) {
+          if (data['vasti name'] == _selectedVasti &&
+              data['vibhag name'] == _selectedVibhag) {
+            _filteredData.add(data);
+          }
+        } else if (_selectedVasti.isNotEmpty) {
+          if (data['vasti name'] == _selectedVasti) {
+            _filteredData.add(data);
+          }
+        } else if (_selectedVibhag.isNotEmpty) {
+          if (data['vibhag name'] == _selectedVibhag) {
+            _filteredData.add(data);
+          }
+        }
       }
     }
-    _filteredData = filteredResults;
+    notifyListeners();
   }
 }
