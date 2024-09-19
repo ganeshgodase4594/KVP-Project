@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kvp/screen/homepage.dart';
-import 'package:kvp/screen/searchname.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -22,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
     await Future.delayed(const Duration(seconds: 2), () {});
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => const SearchName()),
+      MaterialPageRoute(builder: (context) => const Homepage()),
     );
   }
 

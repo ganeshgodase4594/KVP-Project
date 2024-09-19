@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:kvp/screen/attendencepage.dart';
 import 'package:kvp/screen/registerform.dart';
-import 'package:kvp/screen/searchname.dart';
+
+import 'nutritrionpage.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -45,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Expanded(
               child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  childAspectRatio: 1,
+                  childAspectRatio: 0.8,
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 15,
                   crossAxisCount: 2,
@@ -80,7 +82,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+                          const SizedBox(
+                            height: 5,
+                          ),
                           ClipRRect(
                             borderRadius: BorderRadius.circular(10),
                             child: Image.asset(
@@ -90,9 +96,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               getImage(index),
                             ),
                           ),
-                          const SizedBox(
-                            height: 10,
-                          ),
+                          // const SizedBox(
+                          //   height: 10,
+                          // ),
                           Container(
                             padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
@@ -107,6 +113,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   fontSize: 15,
                                   color: Colors.white,
                                 ),
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 5,
                               ),
                             ),
                           )
@@ -145,7 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
       case 1:
         return "Attendence";
       case 2:
-        return "VM Details";
+        return "Nutritrion ";
       case 3:
         return "Other Section";
       default:
@@ -158,25 +166,25 @@ class _HomeScreenState extends State<HomeScreen> {
       case 0:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => RegisterForm()),
+          MaterialPageRoute(builder: (context) => const RegisterForm()),
         );
         break;
       case 1:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => SearchName()),
+          MaterialPageRoute(builder: (context) => const AttendencePage()),
         );
         break;
       case 2:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => RegisterForm()),
+          MaterialPageRoute(builder: (context) => const NutritrionPage()),
         );
         break;
       case 3:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => SearchName()),
+          MaterialPageRoute(builder: (context) => const AttendencePage()),
         );
         break;
       default:

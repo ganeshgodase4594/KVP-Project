@@ -6,30 +6,37 @@ class VastiProvider with ChangeNotifier {
   List<Map<String, dynamic>> _filteredData = [];
   String _selectedVasti = "";
   String _selectedVibhag = "";
+  bool isvastiIcon = false;
+  bool isvibhagIcon = false;
 
   List<Map<String, dynamic>> get filteredData => _filteredData;
   String get selectedVasti => _selectedVasti;
   String get selectedVibhag => _selectedVibhag;
+  List<Map<String, dynamic>> get getdata => collectiondata;
 
   void setSelectedVasti(String vasti) {
+    isvastiIcon = true;
     _selectedVasti = vasti;
     _filterData();
     notifyListeners();
   }
 
   void setSelectedVibhag(String vibhag) {
+    isvibhagIcon = true;
     _selectedVibhag = vibhag;
     _filterData();
     notifyListeners();
   }
 
   void clearSelectedVibhag() {
+    isvibhagIcon = false;
     _selectedVibhag = '';
     _filterData();
     notifyListeners();
   }
 
   void clearSelectedVasti() {
+    isvastiIcon = false;
     _selectedVasti = '';
     _filterData();
     notifyListeners();

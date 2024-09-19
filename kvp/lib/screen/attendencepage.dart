@@ -8,14 +8,14 @@ import 'package:provider/provider.dart';
 
 import '../provider/attendenceprovider.dart';
 
-class SearchName extends StatefulWidget {
-  const SearchName({super.key});
+class AttendencePage extends StatefulWidget {
+  const AttendencePage({super.key});
 
   @override
-  State<SearchName> createState() => _SearchNameState();
+  State<AttendencePage> createState() => _AttendencePageState();
 }
 
-class _SearchNameState extends State<SearchName> {
+class _AttendencePageState extends State<AttendencePage> {
   TextEditingController searchcontroller = TextEditingController();
 
   List vastisearchresult = [];
@@ -38,9 +38,8 @@ class _SearchNameState extends State<SearchName> {
     return Scaffold(
       body: Column(
         children: [
-          const SizedBox(height: 10),
+          const SizedBox(height: 25),
           Container(
-            height: 170,
             decoration: const BoxDecoration(
               color: Color.fromRGBO(25, 72, 106, 1.0),
             ),
@@ -68,114 +67,117 @@ class _SearchNameState extends State<SearchName> {
                   const SizedBox(height: 10),
                   const Divider(color: Colors.white, thickness: 2),
                   const SizedBox(height: 10),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      // mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          dateProvider.selectedDate != null
-                              ? DateFormat('dd-MMM-yyyy')
-                                  .format(dateProvider.selectedDate!)
-                              : "Select Date",
-                          style: GoogleFonts.poppins(
-                            color: Colors.white,
-                            fontSize: 17,
-                            fontWeight: FontWeight.w500,
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        dateProvider.selectedDate != null
+                            ? DateFormat('dd-MMM-yyyy')
+                                .format(dateProvider.selectedDate!)
+                            : "Select Date",
+                        style: GoogleFonts.poppins(
+                          color: Colors.white,
+                          fontSize: 17,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          _selectDate(context);
+                        },
+                        child: const Text(
+                          "📅",
+                          style: TextStyle(
+                              fontSize: 25, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          showVastiDialog(context);
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.white)),
+                          child: Consumer<VastiProvider>(
+                            builder: (context, value, child) {
+                              return Text(
+                                vastiProvider.selectedVasti.isNotEmpty
+                                    ? vastiProvider.selectedVasti
+                                    : "Select Vasti",
+                                style: GoogleFonts.poppins(
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400),
+                              );
+                            },
                           ),
                         ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            _selectDate(context);
-                          },
-                          child: const Text(
-                            "📅",
-                            style: TextStyle(
-                                fontSize: 25, fontWeight: FontWeight.bold),
+                      ),
+                      Consumer<VastiProvider>(
+                        builder: (context, value, child) {
+                          return value.isvastiIcon
+                              ? IconButton(
+                                  icon: const Icon(Icons.clear_outlined,
+                                      color: Colors.white),
+                                  onPressed: () {
+                                    value.clearSelectedVasti();
+                                  },
+                                )
+                              : Container();
+                        },
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          showVibhagDialog(context);
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.white)),
+                          child: Consumer<VastiProvider>(
+                            builder: (context, value, child) {
+                              return Text(
+                                value.selectedVibhag.isNotEmpty
+                                    ? value.selectedVibhag
+                                    : "Select Vibhag",
+                                style: GoogleFonts.poppins(
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400),
+                              );
+                            },
                           ),
                         ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          "Filters : ",
-                          style: GoogleFonts.poppins(
-                              color: Colors.white,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w400),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            showVastiDialog(context);
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.all(5),
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.white)),
-                            child: Consumer<VastiProvider>(
-                              builder: (context, value, child) {
-                                return Text(
-                                  vastiProvider.selectedVasti.isNotEmpty
-                                      ? vastiProvider.selectedVasti
-                                      : "Select Vasti",
-                                  style: GoogleFonts.poppins(
-                                      color: Colors.white,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w400),
-                                );
-                              },
-                            ),
-                          ),
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.clear_outlined,
-                              color: Colors.white),
-                          onPressed: () {
-                            vastiProvider.clearSelectedVasti();
-                          },
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            showVibhagDialog(context);
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.all(5),
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.white)),
-                            child: Consumer<VastiProvider>(
-                              builder: (context, value, child) {
-                                return Text(
-                                  value.selectedVibhag.isNotEmpty
-                                      ? value.selectedVibhag
-                                      : "Select Vibhag",
-                                  style: GoogleFonts.poppins(
-                                      color: Colors.white,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w400),
-                                );
-                              },
-                            ),
-                          ),
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.clear_outlined,
-                              color: Colors.white),
-                          onPressed: () {
-                            vastiProvider.clearSelectedVibhag();
-                          },
-                        ),
-                      ],
-                    ),
+                      ),
+                      Consumer<VastiProvider>(
+                        builder: (context, value, child) {
+                          return value.isvibhagIcon
+                              ? IconButton(
+                                  icon: const Icon(Icons.clear_outlined,
+                                      color: Colors.white),
+                                  onPressed: () {
+                                    value.clearSelectedVibhag();
+                                  },
+                                )
+                              : Container();
+                        },
+                      ),
+                    ],
                   ),
                 ],
               ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:kvp/demopage.dart';
+import 'package:kvp/widget/checkbox.dart';
+import 'package:kvp/screen/homescreen.dart';
 import 'package:kvp/screen/registerform.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -90,7 +91,7 @@ class _HomepageState extends State<Homepage> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const RegisterForm()),
+                  MaterialPageRoute(builder: (context) => const HomeScreen()),
                 );
               },
               child: Container(

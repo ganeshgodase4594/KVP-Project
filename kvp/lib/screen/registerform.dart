@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import '../demopage.dart';
+import '../widget/checkbox.dart';
 import '../provider/checkbox.dart';
 import '../provider/suggestionprovider.dart';
 import '../provider/timeprovider.dart';

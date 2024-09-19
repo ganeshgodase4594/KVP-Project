@@ -1289,7 +1289,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-import 'provider/checkbox.dart';
+import '../provider/checkbox.dart';
 
 class CheckboxWithControllers extends StatelessWidget {
   @override
@@ -1298,7 +1298,7 @@ class CheckboxWithControllers extends StatelessWidget {
 
     return SingleChildScrollView(
       child: ListView.builder(
-      physics: const NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemCount: checkboxProvider.checkboxState.keys.length,
         itemBuilder: (context, index) {
