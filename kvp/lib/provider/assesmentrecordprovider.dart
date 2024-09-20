@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:kvp/provider/girlidprovider.dart';
 import 'package:provider/provider.dart';
 
+import '../components/snackbar.dart';
 import '../screen/assesmendata.dart';
 
 class AssesmentRecordProvider extends ChangeNotifier {
@@ -60,11 +61,11 @@ class AssesmentRecordProvider extends ChangeNotifier {
         _selectedpostresult == null ||
         _selectedfinalresult == null) {
       print("all fields must be selected");
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Please Complete All Text Fields"),
-        ),
-      );
+
+      SnacKBar.error(
+          title: "Fields are Empty",
+          message: "Please complete all the text fields");
+
       return;
     }
 

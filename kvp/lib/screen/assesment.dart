@@ -42,11 +42,21 @@ class _NutritrionPageState extends State<NutritrionPage> {
           ),
           Center(
             child: Text(
-              "Assesment Result ",
+              "Girl List ",
               style: GoogleFonts.poppins(
                 fontWeight: FontWeight.w700,
                 fontSize: 20,
               ),
+            ),
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          Text(
+            "Note: Please tap on the girl's name to update the assessment record.",
+            style: GoogleFonts.poppins(
+              fontWeight: FontWeight.w300,
+              fontSize: 9,
             ),
           ),
           const SizedBox(

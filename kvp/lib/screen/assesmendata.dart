@@ -42,15 +42,26 @@ class _AssesmentResultState extends State<AssesmentResult> {
             const SizedBox(
               height: 20,
             ),
-            Text(
-              "Girl Name :  ${Provider.of<GirlIdProvider>(context, listen: false).selectgirlname}",
-              style: GoogleFonts.poppins(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 18,
-                  color: Colors.black),
+            Row(
+              children: [
+                Text(
+                  "Girl Name : ",
+                  style: GoogleFonts.poppins(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 18,
+                      color: Colors.black),
+                ),
+                Text(
+                  "${Provider.of<GirlIdProvider>(context, listen: false).selectgirlname}",
+                  style: GoogleFonts.poppins(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 18,
+                      color: Colors.black),
+                ),
+              ],
             ),
             const SizedBox(
-              height: 15,
+              height: 20,
             ),
             Row(
               children: [
@@ -524,7 +535,7 @@ void submitMessage(BuildContext context) {
               fontWeight: FontWeight.w700, fontSize: 20, color: Colors.yellow),
         ),
         content: Text(
-          "Assessment Record Saved successfully.",
+          " ${Provider.of<AssesmentRecordProvider>(context, listen: false).selectedQuarter} Assessment Record Saved successfully.",
           style: GoogleFonts.poppins(
               fontWeight: FontWeight.w300, fontSize: 15, color: Colors.white),
         ),

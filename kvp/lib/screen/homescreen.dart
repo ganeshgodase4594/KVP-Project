@@ -4,6 +4,7 @@ import 'package:kvp/screen/attendencepage.dart';
 import 'package:kvp/screen/registerform.dart';
 
 import 'assesment.dart';
+import 'nutritionpage.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -184,7 +185,7 @@ class _HomeScreenState extends State<HomeScreen> {
       case 3:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const AttendencePage()),
+          MaterialPageRoute(builder: (context) => const NutritionPage()),
         );
         break;
       default:
