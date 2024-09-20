@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:kvp/screen/attendencepage.dart';
 import 'package:kvp/screen/registerform.dart';
 
-import 'nutritrionpage.dart';
+import 'assesment.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -138,9 +138,9 @@ class _HomeScreenState extends State<HomeScreen> {
       case 1:
         return "assets/images/finalattend.png";
       case 2:
-        return "assets/images/attendance.jpg";
+        return "assets/images/assesment.jpeg";
       case 3:
-        return "assets/images/attendance1.jpg";
+        return "assets/images/nutrition.jpg";
       default:
         return "assets/images/attendance1.jpg";
     }
@@ -153,9 +153,9 @@ class _HomeScreenState extends State<HomeScreen> {
       case 1:
         return "Attendence";
       case 2:
-        return "Nutritrion ";
+        return "Assessment ";
       case 3:
-        return "Other Section";
+        return "Nutrition";
       default:
         return "Unknown";
     }

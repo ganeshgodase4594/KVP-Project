@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:kvp/provider/assesmentrecordprovider.dart';
 import 'package:kvp/provider/attendenceprovider.dart';
 import 'package:kvp/provider/checkbox.dart';
 import 'package:kvp/provider/girlidprovider.dart';
@@ -24,7 +25,8 @@ void main() async {
         ChangeNotifierProvider(create: (_) => AttendenceProvider()),
         ChangeNotifierProvider(create: (_) => GirlIdProvider()),
         ChangeNotifierProvider(create: (_) => DateProvider()),
-        ChangeNotifierProvider(create: (_) => VastiProvider())
+        ChangeNotifierProvider(create: (_) => VastiProvider()),
+        ChangeNotifierProvider(create: (_) => AssesmentRecordProvider())
       ],
       child: const MyApp(),
     ),
