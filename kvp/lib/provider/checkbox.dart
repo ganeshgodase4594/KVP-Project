@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 class CheckboxProvider with ChangeNotifier {
   // Map to manage checkbox states
+
   final Map<String, bool> _checkboxState = {
     'Bhondla': false,
     'Summer Camp': false,
@@ -31,41 +34,41 @@ class CheckboxProvider with ChangeNotifier {
     switch (key) {
       case 'Bhonda':
         bhonda.text = value ? 'true' : 'false';
-        print("bhonda controller : $value");
+        log("bhonda controller : $value");
         break;
       case 'Summer Camp':
         summercamp.text = value ? 'true' : 'false';
-        print("Summer Camp : $value");
+        log("Summer Camp : $value");
 
         break;
       case 'Mangalagaur':
         mangalagaur.text = value ? 'true' : 'false';
-        print("Mangalgaur : $value");
+        log("Mangalgaur : $value");
 
         break;
       case 'Winter Camp':
         wintercamp.text = value ? 'true' : 'false';
-        print("Winter Camp : $value");
+        log("Winter Camp : $value");
 
         break;
       case 'Haladikunku':
         haladikunku.text = value ? 'true' : 'false';
-        print("Haladikunku : $value");
+        log("Haladikunku : $value");
 
         break;
       case 'Exposure Visit':
         exposurevisit.text = value ? 'true' : 'false';
-        print("Exposure Visit : $value");
+        log("Exposure Visit : $value");
 
         break;
       case 'Company Visit':
         companyvisit.text = value ? 'true' : 'false';
-        print("Company Visit : $value");
+        log("Company Visit : $value");
 
         break;
       case 'Kishori Care Kit':
         kishoricarekit.text = value ? 'true' : 'false';
-        print("Kishori Care Kit : $value");
+        log("Kishori Care Kit : $value");
 
         break;
     }

@@ -97,9 +97,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               getImage(index),
                             ),
                           ),
-                          // const SizedBox(
-                          //   height: 10,
-                          // ),
                           Container(
                             padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(

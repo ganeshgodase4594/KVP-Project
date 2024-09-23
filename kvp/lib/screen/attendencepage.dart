@@ -37,6 +37,8 @@ class _AttendencePageState extends State<AttendencePage> {
 
     return Scaffold(
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           const SizedBox(height: 25),
           Container(
@@ -46,6 +48,7 @@ class _AttendencePageState extends State<AttendencePage> {
             child: Padding(
               padding: const EdgeInsets.all(15.0),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -71,15 +74,41 @@ class _AttendencePageState extends State<AttendencePage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        dateProvider.selectedDate != null
-                            ? DateFormat('dd-MMM-yyyy')
-                                .format(dateProvider.selectedDate!)
-                            : "Select Date",
-                        style: GoogleFonts.poppins(
-                          color: Colors.white,
-                          fontSize: 17,
-                          fontWeight: FontWeight.w500,
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 8, horizontal: 12),
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            colors: [Colors.white, Colors.blueAccent],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.3),
+                              blurRadius: 6,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        child: Text(
+                          dateProvider.selectedDate != null
+                              ? DateFormat('dd-MMM-yyyy')
+                                  .format(dateProvider.selectedDate!)
+                              : "Select Date",
+                          style: GoogleFonts.poppins(
+                            color: Colors.white,
+                            fontSize: 17,
+                            fontWeight: FontWeight.w500,
+                            shadows: [
+                              Shadow(
+                                blurRadius: 5,
+                                color: Colors.black.withOpacity(0.5),
+                                offset: const Offset(1, 2),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       const SizedBox(
@@ -89,10 +118,30 @@ class _AttendencePageState extends State<AttendencePage> {
                         onTap: () {
                           _selectDate(context);
                         },
-                        child: const Text(
-                          "📅",
-                          style: TextStyle(
-                              fontSize: 25, fontWeight: FontWeight.bold),
+                        child: MouseRegion(
+                          cursor: SystemMouseCursors.click,
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 200),
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.2),
+                                  blurRadius: 6,
+                                  offset: const Offset(0, 3),
+                                ),
+                              ],
+                            ),
+                            child: const Text(
+                              "📅",
+                              style: TextStyle(
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ],
@@ -104,12 +153,28 @@ class _AttendencePageState extends State<AttendencePage> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          showVastiDialog(context);
+                          showVastiBottomSheet(context);
                         },
                         child: Container(
-                          padding: const EdgeInsets.all(5),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 15),
                           decoration: BoxDecoration(
-                              border: Border.all(color: Colors.white)),
+                            gradient: const LinearGradient(
+                              colors: [Colors.blueAccent, Colors.white],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                            ),
+                            borderRadius: BorderRadius.circular(12),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.3),
+                                blurRadius: 8,
+                                offset: const Offset(0, 4),
+                              ),
+                            ],
+                            border: Border.all(
+                                color: Colors.white.withOpacity(0.5), width: 2),
+                          ),
                           child: Consumer<VastiProvider>(
                             builder: (context, value, child) {
                               return Text(
@@ -138,17 +203,37 @@ class _AttendencePageState extends State<AttendencePage> {
                               : Container();
                         },
                       ),
-                      const SizedBox(
-                        width: 10,
-                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
                       GestureDetector(
                         onTap: () {
-                          showVibhagDialog(context);
+                          showVibhagBottomSheet(context);
                         },
                         child: Container(
-                          padding: const EdgeInsets.all(5),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 15),
                           decoration: BoxDecoration(
-                              border: Border.all(color: Colors.white)),
+                            gradient: const LinearGradient(
+                              colors: [Colors.blueAccent, Colors.white],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                            ),
+                            borderRadius: BorderRadius.circular(12),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.3),
+                                blurRadius: 8,
+                                offset: const Offset(0, 4),
+                              ),
+                            ],
+                            border: Border.all(
+                                color: Colors.white.withOpacity(0.5), width: 2),
+                          ),
                           child: Consumer<VastiProvider>(
                             builder: (context, value, child) {
                               return Text(
@@ -331,7 +416,7 @@ class _AttendencePageState extends State<AttendencePage> {
     }
   }
 
-  void showVastiDialog(BuildContext context) async {
+  void showVastiBottomSheet(BuildContext context) async {
     QuerySnapshot firebaseVasti =
         await FirebaseFirestore.instance.collection("girldetails").get();
 
@@ -346,162 +431,168 @@ class _AttendencePageState extends State<AttendencePage> {
     String selectedVasti =
         Provider.of<VastiProvider>(context, listen: false).selectedVasti;
 
-    showDialog(
+    showModalBottomSheet(
       context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
+      ),
+      isScrollControlled: true,
       builder: (BuildContext context) {
-        return AlertDialog(
-          titlePadding: const EdgeInsets.all(20),
-          title: Center(
-            child: Text(
-              "Select Vasti Name",
-              style: GoogleFonts.poppins(
-                color: Colors.black,
-                fontSize: 17,
-                fontWeight: FontWeight.w900,
+        return Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Center(
+                child: Text(
+                  "Select Vasti Name",
+                  style: GoogleFonts.poppins(
+                    color: Colors.black,
+                    fontSize: 17,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
               ),
-            ),
-          ),
-          content: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Flexible(
-                  child: SizedBox(
-                    width: double.maxFinite,
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: vastiName.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        String vasti = vastiName[index];
-                        bool isSelected = vasti == selectedVasti;
+              const SizedBox(height: 20),
+              Flexible(
+                child: SizedBox(
+                  width: double.maxFinite,
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: vastiName.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      String vasti = vastiName[index];
+                      bool isSelected = vasti == selectedVasti;
 
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: GestureDetector(
-                            onTap: () {
-                              Provider.of<VastiProvider>(context, listen: false)
-                                  .setSelectedVasti(vastiName[index]);
-                              Navigator.pop(context);
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: isSelected
-                                    ? Colors.blue.withOpacity(0.2)
-                                    : Colors.transparent,
-                                border: isSelected
-                                    ? Border.all(color: Colors.blue, width: 2)
-                                    : Border.all(color: Colors.grey, width: 1),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              padding: const EdgeInsets.all(10),
-                              child: Text(
-                                vastiName[index],
-                                style: GoogleFonts.poppins(
-                                  color: Colors.black,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                ),
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: GestureDetector(
+                          onTap: () {
+                            Provider.of<VastiProvider>(context, listen: false)
+                                .setSelectedVasti(vastiName[index]);
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: isSelected
+                                  ? Colors.blue.withOpacity(0.2)
+                                  : Colors.transparent,
+                              border: isSelected
+                                  ? Border.all(color: Colors.blue, width: 2)
+                                  : Border.all(color: Colors.grey, width: 1),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            padding: const EdgeInsets.all(10),
+                            child: Text(
+                              vastiName[index],
+                              style: GoogleFonts.poppins(
+                                color: Colors.black,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
                               ),
                             ),
                           ),
-                        );
-                      },
-                    ),
+                        ),
+                      );
+                    },
                   ),
-                )
-              ],
-            ),
+                ),
+              ),
+            ],
           ),
         );
       },
     );
   }
+}
 
-  void showVibhagDialog(BuildContext context) async {
-    QuerySnapshot firebaseVibhag =
-        await FirebaseFirestore.instance.collection("girldetails").get();
+void showVibhagBottomSheet(BuildContext context) async {
+  QuerySnapshot firebaseVibhag =
+      await FirebaseFirestore.instance.collection("girldetails").get();
 
-    Set<String> vibhagNameSet = {};
+  Set<String> vibhagNameSet = {};
 
-    String selectedVibhag =
-        Provider.of<VastiProvider>(context, listen: false).selectedVibhag;
+  String selectedVibhag =
+      Provider.of<VastiProvider>(context, listen: false).selectedVibhag;
 
-    for (var vibhagdata in firebaseVibhag.docs) {
-      print("vibhagdata is : ${vibhagdata['vibhag name']}");
-      String vibhagname = vibhagdata['vibhag name'];
-      vibhagNameSet.add(vibhagname);
-    }
+  for (var vibhagdata in firebaseVibhag.docs) {
+    print("vibhagdata is : ${vibhagdata['vibhag name']}");
+    String vibhagname = vibhagdata['vibhag name'];
+    vibhagNameSet.add(vibhagname);
+  }
 
-    List<String> vibhagName = vibhagNameSet.toList();
+  List<String> vibhagName = vibhagNameSet.toList();
 
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          titlePadding: const EdgeInsets.all(20),
-          title: Center(
-            child: Text(
-              "Select Vibhag Name",
-              style: GoogleFonts.poppins(
-                color: Colors.black,
-                fontSize: 17,
-                fontWeight: FontWeight.w900,
+  showModalBottomSheet(
+    context: context,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
+    ),
+    isScrollControlled: true,
+    builder: (BuildContext context) {
+      return Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Center(
+              child: Text(
+                "Select Vibhag Name",
+                style: GoogleFonts.poppins(
+                  color: Colors.black,
+                  fontSize: 17,
+                  fontWeight: FontWeight.w900,
+                ),
               ),
             ),
-          ),
-          content: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Flexible(
-                  child: SizedBox(
-                    width: double.maxFinite,
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: vibhagName.length,
-                      itemBuilder: (BuildContext context, index) {
-                        String vibhag = vibhagName[index];
-                        bool isSelected = vibhag == selectedVibhag;
+            const SizedBox(height: 20),
+            Flexible(
+              child: SizedBox(
+                width: double.maxFinite,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: vibhagName.length,
+                  itemBuilder: (BuildContext context, index) {
+                    String vibhag = vibhagName[index];
+                    bool isSelected = vibhag == selectedVibhag;
 
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: GestureDetector(
-                            onTap: () {
-                              Provider.of<VastiProvider>(context, listen: false)
-                                  .setSelectedVibhag(vibhagName[index]);
-                              Navigator.pop(context);
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: isSelected
-                                    ? Colors.blue.withOpacity(0.2)
-                                    : Colors.transparent,
-                                border: isSelected
-                                    ? Border.all(color: Colors.blue, width: 2)
-                                    : Border.all(color: Colors.grey, width: 1),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              padding: const EdgeInsets.all(10),
-                              child: Text(
-                                vibhagName[index],
-                                style: GoogleFonts.poppins(
-                                  color: Colors.black,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          Provider.of<VastiProvider>(context, listen: false)
+                              .setSelectedVibhag(vibhagName[index]);
+                          Navigator.pop(context);
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: isSelected
+                                ? Colors.blue.withOpacity(0.2)
+                                : Colors.transparent,
+                            border: isSelected
+                                ? Border.all(color: Colors.blue, width: 2)
+                                : Border.all(color: Colors.grey, width: 1),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          padding: const EdgeInsets.all(10),
+                          child: Text(
+                            vibhagName[index],
+                            style: GoogleFonts.poppins(
+                              color: Colors.black,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
-                        );
-                      },
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            )
+          ],
+        ),
+      );
+    },
+  );
 }

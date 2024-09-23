@@ -3,8 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:kvp/screen/homepage.dart';
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
-  _SplashScreenState createState() => _SplashScreenState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
@@ -33,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Container(
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/images/seva-logo-remove.png'),
+              image: AssetImage('assets/images/SevaLogo.png'),
             ),
           ),
         ),

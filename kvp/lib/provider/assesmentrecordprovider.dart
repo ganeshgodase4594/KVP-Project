@@ -1,10 +1,9 @@
+import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:kvp/provider/girlidprovider.dart';
 import 'package:provider/provider.dart';
-
 import '../components/snackbar.dart';
-import '../screen/assesmendata.dart';
 
 class AssesmentRecordProvider extends ChangeNotifier {
   String _selectedYear = DateTime.now().year.toString();
@@ -12,6 +11,7 @@ class AssesmentRecordProvider extends ChangeNotifier {
   String? _selectedpostresult;
   String? _selectedfinalresult;
   String? _selectquarter;
+  bool _isAssessmentAdded = false;
 
   final List<String> years = List.generate(301, (index) {
     int currentYear = DateTime.now().year;
@@ -27,6 +27,7 @@ class AssesmentRecordProvider extends ChangeNotifier {
   String? get selectedPostResult => _selectedpostresult;
   String? get selectedFinalResult => _selectedfinalresult;
   String? get selectedQuarter => _selectquarter;
+  bool get isAssessmentAdded => _isAssessmentAdded;
 
   void storeSelectedYear(String year) {
     _selectedYear = year;
@@ -60,12 +61,11 @@ class AssesmentRecordProvider extends ChangeNotifier {
         _selectedpreresult == null ||
         _selectedpostresult == null ||
         _selectedfinalresult == null) {
-      print("all fields must be selected");
+      log("all fields must be selected");
 
       SnacKBar.error(
           title: "Fields are Empty",
           message: "Please complete all the text fields");
-
       return;
     }
 
@@ -82,11 +82,36 @@ class AssesmentRecordProvider extends ChangeNotifier {
         "postassessment": _selectedpostresult,
         "result": _selectedfinalresult
       });
-      submitMessage(context);
-      print("asssessment record saved successfully");
+      _isAssessmentAdded = true;
+      notifyListeners();
+      SnacKBar.success(
+          message:
+              " ${Provider.of<AssesmentRecordProvider>(context, listen: false).selectedQuarter} Assessment Record Saved successfully.",
+          title: "Success",
+          context: context);
+      Provider.of<AssesmentRecordProvider>(context, listen: false)
+          .clearDropdown();
+
+      log("asssessment record saved successfully");
     } catch (e) {
-      print("Error saving assessment data: $e");
+      log("Error saving assessment data: $e");
+      _isAssessmentAdded = false;
+      notifyListeners();
     }
+  }
+
+  Future<void> checkAssessmentRecord() async {
+    final snapshot = await FirebaseFirestore.instance
+        .collection("girldetails")
+        .doc()
+        .collection('assessmentrecord')
+        .doc(_selectedYear)
+        .collection('quarter')
+        .doc(_selectquarter)
+        .get();
+
+    _isAssessmentAdded = snapshot.exists;
+    notifyListeners();
   }
 
   void clearDropdown() {

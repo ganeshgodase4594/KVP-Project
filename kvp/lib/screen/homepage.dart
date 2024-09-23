@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:kvp/widget/checkbox.dart';
 import 'package:kvp/screen/homescreen.dart';
-import 'package:kvp/screen/registerform.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class Homepage extends StatefulWidget {

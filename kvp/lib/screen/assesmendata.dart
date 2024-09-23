@@ -42,23 +42,48 @@ class _AssesmentResultState extends State<AssesmentResult> {
             const SizedBox(
               height: 20,
             ),
-            Row(
-              children: [
-                Text(
-                  "Girl Name : ",
-                  style: GoogleFonts.poppins(
-                      fontWeight: FontWeight.w500,
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  // Label Text
+                  Text(
+                    "Girl Name: ",
+                    style: GoogleFonts.poppins(
+                      fontWeight: FontWeight.w600,
                       fontSize: 18,
-                      color: Colors.black),
-                ),
-                Text(
-                  "${Provider.of<GirlIdProvider>(context, listen: false).selectgirlname}",
-                  style: GoogleFonts.poppins(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 18,
-                      color: Colors.black),
-                ),
-              ],
+                      color: Colors.black87,
+                    ),
+                  ),
+
+                  Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    margin: const EdgeInsets.only(left: 8),
+                    decoration: BoxDecoration(
+                      color: Colors.blueAccent.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(
+                        color: Colors.blueAccent.withOpacity(0.6),
+                        width: 1.5,
+                      ),
+                    ),
+                    child: Consumer<GirlIdProvider>(
+                      builder: (context, girlIdProvider, child) {
+                        return Text(
+                          girlIdProvider.selectgirlname!,
+                          style: GoogleFonts.poppins(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 18,
+                            color: Colors.blueAccent,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ),
             const SizedBox(
               height: 20,
@@ -481,7 +506,7 @@ class _AssesmentResultState extends State<AssesmentResult> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Colors.blueAccent,
                   borderRadius: BorderRadius.circular(8),
                   boxShadow: [
                     BoxShadow(
@@ -494,11 +519,11 @@ class _AssesmentResultState extends State<AssesmentResult> {
                 ),
                 child: Center(
                   child: Text(
-                    "Submit",
+                    "Add assessment record",
                     style: GoogleFonts.poppins(
-                        fontWeight: FontWeight.w900,
+                        fontWeight: FontWeight.w500,
                         fontSize: 20,
-                        color: Colors.black),
+                        color: Colors.white),
                   ),
                 ),
               ),

@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:kvp/provider/assesmentrecordprovider.dart';
 import 'package:kvp/provider/attendenceprovider.dart';
 import 'package:kvp/provider/checkbox.dart';
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
       home: SplashScreen(),
     );

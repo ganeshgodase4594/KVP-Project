@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -524,10 +526,6 @@ class _RegisterFormState extends State<RegisterForm> {
                                 ),
                               ],
                             ),
-                            // const SizedBox(
-                            //   width: 10,
-                            // ),
-                            // const Spacer(),
                             Expanded(
                               child: Container(
                                 height: 50,
@@ -570,9 +568,6 @@ class _RegisterFormState extends State<RegisterForm> {
                                     return null;
                                   },
                                   onChanged: (value) {
-                                    // Provider.of<Suggestionprovider>(context,
-                                    //         listen: false)
-                                    //     .loadSuggestion();
                                     if (value.isEmpty) {
                                       Provider.of<Suggestionprovider>(context,
                                               listen: false)
@@ -812,10 +807,6 @@ class _RegisterFormState extends State<RegisterForm> {
                                 ),
                               ],
                             ),
-                            // const SizedBox(
-                            //   width: 10,
-                            // ),
-                            // const Spacer(),
                             Expanded(
                               child: Container(
                                 height: 50,
@@ -859,9 +850,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                   },
                                   onChanged: (value) {
                                     _trainerkey.currentState!.validate();
-                                    // Provider.of<Suggestionprovider>(context,
-                                    //         listen: false)
-                                    //     .loadSuggestion();
+
                                     if (value.isEmpty) {
                                       Provider.of<Suggestionprovider>(context,
                                               listen: false)
@@ -1002,9 +991,7 @@ class _RegisterFormState extends State<RegisterForm> {
                             },
                             onChanged: (value) {
                               _freelancerkey.currentState!.validate();
-                              // Provider.of<Suggestionprovider>(context,
-                              //         listen: false)
-                              //     .loadSuggestion();
+
                               if (value.isEmpty) {
                                 Provider.of<Suggestionprovider>(context,
                                         listen: false)
@@ -1146,9 +1133,6 @@ class _RegisterFormState extends State<RegisterForm> {
                                     return null;
                                   },
                                   onChanged: (value) {
-                                    // Provider.of<Suggestionprovider>(context,
-                                    //         listen: false)
-                                    //     .loadSuggestion();
                                     if (value.isEmpty) {
                                       Provider.of<Suggestionprovider>(context,
                                               listen: false)
@@ -1295,15 +1279,7 @@ class _RegisterFormState extends State<RegisterForm> {
                               return null;
                             },
                             onChanged: (value) {
-                              // Provider.of<Suggestionprovider>(context,
-                              //         listen: false)
-                              //     .loadSuggestion();
                               if (value.isEmpty) {
-                                // Provider.of<Suggestionprovider>(context,
-                                //         listen: false)
-                                //     .sponsorlist
-                                //     .clear();
-
                                 Provider.of<Suggestionprovider>(context,
                                         listen: false)
                                     .matchedItems;
@@ -1402,10 +1378,6 @@ class _RegisterFormState extends State<RegisterForm> {
                                 ),
                               ],
                             ),
-                            // const SizedBox(
-                            //   width: 10,
-                            // ),
-                            // const Spacer(),
                             Expanded(
                               child: Container(
                                 height: 50,
@@ -1703,15 +1675,6 @@ class _RegisterFormState extends State<RegisterForm> {
                                 color: Colors.red,
                               ),
                             ),
-                            // validator: (value) {
-                            //   if (value!.trim().isEmpty) {
-                            //     return "Enter special achievement";
-                            //   }
-                            //   return null;
-                            // },
-                            // onChanged: (value) {
-                            //   _formKey.currentState!.validate();
-                            // },
                           ),
                         ),
                         const SizedBox(
@@ -1754,15 +1717,6 @@ class _RegisterFormState extends State<RegisterForm> {
                                   color: Colors.yellow),
                               border: InputBorder.none,
                             ),
-                            // validator: (value) {
-                            //   if (value!.trim().isEmpty) {
-                            //     return "Enter action taken on her";
-                            //   }
-                            //   return null;
-                            // },
-                            // onChanged: (value) {
-                            //   _formKey.currentState!.validate();
-                            // },
                           ),
                         ),
                         const SizedBox(
@@ -2058,10 +2012,6 @@ class _RegisterFormState extends State<RegisterForm> {
                                 ),
                               ],
                             ),
-                            // const SizedBox(
-                            //   width: 10,
-                            // ),
-                            // const Spacer(),
                             Expanded(
                               child: Container(
                                 height: 50,
@@ -2205,10 +2155,6 @@ class _RegisterFormState extends State<RegisterForm> {
                                 ),
                               ],
                             ),
-                            // const SizedBox(
-                            //   width: 10,
-                            // ),
-                            // const Spacer(),
                             Expanded(
                               child: Container(
                                 height: 50,
@@ -2360,10 +2306,6 @@ class _RegisterFormState extends State<RegisterForm> {
                                 ),
                               ],
                             ),
-                            // const SizedBox(
-                            //   width: 10,
-                            // ),
-                            //const Spacer(),
                             Expanded(
                               child: Container(
                                 height: 50,
@@ -2510,10 +2452,6 @@ class _RegisterFormState extends State<RegisterForm> {
                                 ),
                               ],
                             ),
-                            // const SizedBox(
-                            //   width: 10,
-                            // ),
-                            //const Spacer(),
                             Expanded(
                               child: Container(
                                 height: 50,
@@ -2660,10 +2598,6 @@ class _RegisterFormState extends State<RegisterForm> {
                                 ),
                               ],
                             ),
-                            // const SizedBox(
-                            //   width: 10,
-                            // ),
-                            // const Spacer(),
                             Expanded(
                               child: Container(
                                 height: 50,
@@ -2898,10 +2832,6 @@ class _RegisterFormState extends State<RegisterForm> {
                                 ),
                               ],
                             ),
-                            // const SizedBox(
-                            //   width: 10,
-                            // ),
-                            // const Spacer(),
                             Expanded(
                               child: Container(
                                 height: 50,
@@ -3208,7 +3138,7 @@ class _RegisterFormState extends State<RegisterForm> {
   }
 
   void storeDataToFirebase() {
-    print("in storedatatofirebase");
+    log("in storedatatofirebase");
     Map<String, dynamic> activity =
         Provider.of<CheckboxProvider>(context, listen: false).checkboxState;
     List<Map<String, dynamic>> data = [
@@ -3254,38 +3184,6 @@ class _RegisterFormState extends State<RegisterForm> {
       },
     ];
 
-    //   FirebaseFirestore.instance
-    //       .collection("girldetails")
-    //       .add(data)
-    //       .then((value) {
-    //     Provider.of<Suggestionprovider>(context, listen: false)
-    //         .saveSuggestion(vastiname.text, "vasti");
-    //     Provider.of<Suggestionprovider>(context, listen: false)
-    //         .saveSuggestion(vibhagname.text, "vibhag");
-
-    //     Provider.of<Suggestionprovider>(context, listen: false)
-    //         .saveSuggestion(trainername.text, "trainer");
-
-    //     Provider.of<Suggestionprovider>(context, listen: false)
-    //         .saveSuggestion(freelancername.text, "freelancer");
-
-    //     Provider.of<Suggestionprovider>(context, listen: false)
-    //         .saveSuggestion(coordinatorname.text, "coordinator");
-
-    //     Provider.of<Suggestionprovider>(context, listen: false)
-    //         .saveSuggestion(vmname.text, "vm");
-
-    //     Provider.of<Suggestionprovider>(context, listen: false)
-    //         .saveSuggestion(sponsorcompany.text, "sponsor");
-
-    //     Provider.of<Suggestionprovider>(context, listen: false).loadSuggestion();
-
-    //     print("Data submitted successfully");
-    //   }).catchError((error) {
-    //     print("Failed to add data: $error");
-    //   });
-    // }
-
     for (var data1 in data) {
       FirebaseFirestore.instance
           .collection("girldetails")
@@ -3314,9 +3212,9 @@ class _RegisterFormState extends State<RegisterForm> {
         Provider.of<Suggestionprovider>(context, listen: false)
             .loadSuggestion();
 
-        print("Data submitted successfully");
+        log("Data submitted successfully");
       }).catchError((error) {
-        print("Failed to add data: $error");
+        log("Failed to add data: $error");
       });
     }
   }

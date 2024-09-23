@@ -4,6 +4,7 @@ import 'package:kvp/provider/girlidprovider.dart';
 import 'package:kvp/provider/vastifilterprovider.dart';
 import 'package:provider/provider.dart';
 
+import '../provider/assesmentrecordprovider.dart';
 import 'assesmendata.dart';
 
 class NutritrionPage extends StatefulWidget {
@@ -55,8 +56,8 @@ class _NutritrionPageState extends State<NutritrionPage> {
           Text(
             "Note: Please tap on the girl's name to update the assessment record.",
             style: GoogleFonts.poppins(
-              fontWeight: FontWeight.w300,
-              fontSize: 9,
+              fontWeight: FontWeight.w500,
+              fontSize: 12,
             ),
           ),
           const SizedBox(
@@ -74,47 +75,102 @@ class _NutritrionPageState extends State<NutritrionPage> {
                                 value.collectiondata[index]['name of girl'];
 
                             String girlId = value.collectiondata[index]['id'];
-                            print("girlName is : $girlName");
-                            return GestureDetector(
-                              onTap: () {
-                                Provider.of<GirlIdProvider>(context,
-                                        listen: false)
-                                    .storegirlid(girlId);
 
-                                Provider.of<GirlIdProvider>(context,
-                                        listen: false)
-                                    .storeGirlName(girlName);
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) {
-                                  return const AssesmentResult();
-                                }));
-                              },
-                              child: Container(
-                                margin: const EdgeInsets.only(bottom: 20),
-                                padding: const EdgeInsets.all(5),
-                                decoration: BoxDecoration(
-                                  color: Colors.white54,
-                                  borderRadius: BorderRadius.circular(15),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.2),
-                                      spreadRadius: 1,
-                                      blurRadius: 2,
-                                      offset: const Offset(0, 2),
+                            return GestureDetector(
+                                onTap: () {
+                                  Provider.of<GirlIdProvider>(context,
+                                          listen: false)
+                                      .storegirlid(girlId);
+
+                                  Provider.of<GirlIdProvider>(context,
+                                          listen: false)
+                                      .storeGirlName(girlName);
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                    return const AssesmentResult();
+                                  }));
+                                },
+                                child: Container(
+                                  margin: const EdgeInsets.only(bottom: 20),
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 10, horizontal: 15),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(15),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.3),
+                                        spreadRadius: 2,
+                                        blurRadius: 8,
+                                        offset: const Offset(0, 4),
+                                      ),
+                                    ],
+                                    border: Border.all(
+                                      color: Colors.grey.withOpacity(0.15),
+                                      width: 1,
                                     ),
-                                  ],
-                                ),
-                                child: ListTile(
-                                  title: Text(
-                                    girlName,
-                                    style: GoogleFonts.poppins(
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 14,
-                                        color: Colors.black),
                                   ),
-                                ),
-                              ),
-                            );
+                                  child: ListTile(
+                                    leading: CircleAvatar(
+                                      backgroundColor:
+                                          Colors.blue.withOpacity(0.8),
+                                      child: Text(
+                                        girlName[0],
+                                        style: GoogleFonts.poppins(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                    title: Text(
+                                      girlName,
+                                      style: GoogleFonts.poppins(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 16,
+                                        color: Colors.black87,
+                                      ),
+                                    ),
+                                    subtitle: Consumer<AssesmentRecordProvider>(
+                                      builder: (context, isadd, child) {
+                                        return Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            CircleAvatar(
+                                              radius: 11,
+                                              backgroundColor:
+                                                  isadd.isAssessmentAdded
+                                                      ? Colors.green
+                                                      : Colors.red,
+                                              child: Icon(
+                                                isadd.isAssessmentAdded
+                                                    ? Icons.check_circle
+                                                    : Icons.info,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            const SizedBox(width: 10),
+                                            Expanded(
+                                              child: Text(
+                                                isadd.isAssessmentAdded
+                                                    ? 'Assessment record added'
+                                                    : 'Assessment record not added',
+                                                style: GoogleFonts.poppins(
+                                                  fontSize: 10,
+                                                  color: isadd.isAssessmentAdded
+                                                      ? Colors.green
+                                                      : Colors.red,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    ),
+                                    trailing: Icon(Icons.arrow_forward_ios,
+                                        color: Colors.grey[400], size: 18),
+                                  ),
+                                ));
                           });
                     },
                   ),
