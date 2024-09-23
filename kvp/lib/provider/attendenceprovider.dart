@@ -46,7 +46,8 @@ class AttendenceProvider extends ChangeNotifier {
 
     for (var doc in attendenceCollection.docs) {
       final status = doc['status'];
-      DateTime date = doc['date'].toDate();
+      DateTime date = doc['date']
+          .toDate(); // used for convert the timestamp (Firebase) to DateTime....
       tempAttendence[date] = status;
     }
 
@@ -54,6 +55,8 @@ class AttendenceProvider extends ChangeNotifier {
 
     notifyListeners();
   }
+
+  // Written the current attendence status....
 
   String getStatus(DateTime date, BuildContext context, String girlid) {
     fetchAttendenceData(girlid);

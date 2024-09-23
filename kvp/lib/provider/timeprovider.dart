@@ -17,6 +17,10 @@ class TimeProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  /*
+  Written the start and end time....
+  */
+
   TimeOfDay getStartTime() => _startTime;
   TimeOfDay getEndTime() => _endTime;
 }

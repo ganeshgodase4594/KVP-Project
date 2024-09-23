@@ -13,11 +13,17 @@ class AssesmentRecordProvider extends ChangeNotifier {
   String? _selectquarter;
   bool _isAssessmentAdded = false;
 
+/*
+  Created The List of year....
+*/
   final List<String> years = List.generate(301, (index) {
     int currentYear = DateTime.now().year;
     return (currentYear - 100 + index).toString();
   });
 
+/*
+ List Of Menu item in reults 
+ */
   final List<String> result = ["satisfactory", "good", "needs improvements"];
   final List<String> finalresult = ["progress", "regress", "stable"];
   final List<String> quarter = ["Q1", "Q2", "Q3"];
@@ -54,6 +60,10 @@ class AssesmentRecordProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  /*
+  Function To Store Assessment Record....
+  */
+
   Future<void> storeAssessmentRecord(BuildContext context) async {
     String girlId =
         Provider.of<GirlIdProvider>(listen: false, context).selectedgirlid!;
@@ -63,6 +73,9 @@ class AssesmentRecordProvider extends ChangeNotifier {
         _selectedfinalresult == null) {
       log("all fields must be selected");
 
+      /*
+  Used GetX controller snackbar....
+  */
       SnacKBar.error(
           title: "Fields are Empty",
           message: "Please complete all the text fields");
@@ -113,6 +126,10 @@ class AssesmentRecordProvider extends ChangeNotifier {
     _isAssessmentAdded = snapshot.exists;
     notifyListeners();
   }
+
+  /*
+  When We click on submit then its clear the dropdownfield....
+  */
 
   void clearDropdown() {
     _selectedYear = DateTime.now().year.toString();

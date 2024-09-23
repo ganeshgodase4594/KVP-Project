@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -18,6 +17,12 @@ class RegisterForm extends StatefulWidget {
 }
 
 class _RegisterFormState extends State<RegisterForm> {
+  /*
+ 
+ Differnrt controller for the save textfield data
+
+  */
+
   TextEditingController girlname = TextEditingController();
   TextEditingController girlcontactnumber = TextEditingController();
   TextEditingController vastiname = TextEditingController();
@@ -57,6 +62,12 @@ class _RegisterFormState extends State<RegisterForm> {
   TextEditingController parentmeet2 = TextEditingController();
   TextEditingController parentmeet3 = TextEditingController();
 
+  /*
+
+  Used local key for validation..
+
+  */
+
   final _nameKey = GlobalKey<FormFieldState<String>>();
   final _conatctkey = GlobalKey<FormFieldState<String>>();
   final _vmkey = GlobalKey<FormFieldState<String>>();
@@ -84,6 +95,12 @@ class _RegisterFormState extends State<RegisterForm> {
   final _parentmeet2key = GlobalKey<FormFieldState<String>>();
   final _parentmeet3key = GlobalKey<FormFieldState<String>>();
 
+  /*
+
+  Used FocusNode for the suggestion list purpose..
+
+  */
+
   final FocusNode _vmFocusNode = FocusNode();
   final FocusNode _trainerFocusNode = FocusNode();
   final FocusNode _freelancerFocusNode = FocusNode();
@@ -95,6 +112,13 @@ class _RegisterFormState extends State<RegisterForm> {
   @override
   void initState() {
     super.initState();
+
+    /*
+
+      Clears matched items and updates state when the focus is lost ...same for all remaning items
+
+
+    */
 
     _vmFocusNode.addListener(() {
       if (!_vmFocusNode.hasFocus) {
@@ -422,14 +446,7 @@ class _RegisterFormState extends State<RegisterForm> {
                               return null;
                             },
                             onChanged: (value) {
-                              // Provider.of<Suggestionprovider>(context,
-                              //         listen: false)
-                              //     .loadSuggestion();
                               if (value.isEmpty) {
-                                // Provider.of<Suggestionprovider>(context,
-                                //         listen: false)
-                                //     .clearData("vm");
-
                                 Provider.of<Suggestionprovider>(context,
                                         listen: false)
                                     .matchedItems;
@@ -1817,6 +1834,14 @@ class _RegisterFormState extends State<RegisterForm> {
                 const SizedBox(
                   height: 20,
                 ),
+
+                /*
+
+                Used checkbox for girl's participtation on different activities which is arranged by sevasahyog....
+                following container are used for design the all activities
+
+                */
+
                 Flexible(
                   child: Container(
                     padding: const EdgeInsets.all(10),
@@ -1875,7 +1900,8 @@ class _RegisterFormState extends State<RegisterForm> {
                         ),
                         SizedBox(
                             width: MediaQuery.of(context).size.width,
-                            child: CheckboxWithControllers()),
+                            child:
+                                const CheckboxWithControllers()), // this widget written in checkbox.dart file
                       ],
                     ),
                   ),
@@ -1883,6 +1909,13 @@ class _RegisterFormState extends State<RegisterForm> {
                 const SizedBox(
                   height: 20,
                 ),
+
+                /*
+
+                Following container written the personal details of girl's
+
+                */
+
                 Flexible(
                   child: Container(
                     padding: const EdgeInsets.all(10),
@@ -2166,7 +2199,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                 child: TextFormField(
                                   keyboardType: TextInputType.text,
                                   key: _schooltimekey,
-                                  //readOnly: true,
+                                  readOnly: true,
                                   cursorColor: Colors.white,
                                   textAlign: TextAlign.start,
                                   controller: schooltiming,
@@ -2175,7 +2208,6 @@ class _RegisterFormState extends State<RegisterForm> {
                                     fontSize: 13,
                                     color: Colors.yellow,
                                   ),
-
                                   decoration: InputDecoration(
                                     suffixIcon: const Icon(
                                       Icons.access_time,
@@ -2196,6 +2228,8 @@ class _RegisterFormState extends State<RegisterForm> {
                                     ),
                                   ),
                                   onTap: () {
+                                    // this function written the select time widget....
+
                                     _showTimeRangePicker(context);
                                   },
                                   validator: (value) {
@@ -2687,6 +2721,9 @@ class _RegisterFormState extends State<RegisterForm> {
                 const SizedBox(
                   height: 20,
                 ),
+                /*
+                Following Container contain the Parent Participitation Data...
+                */
                 Flexible(
                   child: Container(
                     padding: const EdgeInsets.all(10),
@@ -3023,8 +3060,6 @@ class _RegisterFormState extends State<RegisterForm> {
                 ),
                 GestureDetector(
                   onTap: () async {
-                    // bool isValid = true;
-
                     final keys = [
                       _nameKey,
                       _conatctkey,
@@ -3098,6 +3133,10 @@ class _RegisterFormState extends State<RegisterForm> {
     );
   }
 
+  /*
+  This Function is used clear the all textfield...
+  */
+
   void controllerClear() {
     girlname.clear();
     girlcontactnumber.clear();
@@ -3136,6 +3175,10 @@ class _RegisterFormState extends State<RegisterForm> {
     parentmeet2.clear();
     parentmeet3.clear();
   }
+
+  /*
+  following storeDataToFirebase Function Add The User Data To FireStore....
+  */
 
   void storeDataToFirebase() {
     log("in storedatatofirebase");
@@ -3218,6 +3261,8 @@ class _RegisterFormState extends State<RegisterForm> {
       });
     }
   }
+
+  // submitMessage function written the alert dialog when we click the submit button....
 
   void submitMessage(BuildContext context) {
     showDialog(
@@ -3335,6 +3380,9 @@ class _RegisterFormState extends State<RegisterForm> {
   Future<void> _selectTime(BuildContext context, bool isStartTime) async {
     final TimeProvider timeProvider =
         Provider.of<TimeProvider>(context, listen: false);
+    /*
+        Here we used the showTimePicker function
+        */
     final TimeOfDay? pickedTime = await showTimePicker(
       context: context,
       initialTime: isStartTime ? timeProvider.startTime : timeProvider.endTime,

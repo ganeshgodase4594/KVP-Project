@@ -25,14 +25,18 @@ class _AttendencePageState extends State<AttendencePage> {
   void initState() {
     super.initState();
     Future.microtask(() {
+      //fetch the data from firebase....
       Provider.of<VastiProvider>(context, listen: false).fetchAllData();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final dateProvider = Provider.of<DateProvider>(context);
-    final attendenceProvider = Provider.of<AttendenceProvider>(context);
+    // here we access the different provider....
+
+    final dateProvider = Provider.of<DateProvider>(context, listen: false);
+    final attendenceProvider =
+        Provider.of<AttendenceProvider>(context, listen: false);
     final vastiProvider = Provider.of<VastiProvider>(context, listen: false);
 
     return Scaffold(
@@ -114,6 +118,10 @@ class _AttendencePageState extends State<AttendencePage> {
                       const SizedBox(
                         width: 10,
                       ),
+                      /*
+                      When we click the calender icon then call the _selectDate Function..
+                      _selectDate Function Return The showDateTimePicker Widget.....
+                      */
                       GestureDetector(
                         onTap: () {
                           _selectDate(context);
@@ -268,6 +276,10 @@ class _AttendencePageState extends State<AttendencePage> {
               ),
             ),
           ),
+          /*
+          when we visit the first time on attendence page,so we don't select any date..
+          so if date is null then we show image else we show girlsname with attendence status.... 
+          */
           dateProvider.selectedDate == null
               ? Padding(
                   padding: const EdgeInsets.all(20),
@@ -309,6 +321,9 @@ class _AttendencePageState extends State<AttendencePage> {
                     padding: const EdgeInsets.all(20.0),
                     child: Consumer<VastiProvider>(
                       builder: (context, value, child) {
+                        /*
+                        Here We Return The Girl Name with attendence status
+                        */
                         return ListView.builder(
                           itemCount: vastiProvider.filteredData.length,
                           itemBuilder: (context, index) {
@@ -351,10 +366,23 @@ class _AttendencePageState extends State<AttendencePage> {
                                     onTap: () {
                                       DateTime date =
                                           dateProvider.selectedDate!;
+                                      /*
+                                          Here we firstly get the attendence status of a girl using currentStatus Function....
+                                          */
                                       String currentStatus = attendenceProvider
                                           .getStatus(date, context, girlid);
+
+                                      /*
+                                          if we click the A then its convert on P Else remain same ("A")....
+                                          in newStatus we Store The attendence status....
+                                          */
+
                                       String newStatus =
                                           currentStatus == 'A' ? 'P' : 'A';
+
+                                      /*
+                                      if we get newStatus then we update this status using updateAttendence Function....
+                                      */
 
                                       attendenceProvider.updateAttendence(
                                           date, newStatus, context, girlid);
@@ -402,6 +430,10 @@ class _AttendencePageState extends State<AttendencePage> {
     );
   }
 
+  /*
+  Function for selectTheDate....
+  */
+
   Future<void> _selectDate(BuildContext context) async {
     final DateProvider dateProvider =
         Provider.of<DateProvider>(context, listen: false);
@@ -415,6 +447,10 @@ class _AttendencePageState extends State<AttendencePage> {
       dateProvider.setSelectedDate(picked);
     }
   }
+
+  /*
+  Function for VastiFilter....
+  */
 
   void showVastiBottomSheet(BuildContext context) async {
     QuerySnapshot firebaseVasti =
@@ -505,6 +541,10 @@ class _AttendencePageState extends State<AttendencePage> {
     );
   }
 }
+
+/*
+  Function for selectVastiFilter....
+  */
 
 void showVibhagBottomSheet(BuildContext context) async {
   QuerySnapshot firebaseVibhag =

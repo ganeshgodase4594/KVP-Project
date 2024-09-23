@@ -15,11 +15,17 @@ import 'provider/suggestionprovider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  // initialiaze the firebase
   await Firebase.initializeApp();
 
   runApp(
     MultiProvider(
       providers: [
+        /*
+
+        Provides that uses for app state management
+
+        */
         ChangeNotifierProvider(create: (_) => CheckboxProvider()),
         ChangeNotifierProvider(create: (_) => Suggestionprovider()),
         ChangeNotifierProvider(create: (_) => TimeProvider()),

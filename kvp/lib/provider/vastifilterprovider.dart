@@ -42,6 +42,8 @@ class VastiProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  // this function is used to fetch the data from firebase....
+
   Future<void> fetchAllData() async {
     QuerySnapshot snapshot =
         await FirebaseFirestore.instance.collection("girldetails").get();
@@ -55,6 +57,8 @@ class VastiProvider with ChangeNotifier {
     _filteredData = List.from(collectiondata);
     notifyListeners();
   }
+
+  // this function is used to filter the data based on given items....here we used vasti and vibhag
 
   void _filterData() {
     _filteredData.clear();

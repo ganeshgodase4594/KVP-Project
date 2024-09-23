@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Suggestionprovider extends ChangeNotifier {
+  // Lists to store suggestions for various categories
   List<String> vastilist = [];
   List<String> vibhaglist = [];
   List<String> vmlist = [];
@@ -12,6 +13,7 @@ class Suggestionprovider extends ChangeNotifier {
   List<String> coordinatorlist = [];
   List<String> sponsorlist = [];
 
+  // Flags to determine which suggestion box to display
   bool vmbuild = false;
   bool trainerbuyild = false;
   bool freelancerbuild = false;
@@ -20,19 +22,23 @@ class Suggestionprovider extends ChangeNotifier {
   bool vibhagbuild = false;
   bool sponsorbuild = false;
 
+  // List to store filtered suggestions based on user input
   List<String> matchedItems = [];
 
+  // Method to auto-complete suggestions based on user input
   void autoComplete(List<String> suggestion, String input, String choice) {
     matchedItems.clear();
+
+    // Matching items based on input and adding them to the matchedItems list
     for (String element in suggestion) {
       if (element.toLowerCase().startsWith(input.toLowerCase())) {
         matchedItems.add(element);
       }
     }
 
+    // Determine which category should be active for suggestion display
     switch (choice) {
       case "checkvasti":
-        matchedItems;
         vastibuild = true;
         vibhagbuild = false;
         trainerbuyild = false;
@@ -40,10 +46,9 @@ class Suggestionprovider extends ChangeNotifier {
         coobuild = false;
         vmbuild = false;
         sponsorbuild = false;
-        notifyListeners();
+        notifyListeners(); // Notify listeners to update UI
         break;
       case "checkvibhag":
-        matchedItems;
         vastibuild = false;
         vibhagbuild = true;
         trainerbuyild = false;
@@ -51,12 +56,9 @@ class Suggestionprovider extends ChangeNotifier {
         coobuild = false;
         vmbuild = false;
         sponsorbuild = false;
-
         notifyListeners();
         break;
       case "checkvm":
-        matchedItems;
-
         vastibuild = false;
         vibhagbuild = false;
         trainerbuyild = false;
@@ -67,7 +69,6 @@ class Suggestionprovider extends ChangeNotifier {
         notifyListeners();
         break;
       case "checkfreelance":
-        matchedItems;
         vastibuild = false;
         vibhagbuild = false;
         trainerbuyild = false;
@@ -75,11 +76,9 @@ class Suggestionprovider extends ChangeNotifier {
         coobuild = false;
         vmbuild = false;
         sponsorbuild = false;
-
         notifyListeners();
         break;
       case "checktrainer":
-        matchedItems;
         vastibuild = false;
         vibhagbuild = false;
         trainerbuyild = true;
@@ -90,7 +89,6 @@ class Suggestionprovider extends ChangeNotifier {
         notifyListeners();
         break;
       case "checkcoo":
-        matchedItems;
         vastibuild = false;
         vibhagbuild = false;
         trainerbuyild = false;
@@ -98,11 +96,9 @@ class Suggestionprovider extends ChangeNotifier {
         coobuild = true;
         vmbuild = false;
         sponsorbuild = false;
-
         notifyListeners();
         break;
       case "sponsor":
-        matchedItems;
         vastibuild = false;
         vibhagbuild = false;
         trainerbuyild = false;
@@ -110,7 +106,6 @@ class Suggestionprovider extends ChangeNotifier {
         coobuild = false;
         vmbuild = false;
         sponsorbuild = true;
-
         notifyListeners();
         break;
       default:
@@ -118,13 +113,14 @@ class Suggestionprovider extends ChangeNotifier {
     }
   }
 
+  // Save new suggestion to SharedPreferences
   Future<void> saveSuggestion(String newSuggestion, String input) async {
     if (newSuggestion.isNotEmpty) {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-
       List<String> data;
       String key;
 
+      // Assigns correct SharedPreferences key based on input type
       if ("vasti" == input) {
         key = "vastisuggestion";
       } else if ("vibhag" == input) {
@@ -143,20 +139,24 @@ class Suggestionprovider extends ChangeNotifier {
         return;
       }
 
+      // Retrieves existing suggestions for the key or an empty list if none exist
       data = prefs.getStringList(key) ?? [];
 
+      // Adds new suggestion if it doesn't already exist
       if (!data.contains(newSuggestion)) {
         data.add(newSuggestion);
-        await prefs.setStringList(key, data);
+        await prefs.setStringList(key, data); // Saves updated list
       }
 
-      notifyListeners();
+      notifyListeners(); // Notify listeners to update the UI
     }
   }
 
+  // Load all saved suggestions from SharedPreferences
   Future<void> loadSuggestion() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    log("my name is ganesh");
+
+    // Logs and loads Vasti suggestions
     List<String> savedVastiSuggestions =
         prefs.getStringList('vastisuggestion') ?? [];
     savedVastiSuggestions =
@@ -164,6 +164,7 @@ class Suggestionprovider extends ChangeNotifier {
     log("Saved suggestion vasti list in load suggestion: $savedVastiSuggestions");
     vastilist = savedVastiSuggestions;
 
+    // Logs and loads Vibhag suggestions
     List<String> savedVibhagSuggestions =
         prefs.getStringList("vibhagsuggestion") ?? [];
     savedVibhagSuggestions =
@@ -171,11 +172,13 @@ class Suggestionprovider extends ChangeNotifier {
     log("Saved suggestion vibhag list in load suggestion: $savedVibhagSuggestions");
     vibhaglist = savedVibhagSuggestions;
 
+    // Logs and loads VM suggestions
     List<String> savedVmSuggestions = prefs.getStringList("vmsuggestion") ?? [];
     savedVmSuggestions = savedVmSuggestions.where((s) => s.isNotEmpty).toList();
     log("Saved suggestion VM list in load suggestion: $savedVmSuggestions");
     vmlist = savedVmSuggestions;
 
+    // Logs and loads Trainer suggestions
     List<String> savedTrainerSuggestions =
         prefs.getStringList("trainersuggestion") ?? [];
     savedTrainerSuggestions =
@@ -183,6 +186,7 @@ class Suggestionprovider extends ChangeNotifier {
     log("Saved suggestion Trainer list in load suggestion: $savedTrainerSuggestions");
     trainerlist = savedTrainerSuggestions;
 
+    // Logs and loads Freelancer suggestions
     List<String> savedFreelancerSuggestions =
         prefs.getStringList("freelancersuggestion") ?? [];
     savedFreelancerSuggestions =
@@ -190,6 +194,7 @@ class Suggestionprovider extends ChangeNotifier {
     log("Saved suggestion freelancer list in load suggestion: $savedFreelancerSuggestions");
     freelancerlist = savedFreelancerSuggestions;
 
+    // Logs and loads Coordinator suggestions
     List<String> savedCoordinatorSuggestions =
         prefs.getStringList("coordinatorsuggestion") ?? [];
     savedCoordinatorSuggestions =
@@ -197,6 +202,7 @@ class Suggestionprovider extends ChangeNotifier {
     log("Saved suggestion coordinator list in load suggestion: $savedCoordinatorSuggestions");
     coordinatorlist = savedCoordinatorSuggestions;
 
+    // Logs and loads Sponsor suggestions
     List<String> savedSponsorSuggestions =
         prefs.getStringList("sponsorsuggestion") ?? [];
     savedSponsorSuggestions =
@@ -204,6 +210,6 @@ class Suggestionprovider extends ChangeNotifier {
     log("Saved suggestion sponsor list in load suggestion: $savedSponsorSuggestions");
     sponsorlist = savedSponsorSuggestions;
 
-    notifyListeners();
+    notifyListeners(); // Notify listeners that data has been loaded
   }
 }

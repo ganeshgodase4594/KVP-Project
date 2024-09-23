@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kvp/screen/homescreen.dart';
@@ -14,7 +16,7 @@ class _HomepageState extends State<Homepage> {
   @override
   void initState() {
     super.initState();
-    _requestStrogePermission();
+    _requestStrogePermission(); // Requests storage permission when the app starts
   }
 
   Future<void> _requestStrogePermission() async {
@@ -23,7 +25,7 @@ class _HomepageState extends State<Homepage> {
     if (status.isGranted) {
       await Permission.storage.status;
     } else {
-      print("permission not granted");
+      log("permission not granted");
     }
   }
 
@@ -38,7 +40,7 @@ class _HomepageState extends State<Homepage> {
             const SizedBox(
               height: 120,
             ),
-            Image.asset("assets/images/seva-logo-remove.png"),
+            Image.asset("assets/images/SevaLogo.png"),
             RichText(
                 textAlign: TextAlign.center,
                 text: TextSpan(

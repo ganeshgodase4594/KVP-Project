@@ -78,6 +78,9 @@ class _NutritrionPageState extends State<NutritrionPage> {
 
                             return GestureDetector(
                                 onTap: () {
+                                  /*
+                                  When We Tap on specific girl then it's ..we store the girlId and girlName in a GirlIdProvider....
+                                  */
                                   Provider.of<GirlIdProvider>(context,
                                           listen: false)
                                       .storegirlid(girlId);
@@ -85,6 +88,9 @@ class _NutritrionPageState extends State<NutritrionPage> {
                                   Provider.of<GirlIdProvider>(context,
                                           listen: false)
                                       .storeGirlName(girlName);
+                                  /*
+                                      When we click the specific girl then new page is open which store all assessment data for selected girl......
+                                      */
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
                                     return const AssesmentResult();

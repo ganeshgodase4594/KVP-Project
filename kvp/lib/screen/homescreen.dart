@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kvp/screen/attendencepage.dart';
 import 'package:kvp/screen/registerform.dart';
-
 import 'assesment.dart';
 import 'nutritionpage.dart';
 
@@ -22,9 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(
-              height: 80,
-            ),
+            const SizedBox(height: 80),
             Text(
               "Welcome !",
               style: GoogleFonts.poppins(
@@ -32,9 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 fontSize: 20,
               ),
             ),
-            const SizedBox(
-              height: 5,
-            ),
+            const SizedBox(height: 5),
             Text(
               "Hii Ganesh 👋",
               style: GoogleFonts.poppins(
@@ -42,22 +37,21 @@ class _HomeScreenState extends State<HomeScreen> {
                 fontSize: 20,
               ),
             ),
-            const SizedBox(
-              height: 40,
-            ),
+            const SizedBox(height: 40),
             Expanded(
               child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  childAspectRatio: 0.8,
+                  childAspectRatio: 0.8, // Sets the ratio for grid items
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 15,
-                  crossAxisCount: 2,
+                  crossAxisCount: 2, // Creates a 2-column grid
                 ),
-                itemCount: 4,
+                itemCount: 4, // Specifies the number of grid items
                 itemBuilder: (context, index) {
                   return GestureDetector(
+                    // Detects when a grid item is tapped
                     onTap: () {
-                      navigateToPage(index);
+                      navigateToPage(index); // Navigates based on the index
                     },
                     child: Container(
                       padding: const EdgeInsets.all(10),
@@ -85,16 +79,15 @@ class _HomeScreenState extends State<HomeScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const SizedBox(
-                            height: 5,
-                          ),
+                          const SizedBox(height: 5),
                           ClipRRect(
                             borderRadius: BorderRadius.circular(10),
                             child: Image.asset(
                               height: 100,
                               width: double.infinity,
                               fit: BoxFit.cover,
-                              getImage(index),
+                              getImage(
+                                  index), // Retrieves image based on the index
                             ),
                           ),
                           Container(
@@ -105,14 +98,15 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             child: Center(
                               child: Text(
-                                getText(index),
+                                getText(
+                                    index), // Retrieves text based on the index
                                 style: GoogleFonts.poppins(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 15,
                                   color: Colors.white,
                                 ),
                                 overflow: TextOverflow.ellipsis,
-                                maxLines: 5,
+                                maxLines: 5, // Limits the text to 5 lines
                               ),
                             ),
                           )
@@ -129,6 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  // Function to retrieve image path based on index
   String getImage(int index) {
     switch (index) {
       case 0:
@@ -144,6 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  // Function to retrieve text based on index
   String getText(int index) {
     switch (index) {
       case 0:
@@ -159,6 +155,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  // Function to navigate to different pages based on index
   void navigateToPage(int index) {
     switch (index) {
       case 0:
