@@ -12,7 +12,38 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController controller;
+  late List<Animation<Offset>> animation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    controller =
+        AnimationController(vsync: this, duration: const Duration(seconds: 1));
+
+    animation = [
+      Tween(begin: const Offset(-1, 0), end: Offset.zero)
+          .animate(CurvedAnimation(parent: controller, curve: Curves.easeOut)),
+      Tween(begin: const Offset(1, 0), end: Offset.zero)
+          .animate(CurvedAnimation(parent: controller, curve: Curves.easeOut)),
+      Tween(begin: const Offset(0, -1), end: Offset.zero)
+          .animate(CurvedAnimation(parent: controller, curve: Curves.easeOut)),
+      Tween(begin: const Offset(0, 1), end: Offset.zero)
+          .animate(CurvedAnimation(parent: controller, curve: Curves.easeOut)),
+    ];
+
+    controller.forward();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,64 +84,67 @@ class _HomeScreenState extends State<HomeScreen> {
                     onTap: () {
                       navigateToPage(index); // Navigates based on the index
                     },
-                    child: Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        gradient: const LinearGradient(
-                          colors: [
-                            Colors.white,
-                            Color.fromRGBO(240, 240, 240, 1.0),
+                    child: SlideTransition(
+                      position: animation[index],
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            colors: [
+                              Colors.white,
+                              Color.fromRGBO(240, 240, 240, 1.0),
+                            ],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                          borderRadius: BorderRadius.circular(15),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.2),
+                              blurRadius: 8,
+                              offset: const Offset(0, 4),
+                            ),
                           ],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
+                          border: Border.all(
+                              color: Colors.black.withOpacity(0.3), width: 1),
                         ),
-                        borderRadius: BorderRadius.circular(15),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.2),
-                            blurRadius: 8,
-                            offset: const Offset(0, 4),
-                          ),
-                        ],
-                        border: Border.all(
-                            color: Colors.black.withOpacity(0.3), width: 1),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const SizedBox(height: 5),
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Image.asset(
-                              height: 100,
-                              width: double.infinity,
-                              fit: BoxFit.cover,
-                              getImage(
-                                  index), // Retrieves image based on the index
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              color: const Color.fromRGBO(25, 72, 106, 1.0),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Center(
-                              child: Text(
-                                getText(
-                                    index), // Retrieves text based on the index
-                                style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 15,
-                                  color: Colors.white,
-                                ),
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 5, // Limits the text to 5 lines
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const SizedBox(height: 5),
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.asset(
+                                height: 100,
+                                width: double.infinity,
+                                fit: BoxFit.cover,
+                                getImage(
+                                    index), // Retrieves image based on the index
                               ),
                             ),
-                          )
-                        ],
+                            Container(
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                color: const Color.fromRGBO(25, 72, 106, 1.0),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  getText(
+                                      index), // Retrieves text based on the index
+                                  style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 15,
+                                    color: Colors.white,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 5, // Limits the text to 5 lines
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   );
@@ -159,10 +193,8 @@ class _HomeScreenState extends State<HomeScreen> {
   void navigateToPage(int index) {
     switch (index) {
       case 0:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const RegisterForm()),
-        );
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const RegisterForm()));
         break;
       case 1:
         Navigator.push(

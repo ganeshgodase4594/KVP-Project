@@ -34,9 +34,8 @@ class _AttendencePageState extends State<AttendencePage> {
   Widget build(BuildContext context) {
     // here we access the different provider....
 
-    final dateProvider = Provider.of<DateProvider>(context, listen: false);
-    final attendenceProvider =
-        Provider.of<AttendenceProvider>(context, listen: false);
+    final dateProvider = Provider.of<DateProvider>(context);
+    final attendenceProvider = Provider.of<AttendenceProvider>(context);
     final vastiProvider = Provider.of<VastiProvider>(context, listen: false);
 
     return Scaffold(

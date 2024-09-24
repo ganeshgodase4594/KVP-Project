@@ -11,7 +11,7 @@ class AssesmentRecordProvider extends ChangeNotifier {
   String? _selectedpostresult;
   String? _selectedfinalresult;
   String? _selectquarter;
-  bool _isAssessmentAdded = false;
+  final Map<String, bool> _isAssessmentAdded = {};
 
 /*
   Created The List of year....
@@ -33,7 +33,7 @@ class AssesmentRecordProvider extends ChangeNotifier {
   String? get selectedPostResult => _selectedpostresult;
   String? get selectedFinalResult => _selectedfinalresult;
   String? get selectedQuarter => _selectquarter;
-  bool get isAssessmentAdded => _isAssessmentAdded;
+  Map<String, bool> get isAssessmentAdded => _isAssessmentAdded;
 
   void storeSelectedYear(String year) {
     _selectedYear = year;
@@ -95,7 +95,7 @@ class AssesmentRecordProvider extends ChangeNotifier {
         "postassessment": _selectedpostresult,
         "result": _selectedfinalresult
       });
-      _isAssessmentAdded = true;
+
       notifyListeners();
       SnacKBar.success(
           message:
@@ -108,23 +108,29 @@ class AssesmentRecordProvider extends ChangeNotifier {
       log("asssessment record saved successfully");
     } catch (e) {
       log("Error saving assessment data: $e");
-      _isAssessmentAdded = false;
+      //  _isAssessmentAdded = false;
       notifyListeners();
     }
   }
 
-  Future<void> checkAssessmentRecord() async {
-    final snapshot = await FirebaseFirestore.instance
-        .collection("girldetails")
-        .doc()
-        .collection('assessmentrecord')
-        .doc(_selectedYear)
-        .collection('quarter')
-        .doc(_selectquarter)
-        .get();
+  Future<void> checkAssessmentRecord(String girlIds) async {
+    try {
+      QuerySnapshot snapshot = await FirebaseFirestore.instance
+          .collection("girldetails")
+          .doc(girlIds)
+          .collection("assessmentrecord")
+          .get();
 
-    _isAssessmentAdded = snapshot.exists;
-    notifyListeners();
+      log("Number of documents found for girlId $girlIds: ${snapshot.size}");
+
+      bool exists = snapshot.docs.isNotEmpty;
+      log("Assessment record exists for girlId $girlIds: $exists");
+
+      _isAssessmentAdded[girlIds] = exists;
+      notifyListeners();
+    } catch (e) {
+      log("Error checking assessment record for girlId $girlIds: $e");
+    }
   }
 
   /*
