@@ -83,18 +83,32 @@ class AssesmentRecordProvider extends ChangeNotifier {
     }
 
     try {
-      FirebaseFirestore.instance
+      // Reference to the year document under assessmentrecord
+      DocumentReference yearDocRef = FirebaseFirestore.instance
           .collection("girldetails")
           .doc(girlId)
-          .collection('assessmentrecord')
-          .doc(_selectedYear)
-          .collection('quarter')
-          .doc(_selectquarter)
-          .set({
-        "preassessment": _selectedpreresult,
-        "postassessment": _selectedpostresult,
-        "result": _selectedfinalresult
-      });
+          .collection("assessmentrecord")
+          .doc(_selectedYear);
+
+      // Initialize the year document with dummy data if it doesn't exist
+      await yearDocRef.set(
+        {
+          "initialized": true, // Dummy field to ensure the document exists
+        },
+      );
+
+      // Reference to the quarter document under the specified year
+      DocumentReference quarterDocRef =
+          yearDocRef.collection('quarter').doc(_selectquarter);
+
+      // Set the assessment data with dummy initialization
+      await quarterDocRef.set(
+        {
+          "preassessment": _selectedpreresult,
+          "postassessment": _selectedpostresult,
+          "result": _selectedfinalresult,
+        },
+      );
 
       notifyListeners();
       SnacKBar.success(
@@ -108,14 +122,15 @@ class AssesmentRecordProvider extends ChangeNotifier {
       log("asssessment record saved successfully");
     } catch (e) {
       log("Error saving assessment data: $e");
-      //  _isAssessmentAdded = false;
+
       notifyListeners();
     }
   }
 
   Future<void> checkAssessmentRecord(String girlIds) async {
+    bool exists = false;
     try {
-      QuerySnapshot snapshot = await FirebaseFirestore.instance
+      final snapshot = await FirebaseFirestore.instance
           .collection("girldetails")
           .doc(girlIds)
           .collection("assessmentrecord")
@@ -123,13 +138,16 @@ class AssesmentRecordProvider extends ChangeNotifier {
 
       log("Number of documents found for girlId $girlIds: ${snapshot.size}");
 
-      bool exists = snapshot.docs.isNotEmpty;
+      exists = snapshot.docs.isNotEmpty;
       log("Assessment record exists for girlId $girlIds: $exists");
 
       _isAssessmentAdded[girlIds] = exists;
+
       notifyListeners();
     } catch (e) {
       log("Error checking assessment record for girlId $girlIds: $e");
+      _isAssessmentAdded[girlIds] = exists;
+      notifyListeners();
     }
   }
 

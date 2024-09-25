@@ -20,14 +20,17 @@ class _AttendencePageState extends State<AttendencePage> {
 
   List vastisearchresult = [];
   List vibhagsearchresult = [];
+  bool _isDataFetched = false;
 
   @override
   void initState() {
     super.initState();
-    Future.microtask(() {
-      //fetch the data from firebase....
-      Provider.of<VastiProvider>(context, listen: false).fetchAllData();
-    });
+    if (!_isDataFetched) {
+      Future.microtask(() {
+        Provider.of<VastiProvider>(context, listen: false).fetchAllData();
+      });
+      _isDataFetched = true;
+    }
   }
 
   @override
@@ -35,7 +38,8 @@ class _AttendencePageState extends State<AttendencePage> {
     // here we access the different provider....
 
     final dateProvider = Provider.of<DateProvider>(context);
-    final attendenceProvider = Provider.of<AttendenceProvider>(context);
+    final attendenceProvider =
+        Provider.of<AttendenceProvider>(context, listen: false);
     final vastiProvider = Provider.of<VastiProvider>(context, listen: false);
 
     return Scaffold(

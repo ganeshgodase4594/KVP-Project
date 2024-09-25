@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kvp/provider/girlidprovider.dart';
-import 'package:kvp/provider/vastifilterprovider.dart';
+import 'package:kvp/screen/assesmendata.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/assesmentrecordprovider.dart';
-import 'assesmendata.dart';
+import '../provider/vastifilterprovider.dart';
 
 class NutritrionPage extends StatefulWidget {
   const NutritrionPage({super.key});

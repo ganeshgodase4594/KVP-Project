@@ -6,8 +6,10 @@ import 'package:intl/intl.dart';
 class AttendenceProvider extends ChangeNotifier {
   final Map<String, Map<DateTime, String>> _getAttendence = {};
   final Map<DateTime, String> _attendence = {};
+  bool _isLoading = false;
 
   Map<DateTime, String> get updatedAttendence => _attendence;
+  bool get isLoading => _isLoading;
 
   void updateAttendence(
       DateTime date, String status, BuildContext context, String girlId) {
@@ -36,6 +38,7 @@ class AttendenceProvider extends ChangeNotifier {
   }
 
   Future fetchAttendenceData(String girlid) async {
+    _isLoading = false;
     final attendenceCollection = await FirebaseFirestore.instance
         .collection("girldetails")
         .doc(girlid)
@@ -50,16 +53,13 @@ class AttendenceProvider extends ChangeNotifier {
           .toDate(); // used for convert the timestamp (Firebase) to DateTime....
       tempAttendence[date] = status;
     }
-
     _getAttendence[girlid] = tempAttendence;
-
     notifyListeners();
   }
 
   // Written the current attendence status....
 
   String getStatus(DateTime date, BuildContext context, String girlid) {
-    fetchAttendenceData(girlid);
     return _getAttendence[girlid]?[date] ?? 'A';
   }
 }
