@@ -33,12 +33,12 @@ class _SplashScreenState extends State<SplashScreen>
     // Start the animation
     _controller.forward();
 
-    // Navigate to the homepage after a 3-second delay
+    // Navigate to the homepage after a 2-second delay
     _navigateToHome();
   }
 
   _navigateToHome() async {
-    await Future.delayed(const Duration(seconds: 4), () {});
+    await Future.delayed(const Duration(seconds: 2), () {});
 
     // Replaces the current route with the Homepage
     Navigator.pushReplacement(

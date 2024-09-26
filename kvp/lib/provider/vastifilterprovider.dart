@@ -45,6 +45,8 @@ class VastiProvider with ChangeNotifier {
   // this function is used to fetch the data from firebase....
 
   Future<void> fetchAllData() async {
+    collectiondata.clear();
+    filteredData.clear();
     QuerySnapshot snapshot =
         await FirebaseFirestore.instance.collection("girldetails").get();
 

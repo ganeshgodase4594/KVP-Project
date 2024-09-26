@@ -49,8 +49,9 @@ class _AttendencePageState extends State<AttendencePage> {
         children: [
           const SizedBox(height: 25),
           Container(
-            decoration: const BoxDecoration(
-              color: Color.fromRGBO(25, 72, 106, 1.0),
+            decoration: BoxDecoration(
+              color: const Color.fromRGBO(25, 72, 106, 1.0),
+              borderRadius: BorderRadius.circular(15),
             ),
             child: Padding(
               padding: const EdgeInsets.all(15.0),
@@ -78,15 +79,18 @@ class _AttendencePageState extends State<AttendencePage> {
                   const Divider(color: Colors.white, thickness: 2),
                   const SizedBox(height: 10),
                   Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Container(
                         padding: const EdgeInsets.symmetric(
                             vertical: 8, horizontal: 12),
                         decoration: BoxDecoration(
-                          gradient: const LinearGradient(
-                            colors: [Colors.white, Colors.blueAccent],
+                          gradient: LinearGradient(
+                            colors: [
+                              Colors.red.withOpacity(0.8),
+                              Colors.blueAccent
+                            ],
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                           ),
@@ -132,27 +136,23 @@ class _AttendencePageState extends State<AttendencePage> {
                         child: MouseRegion(
                           cursor: SystemMouseCursors.click,
                           child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 200),
-                            padding: const EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.2),
-                              borderRadius: BorderRadius.circular(10),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.2),
-                                  blurRadius: 6,
-                                  offset: const Offset(0, 3),
-                                ),
-                              ],
-                            ),
-                            child: const Text(
-                              "📅",
-                              style: TextStyle(
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold,
+                              duration: const Duration(milliseconds: 200),
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.2),
+                                borderRadius: BorderRadius.circular(10),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.2),
+                                    blurRadius: 6,
+                                    offset: const Offset(0, 3),
+                                  ),
+                                ],
                               ),
-                            ),
-                          ),
+                              child: const Icon(
+                                Icons.calendar_today_rounded,
+                                color: Colors.blueAccent,
+                              )),
                         ),
                       ),
                     ],
@@ -171,7 +171,7 @@ class _AttendencePageState extends State<AttendencePage> {
                               vertical: 10, horizontal: 15),
                           decoration: BoxDecoration(
                             gradient: const LinearGradient(
-                              colors: [Colors.blueAccent, Colors.white],
+                              colors: [Colors.blueAccent, Colors.red],
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                             ),
@@ -230,7 +230,7 @@ class _AttendencePageState extends State<AttendencePage> {
                               vertical: 10, horizontal: 15),
                           decoration: BoxDecoration(
                             gradient: const LinearGradient(
-                              colors: [Colors.blueAccent, Colors.white],
+                              colors: [Colors.blueAccent, Colors.red],
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                             ),
@@ -325,8 +325,8 @@ class _AttendencePageState extends State<AttendencePage> {
                     child: Consumer<VastiProvider>(
                       builder: (context, value, child) {
                         /*
-                        Here We Return The Girl Name with attendence status
-                        */
+                      Here We Return The Girl Name with attendence status
+                      */
                         return ListView.builder(
                           itemCount: vastiProvider.filteredData.length,
                           itemBuilder: (context, index) {
@@ -342,16 +342,27 @@ class _AttendencePageState extends State<AttendencePage> {
                               margin: const EdgeInsets.only(bottom: 20),
                               padding: const EdgeInsets.all(15),
                               decoration: BoxDecoration(
-                                color: Colors.white54,
-                                borderRadius: BorderRadius.circular(15),
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Colors.white,
+                                    Colors.lightBlueAccent.withOpacity(0.3)
+                                  ],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                ),
+                                borderRadius: BorderRadius.circular(20),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Colors.grey.withOpacity(0.2),
-                                    spreadRadius: 1,
-                                    blurRadius: 2,
-                                    offset: const Offset(0, 2),
+                                    color: Colors.grey.withOpacity(0.3),
+                                  ),
+                                  BoxShadow(
+                                    color: Colors.blueAccent.withOpacity(0.15),
                                   ),
                                 ],
+                                border: Border.all(
+                                  color: Colors.blueAccent.withOpacity(0.2),
+                                  width: 1,
+                                ),
                               ),
                               child: Row(
                                 mainAxisAlignment:
@@ -370,22 +381,22 @@ class _AttendencePageState extends State<AttendencePage> {
                                       DateTime date =
                                           dateProvider.selectedDate!;
                                       /*
-                                          Here we firstly get the attendence status of a girl using currentStatus Function....
-                                          */
+                                        Here we firstly get the attendence status of a girl using currentStatus Function....
+                                        */
                                       String currentStatus = attendenceProvider
                                           .getStatus(date, context, girlid);
 
                                       /*
-                                          if we click the A then its convert on P Else remain same ("A")....
-                                          in newStatus we Store The attendence status....
-                                          */
+                                        if we click the A then its convert on P Else remain same ("A")....
+                                        in newStatus we Store The attendence status....
+                                        */
 
                                       String newStatus =
                                           currentStatus == 'A' ? 'P' : 'A';
 
                                       /*
-                                      if we get newStatus then we update this status using updateAttendence Function....
-                                      */
+                                    if we get newStatus then we update this status using updateAttendence Function....
+                                    */
 
                                       attendenceProvider.updateAttendence(
                                           date, newStatus, context, girlid);
@@ -398,19 +409,21 @@ class _AttendencePageState extends State<AttendencePage> {
                                             girlid);
 
                                         return Container(
-                                          height: 30,
-                                          width: 30,
+                                          height: 35,
+                                          width: 35,
                                           decoration: BoxDecoration(
                                             color: status == 'A'
                                                 ? Colors.red
                                                 : Colors.green,
+                                            borderRadius:
+                                                BorderRadius.circular(10),
                                           ),
                                           child: Center(
                                             child: Text(
                                               status,
                                               style: GoogleFonts.poppins(
                                                 color: Colors.white,
-                                                fontSize: 15,
+                                                fontSize: 18,
                                                 fontWeight: FontWeight.w500,
                                               ),
                                             ),

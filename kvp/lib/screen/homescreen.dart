@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kvp/screen/attendencepage.dart';
+import 'package:kvp/screen/login/signin.dart';
 import 'package:kvp/screen/registerform.dart';
 import 'assesment.dart';
 import 'nutritionpage.dart';
@@ -46,6 +49,7 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   Widget build(BuildContext context) {
+    String firstName = getFirstName();
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -53,16 +57,43 @@ class _HomeScreenState extends State<HomeScreen>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 80),
-            Text(
-              "Welcome !",
-              style: GoogleFonts.poppins(
-                fontWeight: FontWeight.w700,
-                fontSize: 20,
-              ),
+            Row(
+              children: [
+                Text(
+                  "Welcome !",
+                  style: GoogleFonts.poppins(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 20,
+                  ),
+                ),
+                const Spacer(),
+                GestureDetector(
+                  onTap: () async {
+                    FirebaseAuth.instance.signOut();
+                    GoogleSignIn googleSignIn = GoogleSignIn();
+                    await googleSignIn.signOut();
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Loged out of Successfully!'),
+                        backgroundColor: Colors.green,
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SignIn()));
+                  },
+                  child: const Icon(
+                    Icons.logout,
+                    size: 30,
+                  ),
+                )
+              ],
             ),
             const SizedBox(height: 5),
             Text(
-              "Hii Ganesh 👋",
+              "Hii $firstName 👋",
               style: GoogleFonts.poppins(
                 fontWeight: FontWeight.w700,
                 fontSize: 20,
@@ -205,7 +236,7 @@ class _HomeScreenState extends State<HomeScreen>
       case 2:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const NutritrionPage()),
+          MaterialPageRoute(builder: (context) => const AssessmentPage()),
         );
         break;
       case 3:
@@ -218,4 +249,12 @@ class _HomeScreenState extends State<HomeScreen>
       // Handle unexpected cases
     }
   }
+}
+
+String getFirstName() {
+  User? user = FirebaseAuth.instance.currentUser;
+  if (user != null) {
+    return user.displayName?.split(' ')[0] ?? '';
+  }
+  return 'Guest';
 }

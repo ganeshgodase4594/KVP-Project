@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kvp/provider/girlidprovider.dart';
@@ -5,16 +6,17 @@ import 'package:kvp/screen/assesmendata.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/assesmentrecordprovider.dart';
-import '../provider/vastifilterprovider.dart';
 
-class NutritrionPage extends StatefulWidget {
-  const NutritrionPage({super.key});
+class AssessmentPage extends StatefulWidget {
+  const AssessmentPage({super.key});
 
   @override
-  State<NutritrionPage> createState() => _NutritrionPageState();
+  State<AssessmentPage> createState() => _AssessmentPageState();
 }
 
-class _NutritrionPageState extends State<NutritrionPage> {
+class _AssessmentPageState extends State<AssessmentPage> {
+  List<Map<String, dynamic>> collectiondata = [];
+
   bool _isLoading = true;
 
   @override
@@ -23,8 +25,20 @@ class _NutritrionPageState extends State<NutritrionPage> {
     _fetchData();
   }
 
+  Future<void> fetchAllDataFromFirebase() async {
+    QuerySnapshot snapshot =
+        await FirebaseFirestore.instance.collection("girldetails").get();
+
+    for (QueryDocumentSnapshot document in snapshot.docs) {
+      Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+      data['id'] = document.id;
+      collectiondata.add(data);
+      setState(() {});
+    }
+  }
+
   Future<void> _fetchData() async {
-    await Provider.of<VastiProvider>(context, listen: false).fetchAllData();
+    fetchAllDataFromFirebase();
 
     setState(() {
       _isLoading = false;
@@ -32,9 +46,13 @@ class _NutritrionPageState extends State<NutritrionPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    Provider.of<VastiProvider>(context, listen: false);
+  void dispose() {
+    collectiondata.clear();
+    super.dispose();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(20),
@@ -68,18 +86,11 @@ class _NutritrionPageState extends State<NutritrionPage> {
             child: _isLoading
                 ? const Center(child: CircularProgressIndicator())
                 : ListView.builder(
-                    itemCount:
-                        Provider.of<VastiProvider>(context, listen: false)
-                            .collectiondata
-                            .length,
+                    itemCount: collectiondata.length,
                     itemBuilder: (context, index) {
-                      String girlName =
-                          Provider.of<VastiProvider>(context, listen: false)
-                              .collectiondata[index]['name of girl'];
+                      String girlName = collectiondata[index]['name of girl'];
 
-                      String girlId =
-                          Provider.of<VastiProvider>(context, listen: false)
-                              .collectiondata[index]['id'];
+                      String girlId = collectiondata[index]['id'];
 
                       Provider.of<AssesmentRecordProvider>(context,
                               listen: false)
@@ -105,21 +116,27 @@ class _NutritrionPageState extends State<NutritrionPage> {
                           },
                           child: Container(
                             margin: const EdgeInsets.only(bottom: 20),
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 15),
+                            padding: const EdgeInsets.all(10),
                             decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(15),
+                              gradient: LinearGradient(
+                                colors: [
+                                  Colors.white,
+                                  Colors.lightBlueAccent.withOpacity(0.3)
+                                ],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                              ),
+                              borderRadius: BorderRadius.circular(20),
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.grey.withOpacity(0.3),
-                                  spreadRadius: 2,
-                                  blurRadius: 8,
-                                  offset: const Offset(0, 4),
+                                ),
+                                BoxShadow(
+                                  color: Colors.blueAccent.withOpacity(0.15),
                                 ),
                               ],
                               border: Border.all(
-                                color: Colors.grey.withOpacity(0.15),
+                                color: Colors.blueAccent.withOpacity(0.2),
                                 width: 1,
                               ),
                             ),
@@ -183,8 +200,9 @@ class _NutritrionPageState extends State<NutritrionPage> {
                                   );
                                 },
                               ),
-                              trailing: Icon(Icons.arrow_forward_ios,
-                                  color: Colors.grey[400], size: 18),
+                              trailing: const Icon(Icons.arrow_forward_ios,
+                                  color: Color.fromARGB(255, 66, 59, 59),
+                                  size: 18),
                             ),
                           ));
                     }),

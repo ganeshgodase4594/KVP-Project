@@ -12,7 +12,20 @@
           "package_name": "com.kvpproject.app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "491033227389-nb99mqqac5i18k7pghtqsnidjmk8v0uh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kvpproject.app",
+            "certificate_hash": "a6ce8221db1c2c111b8e908b24236b8efae22435"
+          }
+        },
+        {
+          "client_id": "491033227389-pavicreoth5rknpbidmjrlf711v8lkgc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCF5VRNrtpIsrDmnEHqKgdBeLXPewbhE5Q"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "491033227389-pavicreoth5rknpbidmjrlf711v8lkgc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

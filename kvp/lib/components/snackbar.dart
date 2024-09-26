@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SnacKBar {
-  static void success(
-      {required String title,
-      required String message,
-      required BuildContext context}) {
+  static void success({
+    required String title,
+    required String message,
+  }) {
     Get.snackbar(
       "",
       "",
