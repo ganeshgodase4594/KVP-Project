@@ -33,16 +33,15 @@ class _AssessmentPageState extends State<AssessmentPage> {
       Map<String, dynamic> data = document.data() as Map<String, dynamic>;
       data['id'] = document.id;
       collectiondata.add(data);
-      setState(() {});
+
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
   Future<void> _fetchData() async {
     fetchAllDataFromFirebase();
-
-    setState(() {
-      _isLoading = false;
-    });
   }
 
   @override
@@ -54,25 +53,31 @@ class _AssessmentPageState extends State<AssessmentPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          padding: const EdgeInsets.only(left: 20),
+          icon: const Icon(Icons.arrow_back,
+              color: Colors.black), // Custom icon and color
+          onPressed: () {
+            Navigator.pop(context); // Navigate back
+          },
+        ),
+        title: Text(
+          "Assessment Record Girl List",
+          style: GoogleFonts.poppins(
+            fontWeight: FontWeight.w700,
+            fontSize: 16,
+          ),
+        ),
+      ),
       body: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.only(left: 20, right: 20),
         child: Column(children: [
-          const SizedBox(
-            height: 20,
-          ),
-          Center(
-            child: Text(
-              "Girl List ",
-              style: GoogleFonts.poppins(
-                fontWeight: FontWeight.w700,
-                fontSize: 20,
-              ),
-            ),
-          ),
           const SizedBox(
             height: 5,
           ),
           Text(
+            textAlign: TextAlign.center,
             "Note: Please tap on the girl's name to update the assessment record.",
             style: GoogleFonts.poppins(
               fontWeight: FontWeight.w500,

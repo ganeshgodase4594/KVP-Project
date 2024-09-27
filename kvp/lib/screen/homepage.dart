@@ -5,6 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:kvp/screen/homescreen.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import 'navigation/bottom_navigation.dart';
+
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
 
@@ -91,7 +93,8 @@ class _HomepageState extends State<Homepage> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const HomeScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => const BottomNavigation()),
                 );
               },
               child: Container(

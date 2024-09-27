@@ -18,30 +18,27 @@ class _AssesmentResultState extends State<AssesmentResult> {
         Provider.of<AssesmentRecordProvider>(listen: false, context);
 
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          padding: const EdgeInsets.only(left: 20),
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: Text(
+          "Assessment Record",
+          style: GoogleFonts.poppins(
+            fontWeight: FontWeight.w700,
+            fontSize: 18,
+          ),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(
-              height: 40,
-            ),
-            Center(
-              child: Text(
-                "Assessment Record",
-                style: GoogleFonts.poppins(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 20,
-                    color: Colors.black),
-              ),
-            ),
-            const Divider(
-              color: Colors.black,
-              thickness: 2,
-            ),
-            const SizedBox(
-              height: 20,
-            ),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(

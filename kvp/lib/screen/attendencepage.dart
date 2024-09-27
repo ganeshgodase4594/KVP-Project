@@ -43,239 +43,240 @@ class _AttendencePageState extends State<AttendencePage> {
     final vastiProvider = Provider.of<VastiProvider>(context, listen: false);
 
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          padding: const EdgeInsets.only(left: 20),
+          icon: const Icon(Icons.arrow_back,
+              color: Colors.black), // Custom icon and color
+          onPressed: () {
+            Navigator.pop(context); // Navigate back
+          },
+        ),
+        title: Text(
+          "Girl Attendence",
+          style: GoogleFonts.poppins(
+            fontWeight: FontWeight.w700,
+            fontSize: 18,
+          ),
+        ),
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const SizedBox(height: 25),
-          Container(
-            decoration: BoxDecoration(
-              color: const Color.fromRGBO(25, 72, 106, 1.0),
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(),
-                      Center(
-                        child: Text(
-                          "Girl Attendance",
-                          style: GoogleFonts.poppins(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  const Divider(color: Colors.white, thickness: 2),
-                  const SizedBox(height: 10),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 8, horizontal: 12),
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              Colors.red.withOpacity(0.8),
-                              Colors.blueAccent
-                            ],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                          ),
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.3),
-                              blurRadius: 6,
-                              offset: const Offset(0, 4),
-                            ),
-                          ],
-                        ),
-                        child: Text(
-                          dateProvider.selectedDate != null
-                              ? DateFormat('dd-MMM-yyyy')
-                                  .format(dateProvider.selectedDate!)
-                              : "Select Date",
-                          style: GoogleFonts.poppins(
-                            color: Colors.white,
-                            fontSize: 17,
-                            fontWeight: FontWeight.w500,
-                            shadows: [
-                              Shadow(
-                                blurRadius: 5,
-                                color: Colors.black.withOpacity(0.5),
-                                offset: const Offset(1, 2),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      /*
-                      When we click the calender icon then call the _selectDate Function..
-                      _selectDate Function Return The showDateTimePicker Widget.....
-                      */
-                      GestureDetector(
-                        onTap: () {
-                          _selectDate(context);
-                        },
-                        child: MouseRegion(
-                          cursor: SystemMouseCursors.click,
-                          child: AnimatedContainer(
-                              duration: const Duration(milliseconds: 200),
-                              padding: const EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.2),
-                                borderRadius: BorderRadius.circular(10),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.2),
-                                    blurRadius: 6,
-                                    offset: const Offset(0, 3),
-                                  ),
-                                ],
-                              ),
-                              child: const Icon(
-                                Icons.calendar_today_rounded,
-                                color: Colors.blueAccent,
-                              )),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          showVastiBottomSheet(context);
-                        },
-                        child: Container(
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: Container(
+              decoration: BoxDecoration(
+                color: const Color.fromRGBO(25, 72, 106, 1.0),
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
                           padding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 15),
+                              vertical: 8, horizontal: 12),
                           decoration: BoxDecoration(
-                            gradient: const LinearGradient(
-                              colors: [Colors.blueAccent, Colors.red],
+                            gradient: LinearGradient(
+                              colors: [
+                                Colors.red.withOpacity(0.8),
+                                Colors.blueAccent
+                              ],
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                             ),
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(10),
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.black.withOpacity(0.3),
-                                blurRadius: 8,
+                                blurRadius: 6,
                                 offset: const Offset(0, 4),
                               ),
                             ],
-                            border: Border.all(
-                                color: Colors.white.withOpacity(0.5), width: 2),
                           ),
-                          child: Consumer<VastiProvider>(
-                            builder: (context, value, child) {
-                              return Text(
-                                vastiProvider.selectedVasti.isNotEmpty
-                                    ? vastiProvider.selectedVasti
-                                    : "Select Vasti",
-                                style: GoogleFonts.poppins(
-                                    color: Colors.white,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w400),
-                              );
-                            },
-                          ),
-                        ),
-                      ),
-                      Consumer<VastiProvider>(
-                        builder: (context, value, child) {
-                          return value.isvastiIcon
-                              ? IconButton(
-                                  icon: const Icon(Icons.clear_outlined,
-                                      color: Colors.white),
-                                  onPressed: () {
-                                    value.clearSelectedVasti();
-                                  },
-                                )
-                              : Container();
-                        },
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          showVibhagBottomSheet(context);
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 15),
-                          decoration: BoxDecoration(
-                            gradient: const LinearGradient(
-                              colors: [Colors.blueAccent, Colors.red],
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
+                          child: Text(
+                            dateProvider.selectedDate != null
+                                ? DateFormat('dd-MMM-yyyy')
+                                    .format(dateProvider.selectedDate!)
+                                : "Select Date",
+                            style: GoogleFonts.poppins(
+                              color: Colors.white,
+                              fontSize: 17,
+                              fontWeight: FontWeight.w500,
+                              shadows: [
+                                Shadow(
+                                  blurRadius: 5,
+                                  color: Colors.black.withOpacity(0.5),
+                                  offset: const Offset(1, 2),
+                                ),
+                              ],
                             ),
-                            borderRadius: BorderRadius.circular(12),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.3),
-                                blurRadius: 8,
-                                offset: const Offset(0, 4),
-                              ),
-                            ],
-                            border: Border.all(
-                                color: Colors.white.withOpacity(0.5), width: 2),
-                          ),
-                          child: Consumer<VastiProvider>(
-                            builder: (context, value, child) {
-                              return Text(
-                                value.selectedVibhag.isNotEmpty
-                                    ? value.selectedVibhag
-                                    : "Select Vibhag",
-                                style: GoogleFonts.poppins(
-                                    color: Colors.white,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w400),
-                              );
-                            },
                           ),
                         ),
-                      ),
-                      Consumer<VastiProvider>(
-                        builder: (context, value, child) {
-                          return value.isvibhagIcon
-                              ? IconButton(
-                                  icon: const Icon(Icons.clear_outlined,
-                                      color: Colors.white),
-                                  onPressed: () {
-                                    value.clearSelectedVibhag();
-                                  },
-                                )
-                              : Container();
-                        },
-                      ),
-                    ],
-                  ),
-                ],
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        /*
+                        When we click the calender icon then call the _selectDate Function..
+                        _selectDate Function Return The showDateTimePicker Widget.....
+                        */
+                        GestureDetector(
+                          onTap: () {
+                            _selectDate(context);
+                          },
+                          child: MouseRegion(
+                            cursor: SystemMouseCursors.click,
+                            child: AnimatedContainer(
+                                duration: const Duration(milliseconds: 200),
+                                padding: const EdgeInsets.all(8),
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withOpacity(0.2),
+                                  borderRadius: BorderRadius.circular(10),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.2),
+                                      blurRadius: 6,
+                                      offset: const Offset(0, 3),
+                                    ),
+                                  ],
+                                ),
+                                child: const Icon(
+                                  Icons.calendar_today_rounded,
+                                  color: Colors.blueAccent,
+                                )),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            showVastiBottomSheet(context);
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 15),
+                            decoration: BoxDecoration(
+                              gradient: const LinearGradient(
+                                colors: [Colors.blueAccent, Colors.red],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                              ),
+                              borderRadius: BorderRadius.circular(12),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.3),
+                                  blurRadius: 8,
+                                  offset: const Offset(0, 4),
+                                ),
+                              ],
+                              border: Border.all(
+                                  color: Colors.white.withOpacity(0.5),
+                                  width: 2),
+                            ),
+                            child: Consumer<VastiProvider>(
+                              builder: (context, value, child) {
+                                return Text(
+                                  vastiProvider.selectedVasti.isNotEmpty
+                                      ? vastiProvider.selectedVasti
+                                      : "Select Vasti",
+                                  style: GoogleFonts.poppins(
+                                      color: Colors.white,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w400),
+                                );
+                              },
+                            ),
+                          ),
+                        ),
+                        Consumer<VastiProvider>(
+                          builder: (context, value, child) {
+                            return value.isvastiIcon
+                                ? IconButton(
+                                    icon: const Icon(Icons.clear_outlined,
+                                        color: Colors.white),
+                                    onPressed: () {
+                                      value.clearSelectedVasti();
+                                    },
+                                  )
+                                : Container();
+                          },
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            showVibhagBottomSheet(context);
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 15),
+                            decoration: BoxDecoration(
+                              gradient: const LinearGradient(
+                                colors: [Colors.blueAccent, Colors.red],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                              ),
+                              borderRadius: BorderRadius.circular(12),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.3),
+                                  blurRadius: 8,
+                                  offset: const Offset(0, 4),
+                                ),
+                              ],
+                              border: Border.all(
+                                  color: Colors.white.withOpacity(0.5),
+                                  width: 2),
+                            ),
+                            child: Consumer<VastiProvider>(
+                              builder: (context, value, child) {
+                                return Text(
+                                  value.selectedVibhag.isNotEmpty
+                                      ? value.selectedVibhag
+                                      : "Select Vibhag",
+                                  style: GoogleFonts.poppins(
+                                      color: Colors.white,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w400),
+                                );
+                              },
+                            ),
+                          ),
+                        ),
+                        Consumer<VastiProvider>(
+                          builder: (context, value, child) {
+                            return value.isvibhagIcon
+                                ? IconButton(
+                                    icon: const Icon(Icons.clear_outlined,
+                                        color: Colors.white),
+                                    onPressed: () {
+                                      value.clearSelectedVibhag();
+                                    },
+                                  )
+                                : Container();
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

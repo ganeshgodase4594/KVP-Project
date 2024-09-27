@@ -209,6 +209,23 @@ class _RegisterFormState extends State<RegisterForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          padding: const EdgeInsets.only(left: 20),
+          icon: const Icon(Icons.arrow_back,
+              color: Colors.black), // Custom icon and color
+          onPressed: () {
+            Navigator.pop(context); // Navigate back
+          },
+        ),
+        title: Text(
+          "Application Form For KVP Program",
+          style: GoogleFonts.poppins(
+            fontWeight: FontWeight.w700,
+            fontSize: 16,
+          ),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: SingleChildScrollView(
@@ -217,21 +234,6 @@ class _RegisterFormState extends State<RegisterForm> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(
-                  height: 30,
-                ),
-                Center(
-                  child: Text(
-                    "Application Form For KVP Program",
-                    style: GoogleFonts.poppins(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 15,
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
                 Flexible(
                   child: Container(
                     padding: const EdgeInsets.all(10),

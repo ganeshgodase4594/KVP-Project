@@ -1,9 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kvp/screen/attendencepage.dart';
-import 'package:kvp/screen/login/signin.dart';
 import 'package:kvp/screen/registerform.dart';
 import 'assesment.dart';
 import 'nutritionpage.dart';
@@ -56,40 +54,15 @@ class _HomeScreenState extends State<HomeScreen>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 80),
-            Row(
-              children: [
-                Text(
-                  "Welcome !",
-                  style: GoogleFonts.poppins(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 20,
-                  ),
-                ),
-                const Spacer(),
-                GestureDetector(
-                  onTap: () async {
-                    FirebaseAuth.instance.signOut();
-                    GoogleSignIn googleSignIn = GoogleSignIn();
-                    await googleSignIn.signOut();
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Loged out of Successfully!'),
-                        backgroundColor: Colors.green,
-                        duration: Duration(seconds: 2),
-                      ),
-                    );
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const SignIn()));
-                  },
-                  child: const Icon(
-                    Icons.logout,
-                    size: 30,
-                  ),
-                )
-              ],
+            const SizedBox(
+              height: 20,
+            ),
+            Text(
+              "Welcome !",
+              style: GoogleFonts.poppins(
+                fontWeight: FontWeight.w700,
+                fontSize: 20,
+              ),
             ),
             const SizedBox(height: 5),
             Text(
@@ -99,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen>
                 fontSize: 20,
               ),
             ),
-            const SizedBox(height: 40),
+            const SizedBox(height: 20),
             Expanded(
               child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
