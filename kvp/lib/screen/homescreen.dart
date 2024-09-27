@@ -13,10 +13,11 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen>
-    with SingleTickerProviderStateMixin {
+class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late AnimationController controller;
   late List<Animation<Offset>> animation;
+  late Animation<Offset> emojiAnimation;
+  late AnimationController emojicontoller;
 
   @override
   void initState() {
@@ -24,6 +25,21 @@ class _HomeScreenState extends State<HomeScreen>
 
     controller =
         AnimationController(vsync: this, duration: const Duration(seconds: 1));
+    emojicontoller = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 400));
+
+    emojiAnimation = Tween(begin: const Offset(0, 0), end: const Offset(0, 0.1))
+        .animate(
+            CurvedAnimation(parent: emojicontoller, curve: Curves.easeInOut))
+      ..addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          emojicontoller.reverse();
+        } else if (status == AnimationStatus.dismissed) {
+          emojicontoller.forward();
+        }
+      });
+
+    emojicontoller.forward();
 
     animation = [
       Tween(begin: const Offset(-1, 0), end: Offset.zero)
@@ -65,12 +81,24 @@ class _HomeScreenState extends State<HomeScreen>
               ),
             ),
             const SizedBox(height: 5),
-            Text(
-              "Hii $firstName 👋",
-              style: GoogleFonts.poppins(
-                fontWeight: FontWeight.w700,
-                fontSize: 20,
-              ),
+            Row(
+              children: [
+                Text(
+                  "Hii $firstName",
+                  style: GoogleFonts.poppins(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 20,
+                  ),
+                ),
+                const SizedBox(width: 5),
+                SlideTransition(
+                  position: emojiAnimation,
+                  child: const Text(
+                    "👋", // Hi Emoji
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 20),
             Expanded(

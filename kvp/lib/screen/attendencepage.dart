@@ -44,6 +44,7 @@ class _AttendencePageState extends State<AttendencePage> {
 
     return Scaffold(
       appBar: AppBar(
+        forceMaterialTransparency: true,
         leading: IconButton(
           padding: const EdgeInsets.only(left: 20),
           icon: const Icon(Icons.arrow_back,

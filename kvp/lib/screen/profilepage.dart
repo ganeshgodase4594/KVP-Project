@@ -64,7 +64,6 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
         title: Text(
           "Profile",
           style: GoogleFonts.poppins(
@@ -137,6 +136,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         TextButton(
                           onPressed: () async {
                             await _editProfile();
+                            setState(() {});
                             Navigator.pop(context);
                           },
                           child: Text(
@@ -188,7 +188,7 @@ class _ProfilePageState extends State<ProfilePage> {
             const Divider(),
             // Logout Button
             ListTile(
-              leading: const Icon(Icons.logout, color: Colors.red),
+              leading: const Icon(Icons.power_settings_new, color: Colors.red),
               title: Text(
                 'Logout',
                 style: GoogleFonts.poppins(

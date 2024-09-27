@@ -54,6 +54,8 @@ class _AssessmentPageState extends State<AssessmentPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        scrolledUnderElevation: 0,
+        forceMaterialTransparency: true,
         leading: IconButton(
           padding: const EdgeInsets.only(left: 20),
           icon: const Icon(Icons.arrow_back,
