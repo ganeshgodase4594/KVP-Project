@@ -1,1 +1,29 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"kvp-project-cb104","appId":"1:491033227389:android:ed59e2dc7c163081b0c114","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"kvp-project-cb104","configurations":{"android":"1:491033227389:android:ed59e2dc7c163081b0c114"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "kvp-project-cb104",
+          "appId": "1:491033227389:android:ed59e2dc7c163081b0c114",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "kvp-project-cb104",
+          "configurations": {
+            "android": "1:491033227389:android:ed59e2dc7c163081b0c114"
+          }
+        }
+      }
+    }
+  },
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

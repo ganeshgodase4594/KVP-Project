@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:svg_image/svg_image.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});

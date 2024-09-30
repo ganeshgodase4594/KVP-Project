@@ -1,5 +1,7 @@
 import 'dart:developer';
+import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kvp/screen/homescreen.dart';
@@ -18,16 +20,34 @@ class _HomepageState extends State<Homepage> {
   @override
   void initState() {
     super.initState();
-    _requestStrogePermission(); // Requests storage permission when the app starts
+    _requestStoragePermission(); // Requests storage permission when the app starts
   }
 
-  Future<void> _requestStrogePermission() async {
-    var status = await Permission.storage.status;
+  Future<void> _requestStoragePermission() async {
+    // Check if the platform is NOT web
+    if (!kIsWeb) {
+      // Check if it's Android or iOS since these are the only platforms that need permission
+      if (Platform.isAndroid || Platform.isIOS) {
+        var status = await Permission.storage.status;
 
-    if (status.isGranted) {
-      await Permission.storage.status;
+        if (status.isGranted) {
+          // If permission is granted, you can proceed with storage-related actions
+          log("Storage permission is granted.");
+        } else {
+          // Request permission if it hasn't been granted yet
+          var result = await Permission.storage.request();
+          if (result.isGranted) {
+            log("Storage permission granted after request.");
+          } else {
+            log("Storage permission denied.");
+          }
+        }
+      } else {
+        log("Storage permission is not required for this platform.");
+      }
     } else {
-      log("permission not granted");
+      // For web, permissions are not required
+      log("Storage permission is not required on the web.");
     }
   }
 
