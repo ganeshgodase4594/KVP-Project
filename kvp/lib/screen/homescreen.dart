@@ -158,7 +158,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             Container(
                               padding: const EdgeInsets.all(8),
                               decoration: BoxDecoration(
-                                color: const Color.fromRGBO(25, 72, 106, 1.0),
+                                color: Colors.lightBlueAccent.withOpacity(0.3),
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               child: Center(
@@ -168,7 +168,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                   style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.w500,
                                     fontSize: 15,
-                                    color: Colors.white,
+                                    color: Colors.black,
                                   ),
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 5, // Limits the text to 5 lines

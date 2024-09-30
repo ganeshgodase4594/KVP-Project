@@ -143,7 +143,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             'Save',
                             style: GoogleFonts.poppins(
                               fontWeight: FontWeight.w600,
-                              color: Colors.blueAccent,
+                              color: const Color.fromRGBO(25, 72, 106, 1.0),
                             ),
                           ),
                         ),
@@ -156,7 +156,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 50, vertical: 12),
                 decoration: BoxDecoration(
-                  color: Colors.blueAccent,
+                  color: const Color.fromRGBO(25, 72, 106, 1.0),
                   borderRadius: BorderRadius.circular(30),
                 ),
                 child: Text(

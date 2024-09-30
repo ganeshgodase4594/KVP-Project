@@ -17,32 +17,29 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web; // Use web options when running on the web platform
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
         throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
+          'DefaultFirebaseOptions have not been configured for iOS - '
           'you can reconfigure this by running the FlutterFire CLI again.',
         );
       case TargetPlatform.macOS:
         throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
+          'DefaultFirebaseOptions have not been configured for macOS - '
           'you can reconfigure this by running the FlutterFire CLI again.',
         );
       case TargetPlatform.windows:
         throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
+          'DefaultFirebaseOptions have not been configured for Windows - '
           'you can reconfigure this by running the FlutterFire CLI again.',
         );
       case TargetPlatform.linux:
         throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for linux - '
+          'DefaultFirebaseOptions have not been configured for Linux - '
           'you can reconfigure this by running the FlutterFire CLI again.',
         );
       default:
@@ -58,5 +55,18 @@ class DefaultFirebaseOptions {
     messagingSenderId: '491033227389',
     projectId: 'kvp-project-cb104',
     storageBucket: 'kvp-project-cb104.appspot.com',
+  );
+
+  // Android configuration
+
+  // Web configuration
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyBFVCXiFHoNht9YWInr19cIXuW-Tq5mzbU',
+    authDomain: 'kvp-project-cb104.firebaseapp.com',
+    projectId: 'kvp-project-cb104',
+    storageBucket: 'kvp-project-cb104.appspot.com',
+    messagingSenderId: '491033227389',
+    appId: '1:491033227389:web:24f5adb9924cfd3ab0c114',
+    measurementId: 'G-BH2KJHN8QD',
   );
 }

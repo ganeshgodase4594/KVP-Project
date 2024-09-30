@@ -19,7 +19,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
     return Scaffold(
       body: _screens[_selectedIndex],
       bottomNavigationBar: CurvedNavigationBar(
-        buttonBackgroundColor: Colors.blueAccent.withOpacity(0.5),
+        buttonBackgroundColor: Colors.lightBlueAccent.withOpacity(0.3),
         height: 60,
         backgroundColor: Colors.transparent,
         items: _navigationItems,
