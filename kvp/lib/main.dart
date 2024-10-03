@@ -13,6 +13,7 @@ import 'package:kvp/screen/welcomepage.dart';
 import 'package:kvp/screen/login/signin.dart';
 import 'package:provider/provider.dart';
 import 'provider/dateprovider.dart';
+import 'provider/searchprovider.dart';
 import 'provider/suggestionprovider.dart';
 
 void main() async {
@@ -27,9 +28,7 @@ void main() async {
     MultiProvider(
       providers: [
         /*
-
         Provides that uses for app state management
-
         */
         ChangeNotifierProvider(create: (_) => CheckboxProvider()),
         ChangeNotifierProvider(create: (_) => Suggestionprovider()),
@@ -38,7 +37,8 @@ void main() async {
         ChangeNotifierProvider(create: (_) => GirlIdProvider()),
         ChangeNotifierProvider(create: (_) => DateProvider()),
         ChangeNotifierProvider(create: (_) => VastiProvider()),
-        ChangeNotifierProvider(create: (_) => AssesmentRecordProvider())
+        ChangeNotifierProvider(create: (_) => AssesmentRecordProvider()),
+        ChangeNotifierProvider(create: (_) => SearchProvider())
       ],
       child: const MyApp(),
     ),
